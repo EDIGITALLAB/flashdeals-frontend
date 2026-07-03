@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Brand Theme Colors */
+  --primary-color: #ff3f6c;
+  --primary-hover: #e02a55;
+  --primary-light: #fff0f3;
+  --secondary-color: #6200ea;
+  --secondary-dark: #311b92;
+  --accent-color: #ffc107;
+  --accent-hover: #ffb300;
+  --success-color: #00ca72;
+  --success-light: #e6fff4;
+  --success-text: #2e7d32;
+
+  /* Neutral Colors */
+  --bg-color: #f8f9fc;
+  --card-bg: #ffffff;
+  --border-color: #f0f0f5;
+  --border-hover: #e2e2e9;
+  --text-primary: #282c3f;
+  --text-secondary: #7e818c;
+  --text-dark: #1e1e2e;
+  
+  /* Category Colors */
+  --category-fashion-bg: #fde8ef;
+  --category-fashion-color: #ff3f6c;
+  --category-electronics-bg: #e8f0fe;
+  --category-electronics-color: #1a73e8;
+  --category-home-bg: #e6f7ff;
+  --category-home-color: #1890ff;
+  --category-beauty-bg: #f9f0ff;
+  --category-beauty-color: #722ed1;
+  --category-food-bg: #fff7e6;
+  --category-food-color: #fa8c16;
+  --category-travel-bg: #e6fffb;
+  --category-travel-color: #13c2c2;
+  --category-more-bg: #f5f5f5;
+  --category-more-color: #595959;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}

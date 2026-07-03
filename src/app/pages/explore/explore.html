@@ -1,0 +1,64 @@
+<div class="explore-layout">
+  <!-- Search header component -->
+  <app-search-header />
+
+  <!-- Product Toolbar for Pills -->
+  <app-product-toolbar [view]="'pills'" />
+
+  <!-- Inner Split: Sidebar (Filters) and Main Panel (Results) -->
+  <div class="explore-content-split">
+    <!-- Filters Sidebar (Left) component -->
+    <app-filter-sidebar />
+
+    <!-- Main Results (Right) -->
+    <main class="results-main">
+      <!-- Product Toolbar for Header Count & Views -->
+      <app-product-toolbar [view]="'header'" />
+
+      <!-- Products List (List View) -->
+      <div class="products-list-vertical">
+        @for (product of products; track product.id) {
+          <div class="product-item-card" routerLink="/deal-details">
+            <!-- Product Image Left -->
+            <div class="product-image-section">
+              <img [src]="product.image" [alt]="product.name" class="prod-img">
+              <div class="prod-rating-badge">
+                <span>{{ product.rating }}</span>
+                <span class="rating-star">★</span>
+              </div>
+            </div>
+
+            <!-- Product Details Center-Right -->
+            <div class="product-details-section">
+              <div class="prod-header-row">
+                <div>
+                  <h3 class="prod-title">{{ product.name }}</h3>
+                  <p class="prod-store">{{ product.store }}</p>
+                </div>
+                <button class="prod-wishlist-btn">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+              </div>
+
+              <div class="prod-price-row mt-3">
+                <div class="price-container">
+                  <span class="price-current">₹{{ product.price | number:'1.0-0' }}</span>
+                  <span class="price-original">₹{{ product.originalPrice | number:'1.0-0' }}</span>
+                  <span class="price-discount-badge">{{ product.discount }}% OFF</span>
+                </div>
+                
+                <div class="prod-countdown">
+                  <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[0] }}</span>
+                  <span class="prod-timer-colon">:</span>
+                  <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[1] }}</span>
+                  <span class="prod-timer-colon">:</span>
+                  <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[2] }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </main>
+  </div>
+</div>

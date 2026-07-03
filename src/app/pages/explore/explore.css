@@ -1,0 +1,222 @@
+/* Layout container */
+.explore-layout {
+  padding: 0 40px 40px 40px;
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: 'Outfit', sans-serif;
+}
+
+
+
+
+
+/* Main Split layout */
+.explore-content-split {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+
+
+/* Main Results panel */
+.results-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* Product list vertical style */
+.products-list-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-item-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.product-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  border-color: var(--border-hover);
+}
+
+/* Product Image column */
+.product-image-section {
+  width: 180px;
+  height: 140px;
+  background-color: #fcfcfd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+}
+
+.prod-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transition: transform 0.4s ease;
+}
+
+.product-item-card:hover .prod-img {
+  transform: scale(1.08);
+}
+
+.prod-rating-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background-color: #1e1e2e;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.rating-star {
+  color: var(--accent-color);
+  font-size: 10px;
+}
+
+/* Product Details column */
+.product-details-section {
+  padding: 16px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.prod-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.prod-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.prod-store {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.prod-wishlist-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prod-wishlist-btn:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.prod-wishlist-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Price row with timer */
+.prod-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-current {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.price-original {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+.price-discount-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--success-color);
+}
+
+/* Countdown Timer Badge */
+.prod-countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.prod-timer-box {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-family: monospace;
+}
+
+.prod-timer-colon {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-color);
+  opacity: 0.6;
+}
+
+/* Responsive adjust */
+@media (max-width: 992px) {
+  .explore-content-split {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters-sidebar {
+    width: 100%;
+  }
+}

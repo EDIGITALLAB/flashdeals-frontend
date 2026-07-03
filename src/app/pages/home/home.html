@@ -1,0 +1,266 @@
+<div class="app-layout">
+    <!-- Sidebar component -->
+    <app-main-sidebar />
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Navbar component -->
+        <app-navbar />
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Promo Hero Banner -->
+            <section class="hero-carousel">
+                <div class="hero-slide purple-gradient">
+                    <div class="slide-content">
+                        <h1 class="hero-title-large">Big Brands. Bigger Savings.</h1>
+                        <p class="hero-subtitle">Up to 80% OFF on 5000+ Deals</p>
+                        <button class="btn btn-explore">Explore Deals</button>
+                    </div>
+
+                    <div class="slide-badge-container">
+                        <div class="lightning-graphic">
+                            <span class="material-symbols-outlined icon-bolt-large">bolt</span>
+                        </div>
+                        <div class="discount-badge">
+                            <span class="badge-prefix">UP TO</span>
+                            <span class="badge-percentage">80%</span>
+                            <span class="badge-suffix">OFF</span>
+                        </div>
+                    </div>
+
+                    <div class="carousel-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Top Deals Ending Soon -->
+            <section class="deals-section mt-4">
+                <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="section-title">Top Deals Ending Soon</h2>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+
+                <div class="carousel-container position-relative">
+                    <button class="carousel-nav-btn prev-btn">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+
+                    <div class="deals-grid">
+                        @for (deal of deals; track deal.id) {
+                        <div class="deal-card" [class.active-card-shadow]="deal.id === 2">
+                            <div class="brand-logo-container">
+                                <!-- Inline logo SVGs for premium rendering -->
+                                @switch (deal.logoType) {
+                                @case ('puma') {
+                                <svg viewBox="0 0 100 60" width="80" height="40" class="brand-logo text-dark">
+                                    <path
+                                        d="M 68 15 C 63 12, 54 14, 47 20 C 44 22, 40 25, 32 25 C 27 25, 20 20, 17 15 C 19 22, 24 28, 30 30 C 37 32, 44 28, 50 24 C 57 18, 64 18, 70 22 C 74 24, 77 28, 80 32 C 77 25, 73 18, 68 15 Z"
+                                        fill="currentColor" />
+                                    <text x="50%" y="50" font-family="'Outfit', sans-serif" font-weight="900"
+                                        font-size="15" letter-spacing="1.5" text-anchor="middle"
+                                        fill="currentColor">PUMA</text>
+                                </svg>
+                                }
+
+                                @case ('boat') {
+                                <svg viewBox="0 0 100 40" width="85" height="32" class="brand-logo">
+                                    <text x="5" y="28" font-family="'Outfit', sans-serif" font-weight="800"
+                                        font-size="26" letter-spacing="-0.5" fill="#1e1e2e">
+                                        bo<tspan fill="#ff3f6c">At</tspan>
+                                    </text>
+                                    <circle cx="82" cy="18" r="4.5" fill="#ff3f6c" />
+                                    <line x1="5" y1="33" x2="90" y2="33" stroke="#ff3f6c" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                                }
+
+                                @case ('myntra') {
+                                <svg viewBox="0 0 120 40" width="95" height="32" class="brand-logo">
+                                    <defs>
+                                        <linearGradient id="myntra-g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#fe3f40" />
+                                            <stop offset="100%" stop-color="#ff007f" />
+                                        </linearGradient>
+                                        <linearGradient id="myntra-g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#f2a30f" />
+                                            <stop offset="100%" stop-color="#fe3f40" />
+                                        </linearGradient>
+                                    </defs>
+                                    <g transform="translate(2, 2)">
+                                        <path d="M 0 30 L 10 5 L 20 20 L 30 5 L 40 30" fill="none"
+                                            stroke="url(#myntra-g1)" stroke-width="7" stroke-linejoin="round"
+                                            stroke-linecap="round" />
+                                        <path d="M 10 30 L 17 15 L 20 20 L 23 15 L 30 30" fill="none"
+                                            stroke="url(#myntra-g2)" stroke-width="5" stroke-linejoin="round"
+                                            stroke-linecap="round" opacity="0.95" />
+                                    </g>
+                                    <text x="56" y="26" font-family="'Outfit', sans-serif" font-weight="800"
+                                        font-size="18" fill="#282c3f">Myntra</text>
+                                </svg>
+                                }
+
+                                @case ('swiggy') {
+                                <svg viewBox="0 0 120 40" width="95" height="32" class="brand-logo">
+                                    <g fill="#fc8019" transform="translate(2, 4)">
+                                        <path
+                                            d="M 15 0 C 8 0, 3 5, 3 10 C 3 14, 7 16, 12 18 C 17 20, 19 22, 19 25 C 19 28, 15 30, 10 30 C 5 30, 2 27, 2 24 L 2 23 A 1 1 0 0 0 0 23 L 0 24 C 0 29, 5 32, 10 32 C 17 32, 21 28, 21 25 C 21 21, 17 19, 12 17 C 7 15, 5 13, 5 10 C 5 7, 9 5, 14 5 C 18 5, 21 7, 22 9 L 22 10 A 1 1 0 0 0 24 10 L 24 9 C 24 4, 19 0, 15 0 Z" />
+                                    </g>
+                                    <text x="35" y="27" font-family="'Outfit', sans-serif" font-weight="900"
+                                        font-size="18" fill="#fc8019" letter-spacing="0.5">SWIGGY</text>
+                                </svg>
+                                }
+                                }
+                            </div>
+                            <div class="deal-info">
+                                <h3 class="discount-label">{{ deal.discount }}</h3>
+                                <p class="brand-name">{{ deal.storeName }}</p>
+                                <div class="status-indicator">
+                                    <span class="status-dot" [class.online]="deal.status === 'Online'"></span>
+                                    <span class="status-text">{{ deal.status }}</span>
+                                </div>
+                                <div class="countdown-timer">
+                                    <span class="timer-box">{{ getTimeSegments(deal.timerString)[0] }}</span>
+                                    <span class="timer-colon">:</span>
+                                    <span class="timer-box">{{ getTimeSegments(deal.timerString)[1] }}</span>
+                                    <span class="timer-colon">:</span>
+                                    <span class="timer-box">{{ getTimeSegments(deal.timerString)[2] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    <button class="carousel-nav-btn prev-btn">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button class="carousel-nav-btn next-btn">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Categories For You -->
+            <section class="categories-section mt-5">
+                <h2 class="section-title mb-3">Categories For You</h2>
+                <div class="categories-list">
+                    <div class="category-item">
+                        <div class="category-icon-wrapper fashion-bg">
+                            <span class="material-symbols-outlined">shopping_bag</span>
+                        </div>
+                        <span class="category-name">Fashion</span>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon-wrapper electronics-bg">
+                            <span class="material-symbols-outlined">phone_iphone</span>
+                        </div>
+                        <span class="category-name">Electronics</span>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon-wrapper home-bg">
+                            <span class="material-symbols-outlined">home</span>
+                        </div>
+                        <span class="category-name">Home & Living</span>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon-wrapper beauty-bg">
+                            <span class="material-symbols-outlined">face</span>
+                        </div>
+                        <span class="category-name">Beauty</span>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon-wrapper food-bg">
+                            <span class="material-symbols-outlined">restaurant</span>
+                        </div>
+                        <span class="category-name">Food & Dining</span>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon-wrapper travel-bg">
+                            <span class="material-symbols-outlined">flight_takeoff</span>
+                        </div>
+                        <span class="category-name">Travel</span>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon-wrapper more-bg">
+                            <span class="material-symbols-outlined">more_horiz</span>
+                        </div>
+                        <span class="category-name">More</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Based on Your Interests -->
+            <section class="interests-section mt-5 mb-5">
+                <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="section-title">Based on Your Interests</h2>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+
+                <div class="interests-grid">
+                    <!-- Card 1 -->
+                    <div class="interest-card">
+                        <div class="interest-image-container">
+                            <img src="/gaming_setup.png" alt="Gaming Setup" class="interest-image">
+                            <span class="interest-badge">Trending</span>
+                        </div>
+                        <div class="interest-info">
+                            <h4 class="interest-title">Pro Gaming Accessories</h4>
+                            <p class="interest-desc">Elevate your play with top-tier gear</p>
+                            <div class="interest-meta">
+                                <span class="interest-deal text-success">Up to 40% Off</span>
+                                <button class="interest-action-btn">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="interest-card">
+                        <div class="interest-image-container">
+                            <img src="/smart_home.png" alt="Smart Home" class="interest-image">
+                            <span class="interest-badge">New</span>
+                        </div>
+                        <div class="interest-info">
+                            <h4 class="interest-title">Smart Home Essentials</h4>
+                            <p class="interest-desc">Upgrade your living space today</p>
+                            <div class="interest-meta">
+                                <span class="interest-deal text-success">Flat 25% Off</span>
+                                <button class="interest-action-btn">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="interest-card">
+                        <div class="interest-image-container">
+                            <img src="/fitness_gear.png" alt="Fitness Gear" class="interest-image">
+                            <span class="interest-badge">Popular</span>
+                        </div>
+                        <div class="interest-info">
+                            <h4 class="interest-title">Fitness & Gym Gear</h4>
+                            <p class="interest-desc">Everything you need for active lifestyle</p>
+                            <div class="interest-meta">
+                                <span class="interest-deal text-success">Min. 50% Off</span>
+                                <button class="interest-action-btn">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>

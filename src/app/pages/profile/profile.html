@@ -1,0 +1,388 @@
+<div class="profile-page-container">
+  <!-- Profile & Settings Header Bar -->
+  <header class="profile-title-bar">
+    <div class="title-left">
+      <span class="material-symbols-outlined back-arrow" routerLink="/">arrow_back</span>
+      <div class="title-with-badge">
+        <h1 class="page-title">Profile & Settings</h1>
+      </div>
+    </div>
+  </header>
+
+  <div class="profile-layout-container">
+    <!-- Left: Profile Sidebar -->
+        <app-profile-sidebar [activeMenu]="selectedTab" (menuChanged)="onTabChange($event)" />
+
+        <!-- Right: Profile Settings details panel -->
+        <div class="profile-details-panel">
+          
+          <!-- Tab 1: Personal Information -->
+          @if (selectedTab === 'personal') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <h2 class="tab-title">Personal Information</h2>
+                <p class="tab-subtitle">Manage your profile details and personal credentials.</p>
+              </div>
+
+              <div class="info-form-grid">
+                <div class="form-group">
+                  <label class="form-label">First Name</label>
+                  <input type="text" class="form-input" [(ngModel)]="personalInfo.firstName" [disabled]="!isEditingPersonal">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" class="form-input" [(ngModel)]="personalInfo.lastName" [disabled]="!isEditingPersonal">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" class="form-input" [(ngModel)]="personalInfo.email" [disabled]="!isEditingPersonal">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mobile Number</label>
+                  <input type="text" class="form-input" [(ngModel)]="personalInfo.phone" [disabled]="!isEditingPersonal">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Gender</label>
+                  <div class="gender-radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="gender" value="male" [(ngModel)]="personalInfo.gender" [disabled]="!isEditingPersonal">
+                      <span>Male</span>
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="gender" value="female" [(ngModel)]="personalInfo.gender" [disabled]="!isEditingPersonal">
+                      <span>Female</span>
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="gender" value="other" [(ngModel)]="personalInfo.gender" [disabled]="!isEditingPersonal">
+                      <span>Other</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Date of Birth</label>
+                  <input type="date" class="form-input" [(ngModel)]="personalInfo.dob" [disabled]="!isEditingPersonal">
+                </div>
+              </div>
+
+              <div class="form-actions mt-4">
+                @if (!isEditingPersonal) {
+                  <button class="btn-profile btn-primary" (click)="isEditingPersonal = true">
+                    <span class="material-symbols-outlined">edit</span>
+                    <span>Edit Profile</span>
+                  </button>
+                } @else {
+                  <button class="btn-profile btn-success" (click)="savePersonal()">
+                    <span class="material-symbols-outlined">save</span>
+                    <span>Save Changes</span>
+                  </button>
+                  <button class="btn-profile btn-secondary ml-3" (click)="isEditingPersonal = false">
+                    <span>Cancel</span>
+                  </button>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Tab 2: Addresses -->
+          @if (selectedTab === 'addresses') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <div class="header-split">
+                  <div>
+                    <h2 class="tab-title">Manage Addresses</h2>
+                    <p class="tab-subtitle">Add or edit your default delivery destinations.</p>
+                  </div>
+                  <button class="btn-profile btn-primary btn-sm">
+                    <span class="material-symbols-outlined">add</span>
+                    <span>Add New</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="addresses-list-panel">
+                @for (addr of addresses; track addr.id) {
+                  <div class="address-item-card" [class.default-border]="addr.isDefault">
+                    <div class="address-card-header">
+                      <div class="address-tag" [class.home-tag]="addr.type === 'Home'" [class.work-tag]="addr.type === 'Work'">{{ addr.type }}</div>
+                      @if (addr.isDefault) {
+                        <span class="default-badge">DEFAULT</span>
+                      }
+                    </div>
+                    <div class="address-card-body">
+                      <h4 class="address-user-name">{{ addr.name }}</h4>
+                      <p class="address-details">{{ addr.addressLine }}, {{ addr.city }}, {{ addr.state }} - {{ addr.pincode }}</p>
+                      <p class="address-phone"><span class="font-bold">Phone:</span> {{ addr.phone }}</p>
+                    </div>
+                    <div class="address-card-actions">
+                      <button class="address-action-btn">Edit</button>
+                      <span class="action-divider">|</span>
+                      <button class="address-action-btn delete-text">Delete</button>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Tab 3: Payment Methods -->
+          @if (selectedTab === 'payments') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <div class="header-split">
+                  <div>
+                    <h2 class="tab-title">Payment Methods</h2>
+                    <p class="tab-subtitle">Manage your saved credit/debit cards and UPI accounts.</p>
+                  </div>
+                  <button class="btn-profile btn-primary btn-sm">
+                    <span class="material-symbols-outlined">add</span>
+                    <span>Add Card</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="saved-payments-panel">
+                @for (card of paymentCards; track card.id) {
+                  <div class="payment-card-item">
+                    <div class="card-type-icon-wrapper">
+                      @if (card.cardType === 'visa') {
+                        <span class="card-brand visa-text">VISA</span>
+                      } @else if (card.cardType === 'mastercard') {
+                        <span class="card-brand master-text">MC</span>
+                      }
+                    </div>
+                    <div class="payment-card-details">
+                      <h4 class="payment-card-bank">{{ card.bank }} {{ card.type }}</h4>
+                      <p class="payment-card-number">•••• •••• •••• {{ card.number }}</p>
+                      <p class="payment-card-expiry">Expiry: {{ card.expiry }}</p>
+                    </div>
+                    <button class="delete-payment-btn">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Tab 4: App Preferences -->
+          @if (selectedTab === 'preferences') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <h2 class="tab-title">App Preferences</h2>
+                <p class="tab-subtitle">Customize application settings and layout configurations.</p>
+              </div>
+
+              <div class="preferences-form-panel">
+                <div class="preference-item-row">
+                  <div class="preference-text">
+                    <h4 class="pref-title">Dark Theme</h4>
+                    <p class="pref-desc">Switch application color layout theme to dark mode.</p>
+                  </div>
+                  <div class="toggle-switch-wrapper">
+                    <label class="switch">
+                      <input type="checkbox" [(ngModel)]="preferences.darkMode">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="preference-item-row">
+                  <div class="preference-text">
+                    <h4 class="pref-title">Language Selection</h4>
+                    <p class="pref-desc">Change the default rendering language of the application.</p>
+                  </div>
+                  <select class="pref-select" [(ngModel)]="preferences.language">
+                    <option value="en">English (US)</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                    <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                  </select>
+                </div>
+
+                <div class="preference-item-row">
+                  <div class="preference-text">
+                    <h4 class="pref-title">Currency Display</h4>
+                    <p class="pref-desc">Modify default currency prefix in deal displays.</p>
+                  </div>
+                  <select class="pref-select" [(ngModel)]="preferences.currency">
+                    <option value="INR">INR (₹)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!-- Tab 5: Notification Preferences -->
+          @if (selectedTab === 'notifications') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <h2 class="tab-title">Notification Preferences</h2>
+                <p class="tab-subtitle">Control the channels and alert categories you want to receive.</p>
+              </div>
+
+              <div class="notifications-toggles-panel">
+                <div class="notification-item">
+                  <div class="notification-text">
+                    <h4 class="notif-title">Email Alerts</h4>
+                    <p class="notif-desc">Receive flash deals digests and billing transactions via email.</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" [(ngModel)]="notifications.email">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="notification-item">
+                  <div class="notification-text">
+                    <h4 class="notif-title">Push Notifications</h4>
+                    <p class="notif-desc">Get real-time browser notifications when deal countdowns are ending.</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" [(ngModel)]="notifications.push">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="notification-item">
+                  <div class="notification-text">
+                    <h4 class="notif-title">SMS Notifications</h4>
+                    <p class="notif-desc">Receive alerts for high-priority drops directly via text message.</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" [(ngModel)]="notifications.sms">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="notification-item">
+                  <div class="notification-text">
+                    <h4 class="notif-title">WhatsApp Updates</h4>
+                    <p class="notif-desc">Get customer care updates and custom coupon codes on WhatsApp.</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" [(ngModel)]="notifications.whatsapp">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!-- Tab 6: Manage Interests -->
+          @if (selectedTab === 'interests') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <h2 class="tab-title">Manage Interests</h2>
+                <p class="tab-subtitle">Pick topics to help customize the deals carousel on your feed.</p>
+              </div>
+
+              <div class="interests-toggles-grid">
+                @for (cat of interests; track cat.name; let idx = $index) {
+                  <button class="interest-pill-btn" [class.selected]="cat.selected" (click)="toggleInterest(idx)">
+                    @if (cat.selected) {
+                      <span class="material-symbols-outlined check-icon">check</span>
+                    }
+                    <span>{{ cat.name }}</span>
+                  </button>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Tab 7: Privacy Settings -->
+          @if (selectedTab === 'privacy') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <h2 class="tab-title">Privacy Settings</h2>
+                <p class="tab-subtitle">Manage authorization scopes and personal data logs.</p>
+              </div>
+
+              <div class="privacy-options-panel">
+                <div class="privacy-item-row">
+                  <div>
+                    <h4 class="pref-title">Account Visibility</h4>
+                    <p class="pref-desc">Make your wishlist collection invisible to other users.</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="privacy-item-row">
+                  <div>
+                    <h4 class="pref-title">Personalized Ads</h4>
+                    <p class="pref-desc">Enable third-party recommendation trackers to custom tailor ads.</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="privacy-actions mt-4 pt-3 border-top">
+                  <button class="btn-profile btn-secondary">Export Data History</button>
+                  <button class="btn-profile btn-secondary ml-3 text-danger">Delete My Account</button>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!-- Tab 8: Help & Support -->
+          @if (selectedTab === 'help') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <h2 class="tab-title">Help & Support</h2>
+                <p class="tab-subtitle">Need help with an ongoing order? Reach out to support.</p>
+              </div>
+
+              <div class="help-grid">
+                <div class="help-card-option">
+                  <span class="material-symbols-outlined help-option-icon">support_agent</span>
+                  <h4 class="help-option-title">Contact Support</h4>
+                  <p class="help-option-desc">Connect with our support executives live (24/7).</p>
+                  <button class="btn-profile btn-primary btn-sm mt-3">Start Chat</button>
+                </div>
+                <div class="help-card-option">
+                  <span class="material-symbols-outlined help-option-icon">description</span>
+                  <h4 class="help-option-title">Read FAQs</h4>
+                  <p class="help-option-desc">Find answers to frequently asked shipping questions.</p>
+                  <button class="btn-profile btn-secondary btn-sm mt-3">Open FAQs</button>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!-- Tab 9: About Us -->
+          @if (selectedTab === 'about') {
+            <div class="details-tab-content">
+              <div class="tab-header">
+                <h2 class="tab-title">About Us</h2>
+                <p class="tab-subtitle">Learn more about the team behind FlashDeals.</p>
+              </div>
+
+              <div class="about-us-info">
+                <div class="app-version-card">
+                  <span class="material-symbols-outlined app-logo-symbol">bolt</span>
+                  <h4 class="about-version-title">FlashDeals App</h4>
+                  <p class="about-version-tag">Version 2.4.0 (Stable Build)</p>
+                </div>
+                <p class="about-paragraph mt-4">
+                  FlashDeals is a modern e-commerce drops platform delivering hourly flash discounts and exclusive limited-edition products to bargain hunters around the world.
+                </p>
+                <div class="legal-links-list mt-4 pt-3 border-top">
+                  <a href="#" class="legal-link">Terms of Service</a>
+                  <span class="legal-separator">•</span>
+                  <a href="#" class="legal-link">Privacy Policy</a>
+                  <span class="legal-separator">•</span>
+                  <a href="#" class="legal-link">Cookie Configuration</a>
+                </div>
+              </div>
+            </div>
+          }
+
+        </div>
+
+      </div>
+</div>

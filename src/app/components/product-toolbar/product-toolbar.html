@@ -1,0 +1,27 @@
+@if (view === 'pills') {
+  <!-- Pills/Tabs -->
+  <div class="explore-pills">
+    <button class="pill-btn">All</button>
+    <button class="pill-btn active">High Discount</button>
+    <button class="pill-btn">Brands</button>
+    <button class="pill-btn">Interests</button>
+    <button class="pill-btn select-dropdown">
+      <span>Price</span>
+      <span class="material-symbols-outlined scale-down">keyboard_arrow_down</span>
+    </button>
+    <button class="pill-btn">Sort By</button>
+  </div>
+} @else if (view === 'header') {
+  <!-- Results Header -->
+  <div class="results-header">
+    <span class="results-count">345 Results for "shoes"</span>
+    <div class="view-toggle-buttons">
+      <button class="toggle-btn">
+        <span class="material-symbols-outlined">grid_view</span>
+      </button>
+      <button class="toggle-btn active">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+}

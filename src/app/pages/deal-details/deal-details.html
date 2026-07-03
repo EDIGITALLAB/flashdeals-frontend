@@ -1,0 +1,205 @@
+<div class="details-page-container">
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs">
+    <span class="crumb" routerLink="/">Home</span>
+    <span class="crumb-separator">&gt;</span>
+    <span class="crumb" routerLink="/explore">Footwear</span>
+    <span class="crumb-separator">&gt;</span>
+    <span class="crumb" routerLink="/explore">Men</span>
+    <span class="crumb-separator">&gt;</span>
+    <span class="crumb active">Nike Revolution 6</span>
+  </nav>
+
+  <!-- Main Product details layout -->
+  <div class="product-info-grid">
+    
+    <!-- Left Column: Thumbnails + Main Image + Badges -->
+    <div class="product-gallery-section">
+      <div class="gallery-wrapper">
+        <!-- Thumbnails Strip -->
+        <div class="thumbnails-strip">
+          <button class="thumb-btn" [class.active]="selectedImage === '/nike_shoe.png'" (click)="selectedImage = '/nike_shoe.png'">
+            <img src="/nike_shoe.png" alt="Nike shoe thumbnail 1">
+          </button>
+          <button class="thumb-btn" [class.active]="selectedImage === '/nike_shoes.png'" (click)="selectedImage = '/nike_shoes.png'">
+            <img src="/nike_shoes.png" alt="Nike shoes thumbnail 2">
+          </button>
+          <button class="thumb-btn" [class.active]="selectedImage === '/adidas_shoe.png'" (click)="selectedImage = '/adidas_shoe.png'">
+            <img src="/adidas_shoe.png" alt="Adidas shoe thumbnail">
+          </button>
+          <button class="thumb-btn" [class.active]="selectedImage === '/puma_shoe.png'" (click)="selectedImage = '/puma_shoe.png'">
+            <img src="/puma_shoe.png" alt="Puma shoe thumbnail">
+          </button>
+          <button class="thumb-btn" [class.active]="selectedImage === '/skechers_shoe.png'" (click)="selectedImage = '/skechers_shoe.png'">
+            <img src="/skechers_shoe.png" alt="Skechers shoe thumbnail">
+          </button>
+        </div>
+
+        <!-- Main Display Card -->
+        <div class="main-image-card">
+          <img [src]="selectedImage" alt="Nike Revolution 6 Men's Running Shoes" class="main-product-image">
+        </div>
+      </div>
+
+      <!-- Trust Badges Row -->
+      <div class="trust-badges-row">
+        <div class="trust-badge">
+          <span class="material-symbols-outlined badge-icon">verified_user</span>
+          <span class="badge-text">100% Authentic</span>
+        </div>
+        <div class="trust-badge">
+          <span class="material-symbols-outlined badge-icon">history</span>
+          <div class="badge-double-text">
+            <span class="badge-text-primary">Easy Returns</span>
+            <span class="badge-text-secondary">(7 Days)</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <span class="material-symbols-outlined badge-icon">local_shipping</span>
+          <div class="badge-double-text">
+            <span class="badge-text-primary">Free Delivery</span>
+            <span class="badge-text-secondary">above ₹499</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <span class="material-symbols-outlined badge-icon">lock</span>
+          <span class="badge-text">Secure Payment</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Product Specs + Price + Actions + Timer -->
+    <div class="product-purchase-section">
+      <div class="product-brand-header">
+        <h2 class="brand-title">Nike Revolution 6</h2>
+        <h3 class="product-sub-title">Men's Running Shoes</h3>
+        
+        <div class="store-info-row">
+          <span class="material-symbols-outlined store-icon">storefront</span>
+          <span class="store-name">Nike Official Store</span>
+        </div>
+
+        <div class="rating-info-row">
+          <span class="star-rating">★ 4.4</span>
+          <span class="rating-count">(2.3K)</span>
+        </div>
+      </div>
+
+      <div class="price-info-card">
+        <div class="main-price-row">
+          <span class="price-current">₹2,099</span>
+          <span class="price-original">₹4,695</span>
+          <span class="discount-badge">(55% OFF)</span>
+        </div>
+        <span class="tax-info">Inclusive of all taxes</span>
+      </div>
+
+      <!-- Timer Card -->
+      <div class="timer-card-container">
+        <span class="timer-title">Deal ends in</span>
+        <div class="countdown-timer">
+          <div class="timer-segment">
+            <div class="segment-box">{{ getHrs() }}</div>
+            <span class="segment-label">HRS</span>
+          </div>
+          <span class="timer-separator">:</span>
+          <div class="timer-segment">
+            <div class="segment-box">{{ getMins() }}</div>
+            <span class="segment-label">MINS</span>
+          </div>
+          <span class="timer-separator">:</span>
+          <div class="timer-segment">
+            <div class="segment-box">{{ getSecs() }}</div>
+            <span class="segment-label">SECS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Action Buttons -->
+      <div class="action-buttons-container">
+        <button class="buy-now-btn">
+          <span class="material-symbols-outlined btn-icon">shopping_bag</span>
+          <span>Buy Now</span>
+        </button>
+        <button class="wishlist-btn">
+          <span class="material-symbols-outlined btn-icon-wish">favorite</span>
+          <span>Add to Wishlist</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Content: About + Similar -->
+  <div class="bottom-split-section">
+    <!-- About the Deal -->
+    <div class="about-deal-section">
+      <h3 class="section-title">About the Deal</h3>
+      <p class="about-description">
+        Lightweight comfort meets reliable support in the Nike Revolution for everyday runs and all-day wear.
+      </p>
+      <ul class="about-bullets">
+        <li>Lightweight textile for breathable comfort</li>
+        <li>Soft foam midsole for cushioning</li>
+        <li>Durable outsole for traction and durability</li>
+      </ul>
+      <button class="view-more-btn-link">View More</button>
+    </div>
+
+    <!-- Similar Deals -->
+    <div class="similar-deals-section">
+      <div class="similar-header">
+        <h3 class="section-title">Similar Deals</h3>
+        <button class="view-all-link" routerLink="/explore">View All</button>
+      </div>
+
+      <div class="similar-cards-row">
+        <!-- Card 1 -->
+        <div class="similar-deal-card" routerLink="/deal-details">
+          <div class="similar-card-img-wrapper">
+            <img src="/nike_shoes.png" alt="Nike Downshifter 12">
+          </div>
+          <div class="similar-card-details">
+            <h4 class="similar-prod-title">Nike Downshifter 12</h4>
+            <div class="similar-price-row">
+              <span class="sim-price-cur">₹2,299</span>
+              <span class="sim-price-orig">₹4,795</span>
+            </div>
+            <span class="sim-discount">50% OFF</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="similar-deal-card" routerLink="/deal-details">
+          <div class="similar-card-img-wrapper">
+            <img src="/adidas_shoes.png" alt="Adidas Duramo SL">
+          </div>
+          <div class="similar-card-details">
+            <h4 class="similar-prod-title">Adidas Duramo SL</h4>
+            <div class="similar-price-row">
+              <span class="sim-price-cur">₹2,199</span>
+              <span class="sim-price-orig">₹4,499</span>
+            </div>
+            <span class="sim-discount">51% OFF</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="similar-deal-card" routerLink="/deal-details">
+          <div class="similar-card-img-wrapper">
+            <img src="/puma_shoes.png" alt="Puma Flyer Runner">
+          </div>
+          <div class="similar-card-details">
+            <h4 class="similar-prod-title">Puma Flyer Runner</h4>
+            <div class="similar-price-row">
+              <span class="sim-price-cur">₹1,899</span>
+              <span class="sim-price-orig">₹3,799</span>
+            </div>
+            <span class="sim-discount">50% OFF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

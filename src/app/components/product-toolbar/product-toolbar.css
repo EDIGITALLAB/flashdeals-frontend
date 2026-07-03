@@ -1,0 +1,92 @@
+:host(.toolbar-pills) {
+  display: block;
+  background-color: var(--bg-color);
+  padding-bottom: 10px;
+}
+
+/* Pills / Tabs */
+.explore-pills {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.pill-btn {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pill-btn:hover {
+  border-color: var(--border-hover);
+  background-color: #f9f9fb;
+}
+
+.pill-btn.active {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-color: rgba(255, 63, 108, 0.3);
+}
+
+.scale-down {
+  font-size: 16px;
+}
+
+/* Results header / Sort view toggle */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.results-count {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.view-toggle-buttons {
+  display: flex;
+  gap: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  padding: 4px;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+  color: var(--text-primary);
+  background-color: #f5f6f9;
+}
+
+.toggle-btn.active {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+}
+
+.toggle-btn .material-symbols-outlined {
+  font-size: 18px;
+}
