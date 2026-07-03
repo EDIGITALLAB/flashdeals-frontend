@@ -3,7 +3,7 @@
   <app-search-header />
 
   <!-- Product Toolbar for Pills -->
-  <app-product-toolbar [view]="'pills'" />
+  <app-product-toolbar [view]="'pills'" [selectedPriceFilterLabel]="selectedPriceLabel" (priceFilterChange)="onPriceFilterChange($event)" />
 
   <!-- Inner Split: Sidebar (Filters) and Main Panel (Results) -->
   <div class="explore-content-split">
@@ -13,52 +13,91 @@
     <!-- Main Results (Right) -->
     <main class="results-main">
       <!-- Product Toolbar for Header Count & Views -->
-      <app-product-toolbar [view]="'header'" />
+      <app-product-toolbar [view]="'header'" [viewMode]="viewMode" (viewModeChange)="viewMode = $event" />
 
-      <!-- Products List (List View) -->
-      <div class="products-list-vertical">
-        @for (product of products; track product.id) {
-          <div class="product-item-card" routerLink="/deal-details">
-            <!-- Product Image Left -->
-            <div class="product-image-section">
-              <img [src]="product.image" [alt]="product.name" class="prod-img">
-              <div class="prod-rating-badge">
-                <span>{{ product.rating }}</span>
-                <span class="rating-star">★</span>
+      @if (viewMode === 'list') {
+        <!-- Products List (List View) -->
+        <div class="products-list-vertical">
+          @for (product of products; track product.id) {
+            <div class="product-item-card" routerLink="/deal-details">
+              <!-- Product Image Left -->
+              <div class="product-image-section">
+                <img [src]="product.image" [alt]="product.name" class="prod-img">
+                <div class="prod-rating-badge">
+                  <span>{{ product.rating }}</span>
+                  <span class="rating-star">★</span>
+                </div>
+              </div>
+
+              <!-- Product Details Center-Right -->
+              <div class="product-details-section">
+                <div class="prod-header-row">
+                  <div>
+                    <h3 class="prod-title">{{ product.name }}</h3>
+                    <p class="prod-store">{{ product.store }}</p>
+                  </div>
+                  <button class="prod-wishlist-btn" (click)="$event.stopPropagation();">
+                    <span class="material-symbols-outlined">favorite</span>
+                  </button>
+                </div>
+
+                <div class="prod-price-row mt-3">
+                  <div class="price-container">
+                    <span class="price-current">₹{{ product.price | number:'1.0-0' }}</span>
+                    <span class="price-original">₹{{ product.originalPrice | number:'1.0-0' }}</span>
+                    <span class="price-discount-badge">{{ product.discount }}% OFF</span>
+                  </div>
+                  
+                  <div class="prod-countdown">
+                    <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[0] }}</span>
+                    <span class="prod-timer-colon">:</span>
+                    <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[1] }}</span>
+                    <span class="prod-timer-colon">:</span>
+                    <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[2] }}</span>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <!-- Product Details Center-Right -->
-            <div class="product-details-section">
-              <div class="prod-header-row">
-                <div>
-                  <h3 class="prod-title">{{ product.name }}</h3>
-                  <p class="prod-store">{{ product.store }}</p>
+          }
+        </div>
+      } @else {
+        <!-- Products Grid (Grid View) -->
+        <div class="products-grid-horizontal">
+          @for (product of products; track product.id) {
+            <div class="product-grid-card" routerLink="/deal-details">
+              <div class="grid-image-container">
+                <img [src]="product.image" [alt]="product.name" class="grid-img">
+                <div class="grid-rating-badge">
+                  <span>{{ product.rating }}</span>
+                  <span class="rating-star">★</span>
                 </div>
-                <button class="prod-wishlist-btn">
+                <button class="grid-wishlist-btn" (click)="$event.stopPropagation();">
                   <span class="material-symbols-outlined">favorite</span>
                 </button>
               </div>
 
-              <div class="prod-price-row mt-3">
-                <div class="price-container">
-                  <span class="price-current">₹{{ product.price | number:'1.0-0' }}</span>
-                  <span class="price-original">₹{{ product.originalPrice | number:'1.0-0' }}</span>
-                  <span class="price-discount-badge">{{ product.discount }}% OFF</span>
+              <div class="grid-info-container">
+                <div class="grid-store-row">
+                  <span class="grid-store">{{ product.store }}</span>
+                  <span class="grid-discount">{{ product.discount }}% OFF</span>
                 </div>
-                
-                <div class="prod-countdown">
-                  <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[0] }}</span>
-                  <span class="prod-timer-colon">:</span>
-                  <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[1] }}</span>
-                  <span class="prod-timer-colon">:</span>
-                  <span class="prod-timer-box">{{ getTimeSegments(product.timerString)[2] }}</span>
+                <h3 class="grid-title">{{ product.name }}</h3>
+
+                <div class="grid-bottom-row">
+                  <div class="grid-prices">
+                    <span class="grid-price-current">₹{{ product.price | number:'1.0-0' }}</span>
+                    <span class="grid-price-original">₹{{ product.originalPrice | number:'1.0-0' }}</span>
+                  </div>
+                  <div class="grid-timer">
+                    <span class="material-symbols-outlined icon-timer">schedule</span>
+                    <span>{{ getTimeSegments(product.timerString)[0] }}:{{ getTimeSegments(product.timerString)[1] }}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        }
-      </div>
+          }
+        </div>
+      }
     </main>
   </div>
 </div>

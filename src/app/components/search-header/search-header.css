@@ -20,7 +20,7 @@
 }
 
 .back-btn-explore {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -28,11 +28,14 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  transition: background-color 0.2s;
+  background-color: #f5f6f9;
+  transition: transform 0.2s, color 0.2s, background-color 0.2s;
 }
 
 .back-btn-explore:hover {
-  background-color: #f5f6f9;
+  color: var(--primary-color);
+  transform: translateX(-3px);
+  background-color: var(--primary-light);
 }
 
 .explore-search-bar {
@@ -43,6 +46,14 @@
   border-radius: 8px;
   padding: 0 12px;
   height: 42px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.explore-search-bar:focus-within {
+  background-color: var(--card-bg);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 63, 108, 0.15);
 }
 
 .search-icon-exp {

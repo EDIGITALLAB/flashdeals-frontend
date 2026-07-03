@@ -1,0 +1,227 @@
+<div class="my-deals-page-container">
+  <!-- Header Bar -->
+  <header class="deals-header-bar">
+    <div class="title-left">
+      <span class="material-symbols-outlined back-arrow" routerLink="/">arrow_back</span>
+      <h1 class="page-title">My Deals / Follow Ups</h1>
+    </div>
+  </header>
+
+  <div class="my-deals-container px-4 px-md-5">
+    
+    <!-- Tabs -->
+    <ul class="nav nav-tabs border-bottom mb-4 gap-2">
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab === 'watching'" (click)="setActiveTab('watching')">
+          Watching (5)
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab === 'purchased'" (click)="setActiveTab('purchased')">
+          Purchased (3)
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab === 'expired'" (click)="setActiveTab('expired')">
+          Expired (2)
+        </button>
+      </li>
+    </ul>
+    
+    <!-- List container -->
+    <div class="deals-list d-flex flex-column">
+      
+      <!-- Tab: Watching -->
+      @if (activeTab === 'watching') {
+        @for (deal of watchingDeals; track deal.id) {
+          <div class="deal-item-card row align-items-center py-4 border-bottom g-0">
+            <!-- Image Section -->
+            <div class="col-auto">
+              <div class="deal-image-wrapper">
+                @if (deal.type === 'product') {
+                  <img [src]="deal.image" [alt]="deal.title" class="deal-image" />
+                } @else {
+                  <div class="brand-logo-card">
+                    @switch (deal.logoType) {
+                      @case ('myntra') {
+                        <svg viewBox="0 0 120 40" class="brand-logo-svg">
+                          <defs>
+                            <linearGradient id="myntra-gd1" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#fe3f40" />
+                              <stop offset="100%" stop-color="#ff007f" />
+                            </linearGradient>
+                            <linearGradient id="myntra-gd2" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#f2a30f" />
+                              <stop offset="100%" stop-color="#fe3f40" />
+                            </linearGradient>
+                          </defs>
+                          <g transform="translate(2, 2)">
+                            <path d="M 0 30 L 10 5 L 20 20 L 30 5 L 40 30" fill="none" stroke="url(#myntra-gd1)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" />
+                            <path d="M 10 30 L 17 15 L 20 20 L 23 15 L 30 30" fill="none" stroke="url(#myntra-gd2)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity="0.95" />
+                          </g>
+                          <text x="56" y="26" font-family="'Outfit', sans-serif" font-weight="800" font-size="18" fill="#282c3f">Myntra</text>
+                        </svg>
+                      }
+                      @case ('swiggy') {
+                        <svg viewBox="0 0 120 40" class="brand-logo-svg">
+                          <g fill="#fc8019" transform="translate(2, 4)">
+                            <path d="M 15 0 C 8 0, 3 5, 3 10 C 3 14, 7 16, 12 18 C 17 20, 19 22, 19 25 C 19 28, 15 30, 10 30 C 5 30, 2 27, 2 24 L 2 23 A 1 1 0 0 0 0 23 L 0 24 C 0 29, 5 32, 10 32 C 17 32, 21 28, 21 25 C 21 21, 17 19, 12 17 C 7 15, 5 13, 5 10 C 5 7, 9 5, 14 5 C 18 5, 21 7, 22 9 L 22 10 A 1 1 0 0 0 24 10 L 24 9 C 24 4, 19 0, 15 0 Z" />
+                          </g>
+                          <text x="35" y="27" font-family="'Outfit', sans-serif" font-weight="900" font-size="18" fill="#fc8019" letter-spacing="0.5">SWIGGY</text>
+                        </svg>
+                      }
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+            
+            <!-- Details Section -->
+            <div class="col ms-4 min-width-0">
+              <h3 class="deal-title text-truncate">{{ deal.title }}</h3>
+              
+              <div class="deal-meta-info d-flex align-items-center">
+                @if (deal.secondsLeft && deal.secondsLeft > 0) {
+                  <div class="timer-section d-flex align-items-center gap-2">
+                    <span class="ends-in-label">Ends in</span>
+                    <div class="timer-container d-flex align-items-center gap-1">
+                      <span class="timer-digit">{{ getTimeSegments(deal.timerString)[0] }}</span>
+                      <span class="timer-colon">:</span>
+                      <span class="timer-digit">{{ getTimeSegments(deal.timerString)[1] }}</span>
+                      <span class="timer-colon">:</span>
+                      <span class="timer-digit">{{ getTimeSegments(deal.timerString)[2] }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+            
+            <!-- Price / Action Section -->
+            <div class="deal-action-section col-auto text-end">
+              @if (deal.type === 'product') {
+                <div class="price-container">
+                  <div class="current-price">₹{{ deal.priceCurrent | number }}</div>
+                  <div class="price-original-row d-flex align-items-center gap-2 justify-content-end mt-1">
+                    <span class="original-price text-decoration-line-through">₹{{ deal.priceOriginal | number }}</span>
+                    <span class="discount-badge fw-bold">{{ deal.discount }}</span>
+                  </div>
+                </div>
+              } @else if (deal.hasButton) {
+                <button class="btn action-btn btn-outline" routerLink="/explore">{{ deal.buttonText }}</button>
+              }
+            </div>
+          </div>
+        }
+        
+        <!-- Footer -->
+        <div class="deals-footer text-center mt-4">
+          <button class="footer-link" routerLink="/explore">View All Watched Deals</button>
+        </div>
+      }
+      
+      <!-- Tab: Purchased -->
+      @if (activeTab === 'purchased') {
+        @for (deal of purchasedDeals; track deal.id) {
+          <div class="deal-item-card row align-items-center py-4 border-bottom g-0">
+            <div class="col-auto">
+              <div class="deal-image-wrapper">
+                @if (deal.type === 'product') {
+                  <img [src]="deal.image" [alt]="deal.title" class="deal-image" />
+                } @else {
+                  <div class="brand-logo-card">
+                    @switch (deal.logoType) {
+                      @case ('swiggy') {
+                        <svg viewBox="0 0 120 40" class="brand-logo-svg">
+                          <g fill="#fc8019" transform="translate(2, 4)">
+                            <path d="M 15 0 C 8 0, 3 5, 3 10 C 3 14, 7 16, 12 18 C 17 20, 19 22, 19 25 C 19 28, 15 30, 10 30 C 5 30, 2 27, 2 24 L 2 23 A 1 1 0 0 0 0 23 L 0 24 C 0 29, 5 32, 10 32 C 17 32, 21 28, 21 25 C 21 21, 17 19, 12 17 C 7 15, 5 13, 5 10 C 5 7, 9 5, 14 5 C 18 5, 21 7, 22 9 L 22 10 A 1 1 0 0 0 24 10 L 24 9 C 24 4, 19 0, 15 0 Z" />
+                          </g>
+                          <text x="35" y="27" font-family="'Outfit', sans-serif" font-weight="900" font-size="18" fill="#fc8019" letter-spacing="0.5">SWIGGY</text>
+                        </svg>
+                      }
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+            
+            <div class="col ms-4 min-width-0">
+              <h3 class="deal-title text-truncate">{{ deal.title }}</h3>
+              <div class="purchase-info d-flex flex-wrap align-items-center gap-2 text-muted">
+                <span class="info-label">Ordered on:</span>
+                <span class="info-value">{{ deal.purchasedDate }}</span>
+                <span class="divider">|</span>
+                <span class="info-label">Order ID:</span>
+                <span class="info-value code">{{ deal.orderId }}</span>
+              </div>
+            </div>
+            
+            <div class="deal-action-section col-auto text-end">
+              @if (deal.type === 'product') {
+                <div class="price-container">
+                  <div class="current-price text-success">₹{{ deal.priceCurrent | number }}</div>
+                  <div class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-bold mt-1">{{ deal.statusText }}</div>
+                </div>
+              } @else {
+                <div class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 fw-bold">{{ deal.statusText }}</div>
+              }
+            </div>
+          </div>
+        }
+      }
+      
+      <!-- Tab: Expired -->
+      @if (activeTab === 'expired') {
+        @for (deal of expiredDeals; track deal.id) {
+          <div class="deal-item-card expired row align-items-center py-4 border-bottom g-0">
+            <div class="col-auto">
+              <div class="deal-image-wrapper grayscale">
+                @if (deal.type === 'product') {
+                  <img [src]="deal.image" [alt]="deal.title" class="deal-image" />
+                } @else {
+                  <div class="brand-logo-card">
+                    @switch (deal.logoType) {
+                      @case ('myntra') {
+                        <svg viewBox="0 0 120 40" class="brand-logo-svg">
+                          <defs>
+                            <linearGradient id="myntra-gd1" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#fe3f40" />
+                              <stop offset="100%" stop-color="#ff007f" />
+                            </linearGradient>
+                            <linearGradient id="myntra-gd2" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#f2a30f" />
+                              <stop offset="100%" stop-color="#fe3f40" />
+                            </linearGradient>
+                          </defs>
+                          <g transform="translate(2, 2)">
+                            <path d="M 0 30 L 10 5 L 20 20 L 30 5 L 40 30" fill="none" stroke="url(#myntra-gd1)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" />
+                            <path d="M 10 30 L 17 15 L 20 20 L 23 15 L 30 30" fill="none" stroke="url(#myntra-gd2)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity="0.95" />
+                          </g>
+                          <text x="56" y="26" font-family="'Outfit', sans-serif" font-weight="800" font-size="18" fill="#282c3f">Myntra</text>
+                        </svg>
+                      }
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+            
+            <div class="col ms-4 min-width-0">
+              <h3 class="deal-title text-truncate">{{ deal.title }}</h3>
+              <div class="expired-label text-muted">{{ deal.statusText }}</div>
+            </div>
+            
+            <div class="deal-action-section col-auto text-end">
+              @if (deal.type === 'product') {
+                <div class="price-container mb-1">
+                  <div class="current-price text-muted">₹{{ deal.priceCurrent | number }}</div>
+                </div>
+              }
+              <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-3 py-2 fw-bold">Expired</span>
+            </div>
+          </div>
+        }
+      }
+      
+    </div>
+  </div>
+</div>

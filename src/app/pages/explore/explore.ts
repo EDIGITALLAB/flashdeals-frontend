@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FilterSidebar } from '../../components/filter-sidebar/filter-sidebar';
@@ -26,7 +26,7 @@ interface Product {
   styleUrl: './explore.css',
 })
 export class Explore implements OnInit, OnDestroy {
-  products: Product[] = [
+  allProducts: Product[] = [
     {
       id: 1,
       name: "Nike Revolution 6 Men's Running Shoes",
@@ -77,12 +77,21 @@ export class Explore implements OnInit, OnDestroy {
     }
   ];
 
+  products: Product[] = [];
+  viewMode: 'list' | 'grid' = 'list';
   private intervalId: any;
 
+  selectedMinPrice: number | null = null;
+  selectedMaxPrice: number | null = null;
+  selectedPriceLabel = 'All';
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit() {
+    this.products = [...this.allProducts];
     this.updateTimers();
     this.intervalId = setInterval(() => {
-      this.products.forEach(p => {
+      this.allProducts.forEach(p => {
         if (p.secondsLeft > 0) {
           p.secondsLeft--;
         }
@@ -97,10 +106,33 @@ export class Explore implements OnInit, OnDestroy {
     }
   }
 
+  onPriceFilterChange(filter: { min: number | null; max: number | null; label: string }) {
+    this.selectedMinPrice = filter.min;
+    this.selectedMaxPrice = filter.max;
+    this.selectedPriceLabel = filter.label;
+    this.applyFilters();
+  }
+
+  private applyFilters() {
+    let result = [...this.allProducts];
+    if (this.selectedMinPrice !== null) {
+      result = result.filter(p => p.price >= this.selectedMinPrice!);
+    }
+    if (this.selectedMaxPrice !== null) {
+      result = result.filter(p => p.price <= this.selectedMaxPrice!);
+    }
+    this.products = result;
+    this.updateTimers();
+  }
+
   private updateTimers() {
+    this.allProducts.forEach(p => {
+      p.timerString = this.formatTime(p.secondsLeft);
+    });
     this.products.forEach(p => {
       p.timerString = this.formatTime(p.secondsLeft);
     });
+    this.cdr.detectChanges();
   }
 
   private formatTime(totalSeconds: number): string {

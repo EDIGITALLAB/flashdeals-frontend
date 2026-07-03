@@ -7,38 +7,7 @@
 
 
 
-/* Breadcrumbs */
-.breadcrumbs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 16px;
-  margin-bottom: 28px;
-}
 
-.crumb {
-  cursor: pointer;
-  transition: color 0.2s;
-  font-weight: 500;
-}
-
-.crumb:hover {
-  color: var(--primary-color);
-}
-
-.crumb.active {
-  color: var(--text-primary);
-  font-weight: 600;
-  cursor: default;
-}
-
-.crumb-separator {
-  color: var(--text-secondary);
-  font-size: 11px;
-  opacity: 0.5;
-}
 
 /* Main Grid Layout */
 .product-info-grid {

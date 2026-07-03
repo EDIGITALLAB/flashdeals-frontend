@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Breadcrumb } from '../../components/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-deal-details',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, Breadcrumb],
   templateUrl: './deal-details.html',
   styleUrl: './deal-details.css',
 })

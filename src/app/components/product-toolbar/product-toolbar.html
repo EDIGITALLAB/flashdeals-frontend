@@ -5,10 +5,27 @@
     <button class="pill-btn active">High Discount</button>
     <button class="pill-btn">Brands</button>
     <button class="pill-btn">Interests</button>
-    <button class="pill-btn select-dropdown">
-      <span>Price</span>
-      <span class="material-symbols-outlined scale-down">keyboard_arrow_down</span>
-    </button>
+    
+    <!-- Price Dropdown Container -->
+    <div class="price-picker-container">
+      <button class="pill-btn select-dropdown" [class.active]="selectedPriceFilterLabel !== 'All'" (click)="togglePriceDropdown()">
+        <span>{{ selectedPriceFilterLabel === 'All' ? 'Price' : 'Price: ' + selectedPriceFilterLabel }}</span>
+        <span class="material-symbols-outlined scale-down" [class.rotated]="showPriceDropdown">keyboard_arrow_down</span>
+      </button>
+
+      <!-- Price Dropdown Menu -->
+      @if (showPriceDropdown) {
+        <div class="price-dropdown shadow-lg border">
+          @for (opt of priceOptions; track opt.label) {
+            <div class="price-item" [class.active]="opt.label === selectedPriceFilterLabel" (click)="selectPriceFilter(opt); $event.stopPropagation();">
+              <span class="material-symbols-outlined price-check-icon" [style.visibility]="opt.label === selectedPriceFilterLabel ? 'visible' : 'hidden'">check</span>
+              <span class="price-text">{{ opt.label === 'All' ? 'All Prices' : opt.label }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
     <button class="pill-btn">Sort By</button>
   </div>
 } @else if (view === 'header') {
@@ -16,10 +33,10 @@
   <div class="results-header">
     <span class="results-count">345 Results for "shoes"</span>
     <div class="view-toggle-buttons">
-      <button class="toggle-btn">
+      <button class="toggle-btn" [class.active]="viewMode === 'grid'" (click)="setViewMode('grid')">
         <span class="material-symbols-outlined">grid_view</span>
       </button>
-      <button class="toggle-btn active">
+      <button class="toggle-btn" [class.active]="viewMode === 'list'" (click)="setViewMode('list')">
         <span class="material-symbols-outlined">menu</span>
       </button>
     </div>

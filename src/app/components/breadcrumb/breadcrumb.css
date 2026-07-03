@@ -1,0 +1,4 @@
+/* Bootstrap Breadcrumb default styling */
+.breadcrumb-item a {
+  transition: color 0.2s ease;
+}
