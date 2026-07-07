@@ -1,0 +1,89 @@
+/* Desktop Hidden */
+@media (min-width: 768px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Mobile Display Layout */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 9999;
+    padding: 0 8px;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    flex-grow: 1;
+    height: 100%;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .nav-icon {
+    font-size: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-text {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* Active Menu state */
+  .mobile-nav-item.active {
+    color: var(--primary-color);
+  }
+
+  .mobile-nav-item.active .nav-icon {
+    transform: scale(1.1);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  /* Badge Dot design */
+  .icon-badge-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .notification-badge-dot {
+    position: absolute;
+    top: -5px;
+    right: -7px;
+    background-color: #ff3b30;
+    color: white;
+    font-size: 9px;
+    font-weight: 800;
+    min-width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border: 1.5px solid white;
+    box-shadow: 0 2px 4px rgba(255, 59, 48, 0.25);
+  }
+}

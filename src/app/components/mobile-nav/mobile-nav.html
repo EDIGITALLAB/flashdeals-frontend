@@ -1,0 +1,48 @@
+<nav class="mobile-bottom-nav">
+  <!-- Home -->
+  <a routerLink="/" 
+     class="mobile-nav-item" 
+     [class.active]="isRouteActive('/')">
+    <span class="material-symbols-outlined nav-icon">home</span>
+    <span class="nav-text">Home</span>
+  </a>
+
+  <!-- Explore -->
+  <a routerLink="/explore" 
+     class="mobile-nav-item" 
+     [class.active]="isRouteActive('/explore')">
+    <span class="material-symbols-outlined nav-icon">search</span>
+    <span class="nav-text">Explore</span>
+  </a>
+
+  <!-- Alerts (Modal trigger) -->
+  <a href="#" 
+     class="mobile-nav-item" 
+     [class.active]="showAlertsModal"
+     (click)="toggleAlerts($event)">
+    <div class="icon-badge-wrapper">
+      <span class="material-symbols-outlined nav-icon">notifications</span>
+      <span class="notification-badge-dot">3</span>
+    </div>
+    <span class="nav-text">Alerts</span>
+  </a>
+
+  <!-- Categories -->
+  <a routerLink="/explore" 
+     class="mobile-nav-item"
+     [class.active]="isRouteActive('/explore-categories')">
+    <span class="material-symbols-outlined nav-icon">grid_view</span>
+    <span class="nav-text">Categories</span>
+  </a>
+
+  <!-- Profile -->
+  <a routerLink="/profile" 
+     class="mobile-nav-item" 
+     [class.active]="isRouteActive('/profile')">
+    <span class="material-symbols-outlined nav-icon">person</span>
+    <span class="nav-text">Profile</span>
+  </a>
+</nav>
+
+<!-- Embedded Alerts Modal Component -->
+<app-alerts-modal [isOpen]="showAlertsModal" (close)="showAlertsModal = false" />

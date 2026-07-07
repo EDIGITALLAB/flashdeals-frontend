@@ -180,3 +180,10 @@
 .text-danger {
   color: var(--primary-color);
 }
+
+@media (max-width: 768px) {
+  .profile-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

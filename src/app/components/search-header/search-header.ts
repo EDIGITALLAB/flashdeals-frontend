@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,4 +7,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './search-header.html',
   styleUrl: './search-header.css',
 })
-export class SearchHeader {}
+export class SearchHeader {
+  @Output() filterToggle = new EventEmitter<void>();
+
+  onFilterClick() {
+    this.filterToggle.emit();
+  }
+}

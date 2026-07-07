@@ -558,3 +558,42 @@
     margin-left: 80px;
   }
 }
+
+@media (max-width: 768px) {
+  /* Let the document body scroll — not the wrapper — so position:fixed works */
+  .app-layout {
+    display: block !important;
+    min-height: 100vh;
+    overflow: visible !important;
+  }
+  .main-wrapper {
+    margin-left: 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+    display: block !important;
+  }
+  .deals-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .interests-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-carousel {
+    height: auto !important;
+    min-height: 220px;
+  }
+  .hero-title-large {
+    font-size: 24px !important;
+  }
+  .hero-subtitle {
+    font-size: 13px !important;
+  }
+  .slide-badge-container {
+    display: none !important;
+  }
+  .main-content {
+    padding: 16px !important;
+    padding-top: 84px !important;
+    padding-bottom: 88px !important;
+  }
+}

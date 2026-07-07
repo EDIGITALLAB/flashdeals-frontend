@@ -729,3 +729,38 @@ input:checked + .slider:before {
 .legal-separator {
   color: var(--border-hover);
 }
+
+@media (max-width: 768px) {
+  .profile-layout-container {
+    flex-direction: column;
+    padding: 16px;
+    gap: 20px;
+  }
+  
+  app-profile-sidebar {
+    width: 100%;
+  }
+
+  .profile-details-panel {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .info-form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  .profile-title-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 16px 20px;
+  }
+}

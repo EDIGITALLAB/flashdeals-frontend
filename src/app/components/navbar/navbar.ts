@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 export class Navbar {
   selectedLocation = 'Bengaluru';
   showDropdown = false;
+  showMobileSearch = false;
   locations = ['Bengaluru', 'Mumbai', 'Delhi NCR', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata'];
 
   constructor(private elementRef: ElementRef) {}
@@ -23,10 +24,20 @@ export class Navbar {
     this.showDropdown = false;
   }
 
+  toggleMobileSearch() {
+    this.showMobileSearch = !this.showMobileSearch;
+  }
+
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.showDropdown = false;
+      this.showMobileSearch = false;
     }
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.showDropdown = false;
   }
 }

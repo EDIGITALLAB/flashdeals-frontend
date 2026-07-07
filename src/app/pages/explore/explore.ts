@@ -1,23 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { FilterSidebar } from '../../components/filter-sidebar/filter-sidebar';
 import { SearchHeader } from '../../components/search-header/search-header';
 import { ProductToolbar } from '../../components/product-toolbar/product-toolbar';
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  store: string;
-  price: number;
-  originalPrice: number;
-  discount: number;
-  rating: number;
-  image: string;
-  secondsLeft: number;
-  timerString?: string;
-}
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-explore',
@@ -84,11 +71,26 @@ export class Explore implements OnInit, OnDestroy {
   selectedMinPrice: number | null = null;
   selectedMaxPrice: number | null = null;
   selectedPriceLabel = 'All';
+  selectedSort = 'relevance';
+  selectedSortLabel = 'Sort By';
+  mobileFiltersOpen = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  selectedBrandFilter: string | null = null;
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute
+  ) {}
+
+  toggleMobileFilters(isOpen: boolean) {
+    this.mobileFiltersOpen = isOpen;
+  }
 
   ngOnInit() {
-    this.products = [...this.allProducts];
+    this.route.queryParams.subscribe(params => {
+      this.selectedBrandFilter = params['brand'] || null;
+      this.applyFilters();
+    });
     this.updateTimers();
     this.intervalId = setInterval(() => {
       this.allProducts.forEach(p => {
@@ -113,6 +115,19 @@ export class Explore implements OnInit, OnDestroy {
     this.applyFilters();
   }
 
+  onSortChange(sortValue: string) {
+    this.selectedSort = sortValue;
+    const matched = [
+      { label: 'Relevance', value: 'relevance' },
+      { label: 'Price: Low to High', value: 'price_asc' },
+      { label: 'Price: High to Low', value: 'price_desc' },
+      { label: 'Discount: High to Low', value: 'discount_desc' },
+      { label: 'Rating: High to Low', value: 'rating_desc' }
+    ].find(opt => opt.value === sortValue);
+    this.selectedSortLabel = matched ? matched.label : 'Sort By';
+    this.applyFilters();
+  }
+
   private applyFilters() {
     let result = [...this.allProducts];
     if (this.selectedMinPrice !== null) {
@@ -121,6 +136,21 @@ export class Explore implements OnInit, OnDestroy {
     if (this.selectedMaxPrice !== null) {
       result = result.filter(p => p.price <= this.selectedMaxPrice!);
     }
+    if (this.selectedBrandFilter) {
+      result = result.filter(p => p.store.toLowerCase().includes(this.selectedBrandFilter!.toLowerCase()));
+    }
+
+    // Apply Sorting
+    if (this.selectedSort === 'price_asc') {
+      result.sort((a, b) => a.price - b.price);
+    } else if (this.selectedSort === 'price_desc') {
+      result.sort((a, b) => b.price - a.price);
+    } else if (this.selectedSort === 'discount_desc') {
+      result.sort((a, b) => b.discount - a.discount);
+    } else if (this.selectedSort === 'rating_desc') {
+      result.sort((a, b) => b.rating - a.rating);
+    }
+
     this.products = result;
     this.updateTimers();
   }

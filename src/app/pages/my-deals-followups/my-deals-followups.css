@@ -51,7 +51,7 @@
 
 /* My Deals Container Card */
 .my-deals-container {
-  max-width: 1000px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
   background-color: transparent;
@@ -402,5 +402,19 @@
   }
   .price-original-row {
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .deals-header-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 16px 20px;
+  }
+  .watchlist-container {
+    padding: 16px;
   }
 }

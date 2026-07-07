@@ -1,0 +1,94 @@
+@if (isOpen) {
+  <div class="brands-modal-backdrop" (click)="closeModal()">
+    <div class="brands-modal-card" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="modal-header-section">
+        <h2 class="modal-brands-title">Top Popular Brands</h2>
+        <p class="modal-brands-subtitle">Click a brand to view their active flash deals & offers.</p>
+      </div>
+
+      <div class="brands-grid-container">
+        @for (brand of brands; track brand.name) {
+          <div class="brand-card" (click)="selectBrand(brand.name)">
+            <div class="brand-logo-wrapper">
+              @switch (brand.logoType) {
+                @case ('puma') {
+                  <svg viewBox="0 0 100 60" width="80" height="40" class="brand-logo text-dark">
+                    <path d="M 68 15 C 63 12, 54 14, 47 20 C 44 22, 40 25, 32 25 C 27 25, 20 20, 17 15 C 19 22, 24 28, 30 30 C 37 32, 44 28, 50 24 C 57 18, 64 18, 70 22 C 74 24, 77 28, 80 32 C 77 25, 73 18, 68 15 Z" fill="currentColor" />
+                    <text x="50%" y="50" font-family="'Outfit', sans-serif" font-weight="900" font-size="15" letter-spacing="1.5" text-anchor="middle" fill="currentColor">PUMA</text>
+                  </svg>
+                }
+                @case ('boat') {
+                  <svg viewBox="0 0 100 40" width="85" height="32" class="brand-logo">
+                    <text x="5" y="28" font-family="'Outfit', sans-serif" font-weight="800" font-size="26" letter-spacing="-0.5" fill="#1e1e2e">
+                      bo<tspan fill="#ff3f6c">At</tspan>
+                    </text>
+                    <circle cx="82" cy="18" r="4.5" fill="#ff3f6c" />
+                    <line x1="5" y1="33" x2="90" y2="33" stroke="#ff3f6c" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                }
+                @case ('myntra') {
+                  <svg viewBox="0 0 120 40" width="95" height="32" class="brand-logo">
+                    <defs>
+                      <linearGradient id="myntra-modal-g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fe3f40" />
+                        <stop offset="100%" stop-color="#ff007f" />
+                      </linearGradient>
+                      <linearGradient id="myntra-modal-g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f2a30f" />
+                        <stop offset="100%" stop-color="#fe3f40" />
+                      </linearGradient>
+                    </defs>
+                    <g transform="translate(2, 2)">
+                      <path d="M 0 30 L 10 5 L 20 20 L 30 5 L 40 30" fill="none" stroke="url(#myntra-modal-g1)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" />
+                      <path d="M 10 30 L 17 15 L 20 20 L 23 15 L 30 30" fill="none" stroke="url(#myntra-modal-g2)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity="0.95" />
+                    </g>
+                    <text x="56" y="26" font-family="'Outfit', sans-serif" font-weight="800" font-size="18" fill="#282c3f">Myntra</text>
+                  </svg>
+                }
+                @case ('swiggy') {
+                  <svg viewBox="0 0 120 40" width="95" height="32" class="brand-logo">
+                    <g fill="#fc8019" transform="translate(2, 4)">
+                      <path d="M 15 0 C 8 0, 3 5, 3 10 C 3 14, 7 16, 12 18 C 17 20, 19 22, 19 25 C 19 28, 15 30, 10 30 C 5 30, 2 27, 2 24 L 2 23 A 1 1 0 0 0 0 23 L 0 24 C 0 29, 5 32, 10 32 C 17 32, 21 28, 21 25 C 21 21, 17 19, 12 17 C 7 15, 5 13, 5 10 C 5 7, 9 5, 14 5 C 18 5, 21 7, 22 9 L 22 10 A 1 1 0 0 0 24 10 L 24 9 C 24 4, 19 0, 15 0 Z" />
+                    </g>
+                    <text x="35" y="27" font-family="'Outfit', sans-serif" font-weight="900" font-size="18" fill="#fc8019" letter-spacing="0.5">SWIGGY</text>
+                  </svg>
+                }
+                @case ('nike') {
+                  <svg viewBox="0 0 100 40" width="85" height="32" class="brand-logo">
+                    <path d="M15,25 C35,25 70,5 85,5 C80,10 50,30 25,30 C15,30 5,28 15,25 Z" fill="#000000" />
+                  </svg>
+                }
+                @case ('samsung') {
+                  <svg viewBox="0 0 100 40" width="85" height="32" class="brand-logo">
+                    <text x="50%" y="26" font-family="'Outfit', sans-serif" font-weight="900" font-size="16" fill="#0c4da2" text-anchor="middle" letter-spacing="1">SAMSUNG</text>
+                  </svg>
+                }
+                @case ('adidas') {
+                  <svg viewBox="0 0 100 40" width="85" height="32" class="brand-logo">
+                    <g fill="#000000">
+                      <rect x="25" y="18" width="8" height="12" transform="rotate(-30 25 18)" />
+                      <rect x="40" y="10" width="8" height="20" transform="rotate(-30 40 10)" />
+                      <rect x="55" y="2" width="8" height="28" transform="rotate(-30 55 2)" />
+                    </g>
+                    <text x="50%" y="36" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" letter-spacing="0.5" text-anchor="middle" fill="#000000">adidas</text>
+                  </svg>
+                }
+                @case ('kfc') {
+                  <svg viewBox="0 0 100 40" width="85" height="32" class="brand-logo">
+                    <rect x="15" y="5" width="70" height="30" rx="4" fill="#e4002b" />
+                    <text x="50%" y="26" font-family="'Outfit', sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="2">KFC</text>
+                  </svg>
+                }
+              }
+            </div>
+            <span class="brand-card-name">{{ brand.name }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

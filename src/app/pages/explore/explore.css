@@ -405,3 +405,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .explore-layout {
+    padding-top: 84px !important;
+    padding-bottom: 88px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}

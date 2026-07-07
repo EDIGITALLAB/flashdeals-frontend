@@ -213,3 +213,106 @@
   bottom: 0;
   width: 100%;
 }
+
+/* Close Button - hidden on desktop */
+.close-drawer-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-drawer-btn:hover {
+  background-color: #f5f6f9;
+  color: var(--primary-color);
+}
+
+.filter-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Default wrapper styles for desktop */
+.filter-sidebar-wrapper {
+  display: block;
+}
+
+.filter-backdrop {
+  display: none;
+}
+
+/* Responsive adjust */
+@media (max-width: 992px) {
+  :host {
+    position: static !important; /* Remove sticky on mobile */
+    z-index: auto !important;
+  }
+
+  .filter-sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none; /* Let clicks pass through when closed */
+    display: block;
+  }
+
+  .filter-sidebar-wrapper.drawer-open {
+    pointer-events: auto; /* Intercept clicks when open */
+  }
+
+  .filter-backdrop {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .filter-sidebar-wrapper.drawer-open .filter-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .filters-sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: 100%;
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 20px 0 0 20px;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .filter-sidebar-wrapper.drawer-open .filters-sidebar {
+    transform: translateX(0);
+  }
+
+  .close-drawer-btn {
+    display: flex;
+  }
+}

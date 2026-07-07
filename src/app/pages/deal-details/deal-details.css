@@ -540,3 +540,47 @@
   color: var(--success-text);
   font-weight: 700;
 }
+
+@media (max-width: 768px) {
+  .details-page-container {
+    padding: 16px;
+  }
+
+  .product-info-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .gallery-wrapper {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+
+  .thumbnails-strip {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+
+  .thumb-btn {
+    width: 60px;
+    height: 60px;
+  }
+
+  .trust-badges-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .trust-badge {
+    flex: 1 1 40%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-buttons-container {
+    grid-template-columns: 1fr;
+  }
+}

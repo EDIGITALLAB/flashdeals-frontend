@@ -26,7 +26,25 @@
       }
     </div>
 
-    <button class="pill-btn">Sort By</button>
+    <!-- Sort By Dropdown Container -->
+    <div class="price-picker-container">
+      <button class="pill-btn select-dropdown" [class.active]="selectedSortLabel !== 'Sort By'" (click)="toggleSortDropdown()">
+        <span>{{ selectedSortLabel }}</span>
+        <span class="material-symbols-outlined scale-down" [class.rotated]="showSortDropdown">keyboard_arrow_down</span>
+      </button>
+
+      <!-- Sort By Dropdown Menu -->
+      @if (showSortDropdown) {
+        <div class="price-dropdown shadow-lg border">
+          @for (opt of sortOptions; track opt.value) {
+            <div class="price-item" [class.active]="opt.label === selectedSortLabel" (click)="selectSortOption(opt); $event.stopPropagation();">
+              <span class="material-symbols-outlined price-check-icon" [style.visibility]="opt.label === selectedSortLabel ? 'visible' : 'hidden'">check</span>
+              <span class="price-text">{{ opt.label }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
   </div>
 } @else if (view === 'header') {
   <!-- Results Header -->

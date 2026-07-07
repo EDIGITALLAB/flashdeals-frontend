@@ -1,0 +1,38 @@
+@if (isOpen) {
+  <div class="alerts-modal-backdrop" (click)="closeModal()">
+    <div class="alerts-modal-card" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="modal-header-section">
+        <h2 class="modal-alerts-title">Notifications Feed</h2>
+        <p class="modal-alerts-subtitle">Stay updated with live price drops, watchlists, and early access events.</p>
+      </div>
+
+      <div class="notifications-feed-list">
+        @if (notifications.length === 0) {
+          <div class="empty-feed">
+            <span class="material-symbols-outlined empty-icon">notifications_off</span>
+            <p class="empty-text">No active notifications right now.</p>
+          </div>
+        } @else {
+          @for (notif of notifications; track notif.id) {
+            <div class="feed-item" (click)="clickNotification(notif)">
+              <div class="feed-icon-wrapper" [ngClass]="notif.colorClass">
+                <span class="material-symbols-outlined">{{ notif.icon }}</span>
+              </div>
+              <div class="feed-item-details">
+                <div class="feed-item-header">
+                  <h4 class="feed-item-title">{{ notif.title }}</h4>
+                  <span class="feed-item-time">{{ notif.timeString }}</span>
+                </div>
+                <p class="feed-item-message">{{ notif.message }}</p>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </div>
+}

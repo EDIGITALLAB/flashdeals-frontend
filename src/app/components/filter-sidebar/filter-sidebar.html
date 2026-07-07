@@ -1,108 +1,104 @@
-<!-- Filters Sidebar (Left) -->
-<aside class="filters-sidebar">
-  <div class="filter-group-header">
-    <h3 class="filter-title-main">Filters</h3>
-    <button class="clear-all-btn">Clear All</button>
-  </div>
+<!-- Filters Sidebar (Left) Wrapper -->
+<div class="filter-sidebar-wrapper" [class.drawer-open]="isOpen">
+  <div class="filter-backdrop" (click)="onClose()"></div>
 
-  <!-- Categories Filter -->
-  <div class="filter-section">
-    <h4 class="filter-section-title">Categories</h4>
-    <div class="filter-options">
-      <label class="checkbox-container">
-        <input type="checkbox" checked>
-        <span class="checkmark"></span>
-        All
-      </label>
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Men
-      </label>
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Women
-      </label>
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Kids
-      </label>
+  <aside class="filters-sidebar">
+    <div class="filter-group-header">
+      <div class="filter-header-left">
+        <h3 class="filter-title-main">Filters</h3>
+        <button class="close-drawer-btn" (click)="onClose()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <button class="clear-all-btn" (click)="clearAll()">Clear All</button>
     </div>
-  </div>
 
-  <!-- Brands Filter -->
-  <div class="filter-section">
-    <h4 class="filter-section-title">Brands</h4>
-    <div class="brand-search-box mb-3">
-      <input type="text" class="brand-search-input" placeholder="Search brands">
-    </div>
-    <div class="filter-options">
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Nike (120)
-      </label>
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Adidas (98)
-      </label>
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Puma (76)
-      </label>
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Reebok (45)
-      </label>
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        Skechers (34)
-      </label>
-      <button class="more-brands-btn">+ More</button>
-    </div>
-  </div>
-
-  <!-- Discount Filter -->
-  <div class="filter-section">
-    <h4 class="filter-section-title">Discount</h4>
-    <div class="slider-wrapper">
-      <div class="slider-track-highlight" style="left: 0%; right: 28.5%;"></div>
-      <input type="range" class="range-slider" min="10" max="100" value="80">
-      <div class="slider-labels">
-        <span>10%</span>
-        <span>80%+</span>
+    <!-- Categories Filter -->
+    <div class="filter-section">
+      <h4 class="filter-section-title">Categories</h4>
+      <div class="filter-options">
+        <label class="checkbox-container">
+          <input type="checkbox" [checked]="selectedCategories['all']" (change)="onCategoryChange('all', $event)">
+          <span class="checkmark"></span>
+          All
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" [checked]="selectedCategories['men']" (change)="onCategoryChange('men', $event)">
+          <span class="checkmark"></span>
+          Men
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" [checked]="selectedCategories['women']" (change)="onCategoryChange('women', $event)">
+          <span class="checkmark"></span>
+          Women
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" [checked]="selectedCategories['kids']" (change)="onCategoryChange('kids', $event)">
+          <span class="checkmark"></span>
+          Kids
+        </label>
       </div>
     </div>
-  </div>
 
-  <!-- Price Range Filter -->
-  <div class="filter-section">
-    <h4 class="filter-section-title">Price Range</h4>
-    <div class="slider-wrapper">
-      <div class="slider-track-highlight" style="left: 0%; right: 0%;"></div>
-      <input type="range" class="range-slider" min="500" max="5000" value="5000">
-      <div class="slider-labels">
-        <span>₹500</span>
-        <span>₹5000+</span>
+    <!-- Brands Filter -->
+    <div class="filter-section">
+      <h4 class="filter-section-title">Brands</h4>
+      <div class="brand-search-box mb-3">
+        <input type="text" class="brand-search-input" placeholder="Search brands" [value]="brandSearchQuery" (input)="onBrandSearch($event)">
+      </div>
+      <div class="filter-options">
+        @for (brand of filteredBrands; track brand.name) {
+          <label class="checkbox-container">
+            <input type="checkbox" [checked]="selectedBrands[brand.name] || false" (change)="onBrandChange(brand.name, $event)">
+            <span class="checkmark"></span>
+            {{ brand.name }} ({{ brand.count }})
+          </label>
+        }
+
+        @if (!brandSearchQuery) {
+          <button class="more-brands-btn" (click)="toggleMoreBrands()">
+            {{ showMoreBrands ? '- Less' : '+ More' }}
+          </button>
+        }
       </div>
     </div>
-  </div>
 
-  <!-- Ratings Filter -->
-  <div class="filter-section border-0 pb-0">
-    <h4 class="filter-section-title">Ratings</h4>
-    <div class="filter-options">
-      <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        4 ★ & above
-      </label>
+    <!-- Discount Filter -->
+    <div class="filter-section">
+      <h4 class="filter-section-title">Discount</h4>
+      <div class="slider-wrapper">
+        <div class="slider-track-highlight" [style.left.%]="0" [style.right.%]="100 - discountPercent"></div>
+        <input type="range" class="range-slider" min="10" max="100" [value]="selectedDiscount" (input)="onDiscountInput($event)">
+        <div class="slider-labels">
+          <span>10%</span>
+          <span>{{ selectedDiscount }}%+</span>
+        </div>
+      </div>
     </div>
-  </div>
-</aside>
+
+    <!-- Price Range Filter -->
+    <div class="filter-section">
+      <h4 class="filter-section-title">Price Range</h4>
+      <div class="slider-wrapper">
+        <div class="slider-track-highlight" [style.left.%]="0" [style.right.%]="100 - pricePercent"></div>
+        <input type="range" class="range-slider" min="500" max="5000" [value]="selectedPrice" (input)="onPriceInput($event)">
+        <div class="slider-labels">
+          <span>₹500</span>
+          <span>₹{{ selectedPrice === 5000 ? '5000+' : (selectedPrice | number:'1.0-0') }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ratings Filter -->
+    <div class="filter-section border-0 pb-0">
+      <h4 class="filter-section-title">Ratings</h4>
+      <div class="filter-options">
+        <label class="checkbox-container">
+          <input type="checkbox" [checked]="ratingFourAndAbove" (change)="onRatingChange($event)">
+          <span class="checkmark"></span>
+          4 ★ & above
+        </label>
+      </div>
+    </div>
+  </aside>
+</div>

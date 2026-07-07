@@ -183,3 +183,145 @@
   border: 2px solid var(--card-bg);
   padding: 0;
 }
+
+/* Mobile search button — hidden on desktop */
+.mobile-search-btn {
+  display: none;
+}
+
+/* Mobile search overlay */
+.mobile-search-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  :host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  .top-header {
+    padding: 0 16px;
+    height: 64px;
+    gap: 8px;
+  }
+  .search-container {
+    display: none !important;
+  }
+  .location-name, .dropdown-icon {
+    display: none !important;
+  }
+  .location-picker {
+    padding: 6px;
+  }
+
+  /* Show mobile search icon button */
+  .mobile-search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .mobile-search-btn:hover,
+  .mobile-search-btn:active {
+    background-color: #f5f6f9;
+  }
+
+  .mobile-search-btn .material-symbols-outlined {
+    font-size: 22px;
+  }
+
+  /* Expandable search bar that drops below the fixed header */
+  .mobile-search-overlay {
+    display: block;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    animation: slideDown 0.2s ease;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .mobile-search-bar-container {
+    display: flex;
+    align-items: center;
+    background-color: #f5f6f9;
+    border-radius: 10px;
+    padding: 0 12px;
+    height: 44px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .mobile-search-bar-container:focus-within {
+    border-color: var(--primary-color);
+    background-color: var(--card-bg);
+    box-shadow: 0 0 0 3px rgba(255, 63, 108, 0.12);
+  }
+
+  .mobile-search-icon-inner {
+    color: var(--text-secondary);
+    font-size: 20px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .mobile-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .mobile-search-input::placeholder {
+    color: var(--text-secondary);
+  }
+
+  .mobile-search-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 4px;
+    border-radius: 50%;
+    transition: color 0.2s, background-color 0.2s;
+    margin-left: 4px;
+  }
+
+  .mobile-search-close:hover {
+    color: var(--primary-color);
+    background-color: var(--primary-light);
+  }
+
+  .mobile-search-close .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+

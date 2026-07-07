@@ -1,0 +1,54 @@
+@if (isOpen) {
+  <div class="upgrade-modal-backdrop" (click)="closeModal()">
+    <div class="upgrade-modal-card" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="modal-header-section">
+        <div class="diamond-glowing-circle">
+          <span class="material-symbols-outlined vip-diamond-icon">diamond</span>
+        </div>
+        <h2 class="modal-upgrade-title">Upgrade to Premium</h2>
+        <p class="modal-upgrade-subtitle">Get 2 hours early access to all lightning deals & exclusive benefits.</p>
+      </div>
+
+      <div class="modal-benefits-list">
+        <div class="benefit-item">
+          <span class="material-symbols-outlined benefit-check">check_circle</span>
+          <span class="benefit-text">2 Hours Early Access to all Flash Sales</span>
+        </div>
+        <div class="benefit-item">
+          <span class="material-symbols-outlined benefit-check">check_circle</span>
+          <span class="benefit-text">Exclusive Extra 10% Member Discount</span>
+        </div>
+        <div class="benefit-item">
+          <span class="material-symbols-outlined benefit-check">check_circle</span>
+          <span class="benefit-text">Free Priority Shipping on all orders</span>
+        </div>
+        <div class="benefit-item">
+          <span class="material-symbols-outlined benefit-check">check_circle</span>
+          <span class="benefit-text">24/7 Priority VIP Customer Support</span>
+        </div>
+      </div>
+
+      <div class="pricing-plans-grid">
+        <div class="pricing-card">
+          <span class="plan-duration">Monthly</span>
+          <span class="plan-price">₹99<span class="plan-sub">/mo</span></span>
+          <span class="plan-desc">Cancel anytime</span>
+        </div>
+        <div class="pricing-card active">
+          <span class="best-value-badge">Best Value</span>
+          <span class="plan-duration">Yearly</span>
+          <span class="plan-price">₹499<span class="plan-sub">/yr</span></span>
+          <span class="plan-desc">Save 58% instantly</span>
+        </div>
+      </div>
+
+      <button class="btn-upgrade-now" (click)="closeModal()">
+        Upgrade Now
+      </button>
+    </div>
+  </div>
+}

@@ -7,10 +7,10 @@
     <span class="material-symbols-outlined search-icon-exp">search</span>
     <input type="text" class="search-input-exp" placeholder="Search for brands, categories or deals...">
   </div>
-  <button class="header-action-btn-exp">
+  <a routerLink="/my-deals" class="header-action-btn-exp">
     <span class="material-symbols-outlined">favorite</span>
-  </button>
-  <button class="header-action-btn-exp">
+  </a>
+  <button class="header-action-btn-exp" (click)="onFilterClick()">
     <span class="material-symbols-outlined">tune</span>
   </button>
 </div>

@@ -82,6 +82,7 @@
   align-items: center;
   justify-content: center;
   color: var(--text-primary);
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -93,4 +94,17 @@
 
 .header-action-btn-exp .material-symbols-outlined {
   font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  :host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 12px 16px !important;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+  }
 }

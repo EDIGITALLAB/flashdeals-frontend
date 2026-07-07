@@ -1,14 +1,18 @@
 <div class="explore-layout">
   <!-- Search header component -->
-  <app-search-header />
+  <app-search-header (filterToggle)="toggleMobileFilters(true)" />
 
   <!-- Product Toolbar for Pills -->
-  <app-product-toolbar [view]="'pills'" [selectedPriceFilterLabel]="selectedPriceLabel" (priceFilterChange)="onPriceFilterChange($event)" />
+  <app-product-toolbar [view]="'pills'" 
+                       [selectedPriceFilterLabel]="selectedPriceLabel" 
+                       (priceFilterChange)="onPriceFilterChange($event)"
+                       [selectedSortLabel]="selectedSortLabel"
+                       (sortChange)="onSortChange($event)" />
 
   <!-- Inner Split: Sidebar (Filters) and Main Panel (Results) -->
   <div class="explore-content-split">
     <!-- Filters Sidebar (Left) component -->
-    <app-filter-sidebar />
+    <app-filter-sidebar [isOpen]="mobileFiltersOpen" (close)="toggleMobileFilters(false)" />
 
     <!-- Main Results (Right) -->
     <main class="results-main">

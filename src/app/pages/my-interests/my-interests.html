@@ -1,0 +1,116 @@
+<div class="my-interests-page-container">
+  <!-- Header Bar -->
+  <header class="interests-header-bar">
+    <div class="title-left">
+      <span class="material-symbols-outlined back-arrow" routerLink="/profile">arrow_back</span>
+      <h1 class="page-title">My Interests</h1>
+    </div>
+  </header>
+
+  <div class="interests-container">
+    <div class="interests-card shadow-sm">
+      
+      <!-- Section 1: Areas of Interest -->
+      <div class="section-container">
+        <h2 class="section-title">Your Areas of Interest</h2>
+        <p class="section-subtitle">Select categories you love. We'll personalize deals for you.</p>
+
+        <!-- Grid of Interests -->
+        <div class="interests-grid">
+          @for (item of interests; track item.id) {
+            <div class="interest-box" [class.selected]="item.selected" (click)="toggleInterest(item)">
+              <div class="checkbox-indicator">
+                @if (item.selected) {
+                  <span class="material-symbols-outlined check-icon">check</span>
+                }
+              </div>
+              <div class="interest-icon-container">
+                <span class="material-symbols-outlined interest-icon">{{ item.icon }}</span>
+              </div>
+              <span class="interest-name">{{ item.name }}</span>
+            </div>
+          }
+
+          <!-- Add Custom Interest Card -->
+          @if (!showAddCustomInput) {
+            <div class="interest-box add-custom-box" (click)="toggleAddCustomInput()">
+              <span class="material-symbols-outlined plus-icon">add</span>
+              <span class="interest-name">Add Custom Interest</span>
+            </div>
+          } @else {
+            <div class="interest-box add-custom-input-box" (click)="$event.stopPropagation()">
+              <input type="text" 
+                     class="custom-interest-input" 
+                     placeholder="Type interest..." 
+                     [value]="customInterestText"
+                     (input)="onCustomInterestInput($event)"
+                     (keydown)="onCustomInterestKeyDown($event)"
+                     autofocus>
+              <div class="input-actions">
+                <button class="btn-action-add" (click)="addCustomInterest()">Add</button>
+                <button class="btn-action-cancel" (click)="toggleAddCustomInput()">Cancel</button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Section 2: Brand Preferences -->
+      <div class="section-container">
+        <h2 class="section-title">Brand Preferences <span class="optional-text">(Optional)</span></h2>
+        
+        <!-- Chips List -->
+        <div class="brand-chips-list">
+          @for (brand of selectedBrands; track brand) {
+            <div class="brand-chip">
+              <span class="brand-name">{{ brand }}</span>
+              <button class="remove-brand-btn" (click)="removeBrand(brand)">
+                <span class="material-symbols-outlined font-sm">close</span>
+              </button>
+            </div>
+          }
+        </div>
+
+        <!-- Search Input -->
+        <div class="brand-search-container">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input type="text" 
+                 class="brand-search-input" 
+                 placeholder="Search for brands..." 
+                 [value]="brandSearchQuery"
+                 (input)="onBrandSearchInput($event)"
+                 (keydown)="onBrandKeyDown($event)">
+          
+          <!-- Brand Suggestions Dropdown -->
+          @if (brandSuggestions.length > 0) {
+            <div class="suggestions-dropdown shadow-lg border">
+              @for (suggestion of brandSuggestions; track suggestion) {
+                <div class="suggestion-item" (click)="addBrand(suggestion)">
+                  {{ suggestion }}
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="action-section">
+        <button class="btn-save-preferences" (click)="savePreferences()">
+          Save Preferences
+        </button>
+      </div>
+
+      <!-- Success Toast -->
+      @if (saveSuccess) {
+        <div class="toast-success shadow-lg">
+          <span class="material-symbols-outlined toast-icon">check_circle</span>
+          <span class="toast-message">Preferences saved successfully!</span>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>

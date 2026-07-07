@@ -1,9 +1,15 @@
 <!-- Header -->
 <header class="top-header">
+  <!-- Desktop search bar -->
   <div class="search-container">
     <span class="material-symbols-outlined search-icon">search</span>
     <input type="text" class="search-input" placeholder="Search for brands, categories or deals...">
   </div>
+
+  <!-- Mobile search icon button (visible only on mobile) -->
+  <button class="mobile-search-btn" (click)="toggleMobileSearch(); $event.stopPropagation()">
+    <span class="material-symbols-outlined">search</span>
+  </button>
 
   <div class="header-actions">
     <div class="location-picker-container">
@@ -36,3 +42,16 @@
     </button>
   </div>
 </header>
+
+<!-- Mobile expandable search bar -->
+@if (showMobileSearch) {
+  <div class="mobile-search-overlay" (click)="$event.stopPropagation()">
+    <div class="mobile-search-bar-container">
+      <span class="material-symbols-outlined mobile-search-icon-inner">search</span>
+      <input type="text" class="mobile-search-input" placeholder="Search brands, deals..." autofocus>
+      <button class="mobile-search-close" (click)="toggleMobileSearch()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+  </div>
+}

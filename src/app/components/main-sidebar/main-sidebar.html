@@ -21,7 +21,7 @@
         <span class="material-symbols-outlined">grid_view</span>
         <span class="nav-label">Categories</span>
       </a>
-      <a href="#" class="nav-item">
+      <a href="#" class="nav-item" (click)="toggleBrandsModal($event)">
         <span class="material-symbols-outlined">stars</span>
         <span class="nav-label">Top Brands</span>
       </a>
@@ -29,7 +29,7 @@
         <span class="material-symbols-outlined">campaign</span>
         <span class="nav-label">Announcements</span>
       </a>
-      <a href="#" class="nav-item">
+      <a routerLink="/early-access" class="nav-item" routerLinkActive="active">
         <span class="material-symbols-outlined">diamond</span>
         <span class="nav-label">Early Access</span>
       </a>
@@ -37,11 +37,11 @@
         <span class="material-symbols-outlined">local_offer</span>
         <span class="nav-label">My Deals</span>
       </a>
-      <a href="#" class="nav-item">
+      <a routerLink="/my-interests" class="nav-item" routerLinkActive="active">
         <span class="material-symbols-outlined">favorite</span>
         <span class="nav-label">My Interests</span>
       </a>
-      <a href="#" class="nav-item">
+      <a href="#" class="nav-item" (click)="toggleAlertsModal($event)">
         <span class="material-symbols-outlined">notifications</span>
         <span class="nav-label">Alerts</span>
       </a>
@@ -63,3 +63,12 @@
     </div>
   </nav>
 </aside>
+
+<!-- Premium Upgrade Modal Component -->
+<app-upgrade-modal [isOpen]="showUpgradeModal" (close)="closeUpgradeModal()" />
+
+<!-- Top Brands Selection Modal Component -->
+<app-brands-modal [isOpen]="showBrandsModal" (close)="showBrandsModal = false" />
+
+<!-- Alerts Feed Modal Component -->
+<app-alerts-modal [isOpen]="showAlertsModal" (close)="showAlertsModal = false" />
