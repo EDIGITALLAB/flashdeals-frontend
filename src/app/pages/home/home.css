@@ -230,7 +230,8 @@
 .deals-grid-wrapper {
   width: 100%;
   overflow: hidden;
-  padding: 10px 0; /* adds breathing room for card lift on hover */
+  padding: 10px 0;
+  /* adds breathing room for card lift on hover */
   margin: -10px 0;
 }
 
@@ -401,50 +402,62 @@
   background-color: var(--category-fashion-bg);
   color: var(--category-fashion-color);
 }
+
 .electronics-bg {
   background-color: var(--category-electronics-bg);
   color: var(--category-electronics-color);
 }
+
 .home-bg {
   background-color: var(--category-home-bg);
   color: var(--category-home-color);
 }
+
 .beauty-bg {
   background-color: var(--category-beauty-bg);
   color: var(--category-beauty-color);
 }
+
 .food-bg {
   background-color: var(--category-food-bg);
   color: var(--category-food-color);
 }
+
 .travel-bg {
   background-color: var(--category-travel-bg);
   color: var(--category-travel-color);
 }
+
 .more-bg {
   background-color: var(--category-more-bg);
   color: var(--category-more-color);
 }
+
 .toys-bg {
   background-color: #f6ffed;
   color: #52c41a;
 }
+
 .sports-bg {
   background-color: #fff2e8;
   color: #fa541c;
 }
+
 .books-bg {
   background-color: #e6f7ff;
   color: #096dd9;
 }
+
 .health-bg {
   background-color: #fff0f6;
   color: #eb2f96;
 }
+
 .auto-bg {
   background-color: #f0f5ff;
   color: #2f54eb;
 }
+
 .less-bg {
   background-color: #f5f5f5;
   color: #595959;
@@ -548,6 +561,7 @@
   .deals-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .interests-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -560,40 +574,195 @@
 }
 
 @media (max-width: 768px) {
+
   /* Let the document body scroll — not the wrapper — so position:fixed works */
   .app-layout {
     display: block !important;
     min-height: 100vh;
     overflow: visible !important;
   }
+
   .main-wrapper {
     margin-left: 0 !important;
     overflow: visible !important;
     height: auto !important;
     display: block !important;
   }
-  .deals-grid {
-    grid-template-columns: 1fr !important;
-  }
+
   .interests-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
   }
-  .hero-carousel {
-    height: auto !important;
-    min-height: 220px;
+
+  .interest-card {
+    border-radius: 12px !important;
   }
-  .hero-title-large {
-    font-size: 24px !important;
+
+  .interest-image-container {
+    height: 110px !important;
   }
-  .hero-subtitle {
+
+  .interest-info {
+    padding: 10px !important;
+  }
+
+  .interest-title {
+    font-size: 13px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .interest-desc {
+    font-size: 11px !important;
+    margin-bottom: 12px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    height: 28px !important;
+  }
+
+  .interest-deal {
+    font-size: 12px !important;
+  }
+
+  .interest-action-btn {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .interest-action-btn .material-symbols-outlined {
+    font-size: 16px !important;
+  }
+
+  /* Mobile Deals Grid Layout - Option 2: Compact Free Horizontal Scroll */
+  .carousel-container {
+    overflow: visible !important;
+  }
+
+  .deals-grid-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    margin: -10px -16px -24px -16px !important;
+    padding: 10px 16px 24px 16px !important;
+  }
+
+  .deals-grid-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
+  .deals-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    transform: none !important;
+    width: max-content !important;
+    gap: 12px !important;
+  }
+
+  .deal-card {
+    flex: 0 0 145px !important;
+    width: 145px !important;
+    padding: 10px !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .brand-logo-container {
+    height: 60px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .brand-logo {
+    max-height: 28px !important;
+  }
+
+  .discount-label {
     font-size: 13px !important;
   }
+
+  .brand-name {
+    font-size: 11px !important;
+  }
+
+  .countdown-timer {
+    padding: 3px 6px !important;
+    margin-top: 6px !important;
+  }
+
+  .timer-box,
+  .timer-colon {
+    font-size: 10px !important;
+  }
+
+  .carousel-nav-btn {
+    display: none !important;
+  }
+
+  .hero-carousel {
+    border-radius: 16px !important;
+  }
+
+  .hero-slide {
+    height: 180px !important;
+    padding: 20px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-title-large {
+    font-size: 22px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .hero-subtitle {
+    font-size: 13px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .btn-explore {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+  }
+
   .slide-badge-container {
     display: none !important;
   }
+
   .main-content {
     padding: 16px !important;
     padding-top: 84px !important;
     padding-bottom: 88px !important;
+  }
+
+  /* Mobile Grid categories layout */
+  .categories-list {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px 8px !important;
+  }
+
+  .category-item {
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 6px !important;
+  }
+
+  .category-icon-wrapper {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .category-icon-wrapper .material-symbols-outlined {
+    font-size: 24px !important;
+  }
+
+  .category-name {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
   }
 }

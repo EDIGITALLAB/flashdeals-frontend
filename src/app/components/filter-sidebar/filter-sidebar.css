@@ -251,7 +251,10 @@
 /* Responsive adjust */
 @media (max-width: 992px) {
   :host {
-    position: static !important; /* Remove sticky on mobile */
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: visible !important;
     z-index: auto !important;
   }
 

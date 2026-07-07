@@ -412,9 +412,145 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 16px 20px;
+    padding: 14px 16px;
   }
-  .watchlist-container {
-    padding: 16px;
+
+  .title-left {
+    gap: 16px;
+  }
+
+  .deals-header-bar .back-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    padding: 0;
+  }
+
+  .deals-header-bar .page-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .my-deals-page-container {
+    padding-top: 0 !important;
+  }
+
+  .my-deals-container {
+    padding: 72px 16px 88px 16px !important;
+  }
+
+  /* Prevent tabs wrapping on mobile and make them scrollable horizontally */
+  .nav-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  .nav-tabs .nav-item {
+    flex: 1 !important;
+    display: flex !important;
+  }
+
+  .nav-tabs .nav-link {
+    width: 100% !important;
+    font-size: 13px !important;
+    padding: 8px 2px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .nav-tabs .nav-link.active::after {
+    height: 2px !important;
+  }
+
+  /* Align product name and card details to the left on mobile view and downsize details */
+  .deal-item-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 8px !important;
+    padding: 16px 0 !important;
+  }
+
+  .deal-item-card .col-auto,
+  .deal-item-card .col {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .deal-image-wrapper {
+    margin: 0 !important;
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 8px !important;
+  }
+
+  .deal-title {
+    text-align: left !important;
+    white-space: normal !important;
+    font-size: 14px !important;
+    margin: 0 0 6px 0 !important;
+  }
+
+  .ends-in-label {
+    font-size: 11px !important;
+  }
+
+  .timer-digit {
+    font-size: 12px !important;
+    padding: 2px 6px !important;
+    min-width: 22px !important;
+  }
+
+  .timer-colon {
+    font-size: 13px !important;
+  }
+
+  .deal-meta-info {
+    justify-content: flex-start !important;
+  }
+
+  .deal-action-section {
+    align-items: flex-start !important;
+    min-width: unset !important;
+    width: 100% !important;
+    margin-top: 4px !important;
+  }
+
+  .price-container {
+    text-align: left !important;
+  }
+
+  .current-price {
+    font-size: 15px !important;
+  }
+
+  .original-price {
+    font-size: 11px !important;
+  }
+
+  .discount-badge {
+    font-size: 10px !important;
+  }
+
+  .price-original-row {
+    justify-content: flex-start !important;
+    gap: 4px !important;
   }
 }

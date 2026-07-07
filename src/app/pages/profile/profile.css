@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 .profile-page-container {
   min-height: 100vh;
   background-color: var(--bg-color);
@@ -12,6 +16,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .title-left {
@@ -187,7 +194,8 @@
 /* Buttons */
 .btn-profile {
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 0 20px;
+  height: 42px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -196,11 +204,21 @@
   justify-content: center;
   gap: 8px;
   transition: all 0.2s;
+  box-sizing: border-box;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-profile .material-symbols-outlined {
+  font-size: 20px;
+  line-height: 1;
 }
 
 .btn-profile.btn-sm {
-  padding: 8px 16px;
+  padding: 0 16px;
+  height: 34px;
   font-size: 13px;
+  box-sizing: border-box;
 }
 
 .btn-primary {
@@ -233,8 +251,9 @@
 }
 
 .btn-secondary:hover {
-  background-color: #f5f6f9;
-  border-color: var(--border-hover);
+  background-color: var(--primary-light);
+  border-color: rgba(255, 63, 108, 0.2);
+  color: var(--primary-color);
 }
 
 .ml-3 {
@@ -730,14 +749,38 @@ input:checked + .slider:before {
   color: var(--border-hover);
 }
 
+/* Flex container layout fixes for items with switches/selects */
+.notification-text,
+.preference-text,
+.privacy-item-row > div:first-child {
+  flex: 1;
+  min-width: 0;
+  padding-right: 16px;
+}
+
+.switch,
+.pref-select,
+.toggle-switch-wrapper {
+  flex-shrink: 0;
+}
+
+/* Mobile back button — hidden on desktop */
+.mobile-back-header {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .profile-page-container {
+    padding-top: 0;
+  }
+
   .profile-layout-container {
     flex-direction: column;
-    padding: 16px;
-    gap: 20px;
+    padding: 84px 16px 88px 16px !important;
+    gap: 16px;
   }
-  
-  app-profile-sidebar {
+
+  .profile-sidebar-wrapper {
     width: 100%;
   }
 
@@ -761,6 +804,237 @@ input:checked + .slider:before {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 16px 20px;
+    padding: 14px 16px;
+  }
+
+  .title-left {
+    gap: 16px;
+  }
+
+  .page-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .back-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #f5f6f9;
+  }
+
+  /* Mobile two-panel navigation */
+  /* Default: dono panel hidden */
+  .profile-layout-container .profile-sidebar-wrapper,
+  .profile-layout-container .profile-details-panel {
+    display: none;
+  }
+
+  /* Sidebar dikho jab mobile-show-sidebar class ho */
+  .profile-layout-container.mobile-show-sidebar .profile-sidebar-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  /* Details panel dikho jab mobile-show-details class ho */
+  .profile-layout-container.mobile-show-details .profile-details-panel {
+    display: block;
+    width: 100%;
+  }
+
+  /* Mobile back button */
+  .mobile-back-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .mobile-back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .mobile-back-btn:hover,
+  .mobile-back-btn:active {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+  }
+
+  .mobile-back-btn .material-symbols-outlined {
+    font-size: 24px;
+  }
+
+  .help-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Compact subpage/tab styling for mobile */
+  .details-tab-content {
+    gap: 16px;
+  }
+
+  .tab-header {
+    padding-bottom: 12px;
+  }
+
+  .tab-title {
+    font-size: 18px;
+  }
+
+  .tab-subtitle {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .form-label {
+    font-size: 12px;
+  }
+
+  .form-input {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .btn-profile {
+    padding: 0 12px;
+    height: 32px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .btn-profile.btn-sm {
+    padding: 0 10px;
+    height: 28px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+
+  .btn-profile .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  .form-actions,
+  .privacy-actions {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .form-actions .ml-3,
+  .privacy-actions .ml-3 {
+    margin-left: 0 !important;
+  }
+
+  .address-item-card {
+    padding: 14px;
+    gap: 8px;
+  }
+
+  .address-user-name {
+    font-size: 14px;
+  }
+
+  .address-details {
+    font-size: 13px;
+  }
+
+  .address-phone {
+    font-size: 12px;
+  }
+
+  .address-card-actions {
+    margin-top: 6px;
+    padding-top: 10px;
+  }
+
+  .address-action-btn {
+    font-size: 12px;
+  }
+
+  .payment-card-item {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .card-type-icon-wrapper {
+    width: 48px;
+    height: 32px;
+    font-size: 10px;
+  }
+
+  .card-name-details {
+    font-size: 13px;
+  }
+
+  .card-number-mask {
+    font-size: 13px;
+  }
+
+  .card-holder-name {
+    font-size: 11px;
+  }
+
+  .delete-payment-btn {
+    padding: 6px;
+  }
+
+  .delete-payment-btn .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  .notification-item {
+    padding-bottom: 12px;
+  }
+
+  .notif-title {
+    font-size: 14px;
+  }
+
+  .notif-desc {
+    font-size: 12px;
+  }
+
+  .interest-pill-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 16px;
+  }
+
+  .help-card-option {
+    padding: 16px;
+  }
+
+  .app-version-card {
+    padding: 16px;
+  }
+
+  .about-paragraph {
+    font-size: 13px;
+  }
+
+  .legal-link {
+    font-size: 12px;
+  }
+
+  .pref-select {
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 130px;
+    border-radius: 6px;
   }
 }

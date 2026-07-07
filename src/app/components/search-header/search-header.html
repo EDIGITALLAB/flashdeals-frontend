@@ -1,5 +1,5 @@
-<!-- Top Search & Bar -->
-<div class="explore-header">
+<!-- Desktop: Full search bar -->
+<div class="explore-header desktop-header">
   <a routerLink="/" class="back-btn-explore">
     <span class="material-symbols-outlined">arrow_back</span>
   </a>
@@ -13,4 +13,40 @@
   <button class="header-action-btn-exp" (click)="onFilterClick()">
     <span class="material-symbols-outlined">tune</span>
   </button>
+</div>
+
+<!-- Mobile: Compact icon bar -->
+<div class="explore-header mobile-header" [class.search-active]="showMobileSearch">
+
+  @if (showMobileSearch) {
+    <!-- Full width search mode -->
+    <div class="mobile-fullsearch-wrap">
+      <div class="explore-search-bar mobile-fullsearch-bar">
+        <span class="material-symbols-outlined search-icon-exp">search</span>
+        <input type="text" class="search-input-exp" placeholder="Search brands, deals..." autofocus>
+      </div>
+      <button class="header-action-btn-exp mobile-icon-btn" (click)="toggleMobileSearch()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+  } @else {
+    <!-- Normal collapsed mode -->
+    <a routerLink="/" class="back-btn-explore">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </a>
+    <span class="mobile-page-label">Explore</span>
+    <div class="mobile-header-actions">
+      <button class="header-action-btn-exp mobile-icon-btn" (click)="toggleMobileSearch()">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+      <a routerLink="/my-deals" class="header-action-btn-exp mobile-icon-btn">
+        <span class="material-symbols-outlined">favorite</span>
+      </a>
+      <button class="header-action-btn-exp mobile-icon-btn" (click)="onFilterClick()">
+        <span class="material-symbols-outlined">tune</span>
+      </button>
+    </div>
+  }
+
 </div>

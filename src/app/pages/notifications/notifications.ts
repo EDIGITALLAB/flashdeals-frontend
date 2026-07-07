@@ -1,18 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AlertNotification } from '../../models/alert-notification.model';
 
 @Component({
-  selector: 'app-alerts-modal',
-  imports: [CommonModule],
-  templateUrl: './alerts-modal.html',
-  styleUrl: './alerts-modal.css',
+  selector: 'app-notifications',
+  imports: [CommonModule, RouterLink],
+  templateUrl: './notifications.html',
+  styleUrl: './notifications.css',
 })
-export class AlertsModal {
-  @Input() isOpen = false;
-  @Output() close = new EventEmitter<void>();
-
+export class Notifications {
   notifications: AlertNotification[] = [
     {
       id: 1,
@@ -50,13 +47,30 @@ export class AlertsModal {
       icon: 'favorite',
       colorClass: 'watchlisted',
       routeLink: '/my-deals'
+    },
+    {
+      id: 5,
+      title: 'Flash Sale Starting!',
+      message: 'The Puma Sports collection flash sale starts in 10 minutes. Get ready!',
+      timeString: '5 hours ago',
+      icon: 'bolt',
+      colorClass: 'price-drop',
+      routeLink: '/explore'
+    },
+    {
+      id: 6,
+      title: 'New Deal Alert',
+      message: 'Exclusive deal on Apple AirPods Pro 2nd Gen — ₹6,999 for the next 2 hours only!',
+      timeString: 'Yesterday',
+      icon: 'notifications_active',
+      colorClass: 'early-access',
+      routeLink: '/explore'
     }
   ];
 
   constructor(private router: Router) {}
 
   clickNotification(notif: AlertNotification) {
-    this.closeModal();
     if (notif.queryParams) {
       this.router.navigate([notif.routeLink], { queryParams: notif.queryParams });
     } else {
@@ -64,12 +78,7 @@ export class AlertsModal {
     }
   }
 
-  closeModal() {
-    this.close.emit();
-  }
-
-  viewAllNotifications() {
-    this.closeModal();
-    this.router.navigate(['/notifications']);
+  markAllRead() {
+    // future: mark all as read
   }
 }

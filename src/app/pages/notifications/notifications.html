@@ -1,0 +1,42 @@
+<div class="notifications-page">
+
+  <!-- Title Bar (apna khud ka navbar) -->
+  <header class="notif-title-bar">
+    <div class="notif-title-left">
+      <span class="material-symbols-outlined back-arrow" routerLink="/">arrow_back</span>
+      <h1 class="notif-page-title">Notifications</h1>
+    </div>
+    <button class="mark-read-btn" (click)="markAllRead()">Mark all read</button>
+  </header>
+
+  <!-- Content -->
+  <div class="notif-content">
+
+    @if (notifications.length === 0) {
+      <div class="empty-state">
+        <span class="material-symbols-outlined empty-icon">notifications_off</span>
+        <h3 class="empty-title">No Notifications</h3>
+        <p class="empty-desc">You're all caught up! Check back later for new deals and alerts.</p>
+      </div>
+    } @else {
+      <div class="notif-list">
+        @for (notif of notifications; track notif.id) {
+          <div class="notif-item" (click)="clickNotification(notif)">
+            <div class="notif-icon-wrap" [ngClass]="notif.colorClass">
+              <span class="material-symbols-outlined">{{ notif.icon }}</span>
+            </div>
+            <div class="notif-body">
+              <div class="notif-header-row">
+                <h4 class="notif-title-text">{{ notif.title }}</h4>
+                <span class="notif-time">{{ notif.timeString }}</span>
+              </div>
+              <p class="notif-message">{{ notif.message }}</p>
+            </div>
+            <span class="material-symbols-outlined notif-chevron">chevron_right</span>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { ProfileSidebar } from '../../components/profile-sidebar/profile-sidebar
 })
 export class Profile {
   selectedTab: string = 'personal';
+  mobileView: 'sidebar' | 'details' = 'sidebar'; // mobile pe sidebar ya details dikhe
 
   // Personal Info Form Model
   personalInfo = {
@@ -99,6 +100,11 @@ export class Profile {
 
   onTabChange(tab: string) {
     this.selectedTab = tab;
+    this.mobileView = 'details'; // mobile pe details panel pe ja
+  }
+
+  goBackToSidebar() {
+    this.mobileView = 'sidebar'; // mobile pe wapas sidebar pe aa
   }
 
   savePersonal() {

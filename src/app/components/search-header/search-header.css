@@ -19,6 +19,10 @@
   padding: 10px 16px;
 }
 
+/* Desktop shows desktop-header, hides mobile-header */
+.desktop-header { display: flex; }
+.mobile-header  { display: none; }
+
 .back-btn-explore {
   color: var(--text-primary);
   text-decoration: none;
@@ -102,9 +106,90 @@
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
     z-index: 1000;
-    padding: 12px 16px !important;
-    background-color: var(--bg-color);
+    padding: 0 !important;
+    background-color: var(--card-bg);
     border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Swap: hide desktop, show mobile */
+  .desktop-header { display: none; }
+  .mobile-header  {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0;
+    border: none;
+    padding: 14px 16px;
+    background-color: var(--card-bg);
+    gap: 10px;
+  }
+
+  /* Page label (when search is collapsed) */
+  .mobile-page-label {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .back-btn-explore {
+    width: 32px;
+    height: 32px;
+  }
+
+  .back-btn-explore .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  /* Expanded search input on mobile */
+  .mobile-expanded-search {
+    flex: 1;
+    border-radius: 8px;
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid var(--primary-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 63, 108, 0.1);
+  }
+
+  /* Mobile action icons */
+  .mobile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .mobile-icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+  }
+
+  /* Full-width search mode */
+  .mobile-fullsearch-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .mobile-fullsearch-bar {
+    flex: 1;
+    height: 40px;
+    border-radius: 10px;
+    border: 1.5px solid var(--primary-color) !important;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 63, 108, 0.1);
+    animation: expandSearch 0.2s ease;
+  }
+
+  @keyframes expandSearch {
+    from { opacity: 0; transform: scaleX(0.8); }
+    to   { opacity: 1; transform: scaleX(1); }
   }
 }

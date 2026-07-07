@@ -268,7 +268,7 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .grid-wishlist-btn {
@@ -285,7 +285,7 @@
   justify-content: center;
   color: var(--text-secondary);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.2s;
 }
 
@@ -410,7 +410,150 @@
   .explore-layout {
     padding-top: 84px !important;
     padding-bottom: 88px !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    gap: 12px !important;
+  }
+
+  /* List view card — mobile fix */
+  .product-item-card {
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .product-image-section {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    padding: 10px;
+  }
+
+  .product-details-section {
+    padding: 12px 12px;
+    flex: 1;
+    min-width: 0;
+    /* prevent overflow */
+    overflow: hidden;
+  }
+
+  .prod-header-row {
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .prod-title {
+    font-size: 13px;
+    white-space: normal;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 2px;
+  }
+
+  .prod-store {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .prod-wishlist-btn .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  /* Price row — keep row layout, make compact to fit side-by-side */
+  .prod-price-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .price-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+
+  .price-current {
+    font-size: 15px;
+  }
+
+  .price-original {
+    font-size: 11px;
+  }
+
+  .price-discount-badge {
+    font-size: 10px;
+  }
+
+  .prod-countdown {
+    padding: 3px 6px;
+    gap: 2px;
+    display: flex;
+    align-items: center;
+  }
+
+  .prod-timer-box,
+  .prod-timer-colon {
+    font-size: 10px;
+  }
+
+  /* Grid — 2 columns on mobile */
+  .products-grid-horizontal {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .grid-image-container {
+    height: 140px;
+  }
+
+  .grid-title {
+    font-size: 13px;
+    height: auto;
+  }
+
+  .grid-price-current {
+    font-size: 13px !important;
+  }
+
+  .grid-price-original {
+    font-size: 10px !important;
+  }
+
+  .grid-timer {
+    font-size: 10px !important;
+    padding: 2px 4px !important;
+    align-self: auto !important;
+    background-color: rgba(255, 63, 108, 0.07) !important; /* Lighter background */
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+  }
+
+  .grid-timer .icon-timer {
+    font-size: 11px !important;
+  }
+
+  .grid-bottom-row {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 2px !important;
+    padding-top: 8px !important;
+  }
+
+  .grid-prices {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+    align-self: auto !important;
   }
 }

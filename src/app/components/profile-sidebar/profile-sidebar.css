@@ -185,5 +185,68 @@
   .profile-card {
     width: 100%;
     box-sizing: border-box;
+    padding: 16px;
+  }
+
+  .profile-header-user {
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+  }
+
+  .avatar-circle {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .user-name {
+    font-size: 16px;
+  }
+
+  .user-email, .user-phone {
+    font-size: 12px;
+  }
+
+  .edit-profile-link {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .menu-heading {
+    margin-bottom: 6px;
+  }
+
+  .profile-menu-item {
+    padding: 7px 10px;
+    gap: 8px;
+  }
+
+  .menu-item-icon {
+    font-size: 18px;
+  }
+
+  .menu-item-label {
+    font-size: 13px;
+  }
+
+  .menu-arrow {
+    font-size: 14px;
+  }
+
+  .logout-menu-btn {
+    justify-content: center !important;
+    text-align: center;
+  }
+
+  .logout-menu-btn .menu-item-icon,
+  .logout-menu-btn .menu-item-label {
+    text-align: center;
+  }
+
+  .profile-card .mt-4 {
+    margin-top: 10px !important;
+  }
+  .profile-card .pt-3 {
+    padding-top: 8px !important;
   }
 }

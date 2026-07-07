@@ -1,5 +1,6 @@
 import { Component, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,11 @@ export class Navbar {
   showMobileSearch = false;
   locations = ['Bengaluru', 'Mumbai', 'Delhi NCR', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata'];
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private router: Router) {}
+
+  goToNotifications() {
+    this.router.navigate(['/notifications']);
+  }
 
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;

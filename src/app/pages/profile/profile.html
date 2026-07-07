@@ -9,13 +9,20 @@
     </div>
   </header>
 
-  <div class="profile-layout-container">
+  <div class="profile-layout-container" [class.mobile-show-sidebar]="mobileView === 'sidebar'" [class.mobile-show-details]="mobileView === 'details'">
     <!-- Left: Profile Sidebar -->
-        <app-profile-sidebar [activeMenu]="selectedTab" (menuChanged)="onTabChange($event)" />
+        <div class="profile-sidebar-wrapper">
+          <app-profile-sidebar [activeMenu]="selectedTab" (menuChanged)="onTabChange($event)" />
+        </div>
 
         <!-- Right: Profile Settings details panel -->
         <div class="profile-details-panel">
-          
+          <!-- Mobile back button (only on mobile when showing details) -->
+          <div class="mobile-back-header">
+            <button class="mobile-back-btn" (click)="goBackToSidebar()">
+              <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+          </div>
           <!-- Tab 1: Personal Information -->
           @if (selectedTab === 'personal') {
             <div class="details-tab-content">
