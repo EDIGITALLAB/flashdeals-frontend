@@ -1,6 +1,17 @@
 @if (isOpen) {
   <div class="alerts-modal-backdrop" (click)="closeModal()">
-    <div class="alerts-modal-card" (click)="$event.stopPropagation()">
+    <div class="alerts-modal-card" 
+         (click)="$event.stopPropagation()"
+         (touchstart)="onTouchStart($event)"
+         (touchmove)="onTouchMove($event)"
+         (touchend)="onTouchEnd()"
+         [style.transform]="translateY > 0 ? 'translateY(' + translateY + 'px)' : ''"
+         [class.is-dragging]="isDragging">
+      
+      <div class="modal-drag-handle" (click)="closeModal()">
+        <div class="modal-drag-handle-pill"></div>
+      </div>
+
       <button class="modal-close-btn" (click)="closeModal()">
         <span class="material-symbols-outlined">close</span>
       </button>

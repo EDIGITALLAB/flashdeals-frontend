@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -8,8 +8,27 @@ import { Router } from '@angular/router';
   templateUrl: './brands-modal.html',
   styleUrl: './brands-modal.css',
 })
-export class BrandsModal {
-  @Input() isOpen = false;
+export class BrandsModal implements OnDestroy {
+  private _isOpen = false;
+
+  @Input()
+  set isOpen(value: boolean) {
+    this._isOpen = value;
+    if (typeof document !== 'undefined') {
+      if (value) {
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+      } else {
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+      }
+    }
+  }
+
+  get isOpen(): boolean {
+    return this._isOpen;
+  }
+
   @Output() close = new EventEmitter<void>();
 
   brands = [
@@ -32,5 +51,17 @@ export class BrandsModal {
 
   closeModal() {
     this.close.emit();
+  }
+
+  viewAllBrands() {
+    this.closeModal();
+    this.router.navigate(['/explore']);
+  }
+
+  ngOnDestroy() {
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+    }
   }
 }

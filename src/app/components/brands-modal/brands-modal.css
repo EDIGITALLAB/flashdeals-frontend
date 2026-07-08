@@ -88,9 +88,67 @@
   width: 100%;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+  .brands-modal-backdrop {
+    padding: 16px;
+    height: 100dvh;
+  }
+
+  .brands-modal-card {
+    border-radius: 20px;
+    padding: 24px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px;
+    max-height: 90dvh;
+    overflow: hidden;
+  }
+
+  .modal-close-btn {
+    top: 12px;
+    right: 12px;
+  }
+
+  .modal-header-section {
+    margin-bottom: 20px;
+  }
+
+  .modal-brands-title {
+    font-size: 20px;
+  }
+
+  .modal-brands-subtitle {
+    font-size: 12px;
+    max-width: 280px;
+  }
+
   .brands-grid-container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    overflow-y: auto;
+    max-height: calc(90dvh - 210px);
+    overscroll-behavior: contain;
+  }
+
+  .brand-card {
+    padding: 12px 6px;
+    border-radius: 12px;
+  }
+
+  .brand-logo-wrapper {
+    height: 40px;
+    margin-bottom: 6px;
+  }
+
+  .modal-footer-section {
+    margin-top: 12px;
+    padding-top: 8px;
+  }
+
+  .see-more-btn {
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+
+  .see-more-btn .icon-arrow {
+    font-size: 14px;
   }
 }
 
@@ -147,4 +205,44 @@
 @keyframes scaleUp {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* Modal Footer Section */
+.modal-footer-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.see-more-btn:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.see-more-btn .icon-arrow {
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.see-more-btn:hover .icon-arrow {
+  transform: translateX(3px);
 }

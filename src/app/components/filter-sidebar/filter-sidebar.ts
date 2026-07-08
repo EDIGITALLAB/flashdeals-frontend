@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,8 +7,27 @@ import { CommonModule } from '@angular/common';
   templateUrl: './filter-sidebar.html',
   styleUrl: './filter-sidebar.css',
 })
-export class FilterSidebar {
-  @Input() isOpen = false;
+export class FilterSidebar implements OnDestroy {
+  private _isOpen = false;
+
+  @Input()
+  set isOpen(value: boolean) {
+    this._isOpen = value;
+    if (typeof document !== 'undefined') {
+      if (value) {
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+      } else {
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+      }
+    }
+  }
+
+  get isOpen(): boolean {
+    return this._isOpen;
+  }
+
   @Output() close = new EventEmitter<void>();
 
   // Categories state
@@ -117,5 +136,12 @@ export class FilterSidebar {
 
   toggleMoreBrands() {
     this.showMoreBrands = !this.showMoreBrands;
+  }
+
+  ngOnDestroy() {
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+    }
   }
 }

@@ -345,7 +345,9 @@
 
 /* Animations */
 @keyframes blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes fadeInUp {
@@ -353,6 +355,7 @@
     opacity: 0;
     transform: translate(-50%, 20px);
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, 0);
@@ -360,42 +363,108 @@
 }
 
 /* Responsive queries */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .early-access-header-bar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 16px 20px;
+    padding: 14px 16px;
+  }
+
+  .early-access-header-bar .back-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    padding: 0;
+  }
+
+  .early-access-header-bar .page-title {
+    font-size: 15px;
+    font-weight: 700;
   }
 
   .early-access-container {
-    padding: 20px;
-    padding-top: 84px !important;
-    padding-bottom: 88px !important;
+    padding: 16px;
+    padding-top: 68px !important;
+    padding-bottom: 80px !important;
+    gap: 20px;
   }
 
   .promo-banner-card {
-    padding: 24px;
+    padding: 20px 16px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    border-radius: 16px;
+    gap: 16px;
   }
 
   .banner-left-content {
     max-width: 100%;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .banner-title {
+    font-size: 18px;
+  }
+
+  .banner-subtitle {
+    font-size: 12px;
+  }
+
+  .banner-svg {
+    width: 120px;
+    height: 90px;
+  }
+
+  .section-heading-title {
+    font-size: 14px;
   }
 
   .sale-item-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
-    padding: 20px;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
   }
 
   .sale-logo-container {
     width: 100px;
     height: 50px;
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .sale-item-name {
+    font-size: 14px;
+  }
+
+  .early-start-label {
+    font-size: 11px;
+  }
+
+  .sale-timer-row {
+    gap: 4px;
+    margin: 2px 0;
+  }
+
+  .timer-segment {
+    font-size: 13px;
+    padding: 2px 6px;
+    min-width: 28px;
+    border-radius: 4px;
+  }
+
+  .timer-colon {
+    font-size: 13px;
+  }
+
+  .sale-launch-date {
+    font-size: 11px;
   }
 
   .sale-action-container {
@@ -404,6 +473,13 @@
 
   .btn-notify-toggle {
     width: 100%;
+    height: 36px;
+    font-size: 12px;
+    border-radius: 8px;
     justify-content: center;
+  }
+
+  .view-all-link {
+    font-size: 12px;
   }
 }

@@ -20,6 +20,10 @@ export class Navbar {
     this.router.navigate(['/notifications']);
   }
 
+  goToMyDeals() {
+    this.router.navigate(['/my-deals']);
+  }
+
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }

@@ -32,6 +32,42 @@ export class AlertsModal implements OnDestroy {
 
   @Output() close = new EventEmitter<void>();
 
+  startY = 0;
+  currentY = 0;
+  translateY = 0;
+  isDragging = false;
+
+  onTouchStart(event: TouchEvent) {
+    const target = event.target as HTMLElement;
+    // Don't intercept drag if touch starts inside the scrollable notification list
+    if (target.closest('.notifications-feed-list')) {
+      return;
+    }
+    this.startY = event.touches[0].clientY;
+    this.isDragging = true;
+  }
+
+  onTouchMove(event: TouchEvent) {
+    if (!this.isDragging) return;
+    this.currentY = event.touches[0].clientY;
+    const deltaY = this.currentY - this.startY;
+    // Only allow dragging downwards
+    if (deltaY > 0) {
+      this.translateY = deltaY;
+    }
+  }
+
+  onTouchEnd() {
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    if (this.translateY > 100) {
+      // Swiped down far enough, close the modal
+      this.closeModal();
+    }
+    // Snap back to original position
+    this.translateY = 0;
+  }
+
   notifications: AlertNotification[] = [
     {
       id: 1,
@@ -84,6 +120,8 @@ export class AlertsModal implements OnDestroy {
   }
 
   closeModal() {
+    this.translateY = 0;
+    this.isDragging = false;
     this.close.emit();
   }
 
