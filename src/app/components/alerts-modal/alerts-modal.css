@@ -270,7 +270,7 @@
   }
 
   .notifications-feed-list {
-    max-height: calc(80dvh - 185px);
+    max-height: calc(80dvh - 210px);
   }
 
   .modal-header-section {
@@ -316,15 +316,13 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.header-view-all {
-  margin-top: 4px;
-  align-self: flex-end;
-  font-size: 13px !important;
-  padding: 4px 8px !important;
-}
-
-.header-view-all .icon-arrow {
-  font-size: 14px !important;
+.modal-footer-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .view-all-btn {
