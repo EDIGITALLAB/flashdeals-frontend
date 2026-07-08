@@ -61,6 +61,7 @@
   align-items: center;
   text-align: center;
   margin-bottom: 28px;
+  flex-shrink: 0;
 }
 
 .modal-alerts-title {
@@ -88,6 +89,8 @@
   flex-direction: column;
   gap: 12px;
   padding-right: 4px;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 /* Individual Feed Item */
@@ -248,6 +251,7 @@
     animation: slideUp 0.35s cubic-bezier(0.34, 1.26, 0.64, 1);
     /* Drag handle indicator */
     border-top: 3px solid var(--border-color);
+    overflow: hidden;
   }
 
   /* Drag handle pill */
@@ -262,7 +266,7 @@
   }
 
   .notifications-feed-list {
-    max-height: 55vh;
+    max-height: calc(80vh - 220px);
   }
 
   .modal-alerts-title {
@@ -309,6 +313,7 @@
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .view-all-btn {
