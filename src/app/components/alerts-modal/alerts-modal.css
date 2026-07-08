@@ -266,7 +266,7 @@
   }
 
   .notifications-feed-list {
-    max-height: calc(80vh - 220px);
+    max-height: calc(80vh - 260px);
   }
 
   .modal-alerts-title {
