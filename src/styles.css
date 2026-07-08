@@ -54,6 +54,10 @@ body {
     height: auto !important;
   }
 
+  html.modal-open, body.modal-open {
+    overflow-y: hidden !important;
+  }
+
   /* Offset fixed headers/footers globally on mobile screens ONLY */
   .main-content,
   .explore-layout, 

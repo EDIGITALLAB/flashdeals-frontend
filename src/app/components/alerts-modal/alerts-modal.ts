@@ -17,9 +17,11 @@ export class AlertsModal implements OnDestroy {
     this._isOpen = value;
     if (typeof document !== 'undefined') {
       if (value) {
-        document.body.style.overflow = 'hidden';
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
       } else {
-        document.body.style.overflow = '';
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
       }
     }
   }
@@ -92,7 +94,8 @@ export class AlertsModal implements OnDestroy {
 
   ngOnDestroy() {
     if (typeof document !== 'undefined') {
-      document.body.style.overflow = '';
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
     }
   }
 }
