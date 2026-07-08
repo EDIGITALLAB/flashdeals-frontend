@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AlertNotification } from '../../models/alert-notification.model';
@@ -9,8 +9,25 @@ import { AlertNotification } from '../../models/alert-notification.model';
   templateUrl: './alerts-modal.html',
   styleUrl: './alerts-modal.css',
 })
-export class AlertsModal {
-  @Input() isOpen = false;
+export class AlertsModal implements OnDestroy {
+  private _isOpen = false;
+
+  @Input()
+  set isOpen(value: boolean) {
+    this._isOpen = value;
+    if (typeof document !== 'undefined') {
+      if (value) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+  }
+
+  get isOpen(): boolean {
+    return this._isOpen;
+  }
+
   @Output() close = new EventEmitter<void>();
 
   notifications: AlertNotification[] = [
@@ -71,5 +88,11 @@ export class AlertsModal {
   viewAllNotifications() {
     this.closeModal();
     this.router.navigate(['/notifications']);
+  }
+
+  ngOnDestroy() {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
   }
 }
