@@ -3,35 +3,55 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MainSidebar } from '../../components/main-sidebar/main-sidebar';
 import { Navbar } from '../../components/navbar/navbar';
+import { Footer } from '../../components/footer/footer';
 
 interface Deal {
   id: number;
   brand: string;
-  logoType: 'puma' | 'boat' | 'myntra' | 'swiggy' | 'nike' | 'samsung' | 'adidas' | 'kfc';
   discount: string;
-  storeName: string;
-  status: 'Online' | 'Offline';
-  secondsLeft: number;
-  timerString?: string;
+  title: string;
+  price: string;
+  originalPrice: string;
+  image: string;
 }
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, MainSidebar, Navbar],
+  imports: [CommonModule, RouterLink, MainSidebar, Navbar, Footer],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home implements OnInit, OnDestroy {
   constructor(private cdr: ChangeDetectorRef) {}
+
+  headerSecondsLeft = 2 * 3600 + 14 * 60 + 22;
+  headerTimerString = '02 : 14 : 22';
+
   deals: Deal[] = [
-    { id: 1, brand: 'Puma', logoType: 'puma', discount: 'Min. 60% Off', storeName: 'Puma Store', status: 'Online', secondsLeft: 2 * 3600 + 14 * 60 + 36 },
-    { id: 2, brand: 'boAt', logoType: 'boat', discount: 'Up to 70% Off', storeName: 'boAt Lifestyle', status: 'Online', secondsLeft: 4 * 3600 + 30 * 60 + 12 },
-    { id: 3, brand: 'Myntra', logoType: 'myntra', discount: '40-80% Off', storeName: 'Myntra Fashion', status: 'Online', secondsLeft: 5 * 3600 + 45 * 60 + 22 },
-    { id: 4, brand: 'Swiggy', logoType: 'swiggy', discount: 'Flat 50% Off', storeName: 'On Food Orders', status: 'Online', secondsLeft: 1 * 3600 + 10 * 60 + 5 },
-    { id: 5, brand: 'Nike', logoType: 'nike', discount: 'Min. 40% Off', storeName: 'Nike Store', status: 'Online', secondsLeft: 3 * 3600 + 15 * 60 + 0 },
-    { id: 6, brand: 'Samsung', logoType: 'samsung', discount: 'Up to 30% Off', storeName: 'Samsung Café', status: 'Online', secondsLeft: 6 * 3600 + 45 * 60 + 0 },
-    { id: 7, brand: 'Adidas', logoType: 'adidas', discount: '30-60% Off', storeName: 'Adidas Originals', status: 'Online', secondsLeft: 2 * 3600 + 20 * 60 + 0 },
-    { id: 8, brand: 'KFC', logoType: 'kfc', discount: 'Flat 20% Off', storeName: 'KFC Delivery', status: 'Online', secondsLeft: 1 * 3600 + 50 * 60 + 0 }
+    { id: 1, brand: 'Nike', discount: '60% OFF', title: "Men's Running Shoes", price: '₹2,399', originalPrice: '₹5,999', image: 'nike_shoes.png' },
+    { id: 2, brand: 'boAt', discount: '70% OFF', title: 'Airdopes 141', price: '₹1,499', originalPrice: '₹4,999', image: 'boat_headphones.png' },
+    { id: 3, brand: 'Myntra', discount: '40% OFF', title: "Women's Denim Jacket", price: '₹1,799', originalPrice: '₹2,999', image: 'myntra_denim.jpg' },
+    { id: 4, brand: 'Swiggy', discount: '50% OFF', title: 'Food & Dining Offers', price: '₹250', originalPrice: '₹500', image: 'swiggy_meal.jpg' }
+  ];
+
+  trendingDeals: Deal[] = [
+    { id: 101, brand: 'Nike Revolution 7', discount: '58% OFF', title: 'Nike Revolution 7', price: '₹2,499', originalPrice: '₹5,999', image: 'nike_shoes.png' },
+    { id: 102, brand: 'boAt Airdopes 141', discount: '67% OFF', title: 'boAt Airdopes 141', price: '₹1,299', originalPrice: '₹3,999', image: 'boat_headphones.png' },
+    { id: 103, brand: 'Fire-Boltt Phoenix', discount: '44% OFF', title: 'Fire-Boltt Phoenix', price: '₹4,999', originalPrice: '₹8,999', image: 'smart_home.png' },
+    { id: 104, brand: 'Adidas Backpack', discount: '55% OFF', title: 'Adidas Backpack', price: '₹999', originalPrice: '₹2,199', image: 'fitness_gear.png' },
+    { id: 105, brand: 'Bella Vita Perfume', discount: '50% OFF', title: 'Bella Vita Perfume', price: '₹599', originalPrice: '₹1,199', image: 'myntra_fashion.jpg' }
+  ];
+
+  recentlyViewedDeals = [
+    { id: 201, title: 'boAt Rockerz 550', price: '₹1,499', originalPrice: '₹3,499', image: 'boat_headphones.png', viewedTime: 'Viewed 2 hours ago' },
+    { id: 202, title: 'Nike Air Max', price: '₹4,999', originalPrice: '₹8,999', image: 'nike_shoes.png', viewedTime: 'Viewed 5 hours ago' },
+    { id: 203, title: 'Fire-Boltt Ninja', price: '₹1,999', originalPrice: '₹3,999', image: 'smartwatch_deal.jpg', viewedTime: 'Viewed 1 day ago' }
+  ];
+
+  recommendedDeals = [
+    { id: 301, title: 'HRX Hoodie', price: '₹1,299', originalPrice: '₹2,499', image: 'cat_fashion.jpg' },
+    { id: 302, title: 'Lenskart Sunglasses', price: '₹1,799', originalPrice: '₹3,499', image: 'cat_beauty.jpg' },
+    { id: 303, title: 'Minimalist Serum', price: '₹599', originalPrice: '₹899', image: 'cat_health.jpg' }
   ];
 
   currentDealsPage = 0;
@@ -92,11 +112,9 @@ export class Home implements OnInit, OnDestroy {
   ngOnInit() {
     this.updateTimers();
     this.intervalId = setInterval(() => {
-      this.deals.forEach(deal => {
-        if (deal.secondsLeft > 0) {
-          deal.secondsLeft--;
-        }
-      });
+      if (this.headerSecondsLeft > 0) {
+        this.headerSecondsLeft--;
+      }
       this.updateTimers();
     }, 1000);
 
@@ -131,9 +149,7 @@ export class Home implements OnInit, OnDestroy {
   }
 
   private updateTimers() {
-    this.deals.forEach(deal => {
-      deal.timerString = this.formatTime(deal.secondsLeft);
-    });
+    this.headerTimerString = this.formatTime(this.headerSecondsLeft);
     this.cdr.detectChanges();
   }
 
