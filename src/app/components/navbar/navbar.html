@@ -1,10 +1,26 @@
 <!-- Header -->
 <header class="top-header">
+  <!-- Brand Logo -->
+  <a routerLink="/" class="logo-container">
+    <div class="logo-circle">
+      <span class="material-symbols-outlined logo-bolt">bolt</span>
+    </div>
+    <span class="logo-text">Flash<span class="logo-highlight">Deals</span></span>
+  </a>
+
   <!-- Desktop search bar -->
   <div class="search-container">
     <span class="material-symbols-outlined search-icon">search</span>
     <input type="text" class="search-input" placeholder="Search for brands, categories or deals...">
   </div>
+
+  <!-- Desktop Navigation Shortcuts -->
+  <nav class="desktop-top-nav">
+    <a href="#" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">grid_view</span> <span>Categories</span></a>
+    <a href="#" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">stars</span> <span>Top Brands</span></a>
+    <a routerLink="/my-deals" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">bolt</span> <span>Deals</span></a>
+    <a routerLink="/early-access" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">percent</span> <span>Offers</span></a>
+  </nav>
 
   <!-- Mobile search icon button (visible only on mobile) -->
   <button class="mobile-search-btn" (click)="toggleMobileSearch(); $event.stopPropagation()">
@@ -32,14 +48,23 @@
       }
     </div>
 
-    <button class="icon-btn notification-btn" (click)="goToNotifications()">
+    <button class="icon-btn notification-btn" (click)="goToNotifications()" title="Notifications">
       <span class="material-symbols-outlined">notifications</span>
       <span class="badge">3</span>
     </button>
 
-    <button class="icon-btn wishlist-btn" (click)="goToMyDeals()">
-      <span class="material-symbols-outlined">favorite</span>
+    <button class="icon-btn wishlist-btn" (click)="goToMyDeals()" title="Wishlist">
+      <span class="material-symbols-outlined">favorite_border</span>
     </button>
+
+    <button class="icon-btn cart-btn" title="Cart">
+      <span class="material-symbols-outlined">shopping_cart</span>
+      <span class="badge cart-badge">0</span>
+    </button>
+
+    <div class="user-avatar-btn" title="Profile">
+      <span>E</span>
+    </div>
   </div>
 </header>
 

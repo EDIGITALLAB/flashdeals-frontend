@@ -1,10 +1,11 @@
 import { Component, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
@@ -14,7 +15,15 @@ export class Navbar {
   showMobileSearch = false;
   locations = ['Bengaluru', 'Mumbai', 'Delhi NCR', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata'];
 
-  constructor(private elementRef: ElementRef, private router: Router) {}
+  constructor(
+    private elementRef: ElementRef,
+    private router: Router,
+    public sidebarService: SidebarService
+  ) {}
+
+  toggleSidebar() {
+    this.sidebarService.toggle();
+  }
 
   goToNotifications() {
     this.router.navigate(['/notifications']);

@@ -1,197 +1,461 @@
-<div class="details-page-container">
+<div class="deal-details-page-wrapper">
+  <!-- Top Navbar -->
+  <app-navbar />
 
-  <!-- Breadcrumbs -->
-  <app-breadcrumb />
+  <div class="details-page-container">
+    <!-- Breadcrumbs -->
+    <app-breadcrumb />
 
-  <!-- Main Product details layout -->
-  <div class="product-info-grid">
-    
-    <!-- Left Column: Thumbnails + Main Image + Badges -->
-    <div class="product-gallery-section">
-      <div class="gallery-wrapper">
-        <!-- Thumbnails Strip -->
-        <div class="thumbnails-strip">
-          <button class="thumb-btn" [class.active]="selectedImage === '/nike_shoe.png'" (click)="selectedImage = '/nike_shoe.png'">
-            <img src="/nike_shoe.png" alt="Nike shoe thumbnail 1">
+    <!-- Main Product Section (2-Column Grid Layout) -->
+    <div class="product-main-grid">
+
+      <!-- LEFT: Image Gallery with 360/3D Tools -->
+      <div class="product-gallery-container">
+        <div class="gallery-wrapper">
+          <!-- Thumbnails Strip -->
+          <div class="thumbnails-strip">
+            @for (img of images; track $index) {
+              <button class="thumb-btn" [class.active]="currentImgIndex === $index" (click)="selectImg($index)">
+                <img [src]="img" [alt]="'Product thumbnail ' + ($index + 1)">
+              </button>
+            }
+            <button class="thumb-btn thumb-more-btn" (click)="nextImg()">
+              <span>+3</span>
+            </button>
+          </div>
+
+          <!-- Main Display Card with Controls & Overlay Badges -->
+          <div class="main-image-viewport">
+            <span class="discount-overlay-badge">55% OFF</span>
+            
+            <div class="top-overlay-tools">
+              <button class="tool-circle-btn" [class.active]="isWishlisted" (click)="toggleWishlist()" title="Wishlist">
+                <span class="material-symbols-outlined">{{ isWishlisted ? 'favorite' : 'favorite_border' }}</span>
+              </button>
+              <button class="tool-circle-btn" title="Fullscreen Zoom">
+                <span class="material-symbols-outlined">fullscreen</span>
+              </button>
+            </div>
+
+            <!-- Carousel Arrows -->
+            <button class="carousel-arrow arrow-left" (click)="prevImg()" title="Previous Image">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button class="carousel-arrow arrow-right" (click)="nextImg()" title="Next Image">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+
+            <!-- Main Product Image -->
+            <img [src]="selectedImage" alt="Nike Revolution 6 Men's Running Shoes" class="main-shoe-image">
+          </div>
+        </div>
+
+        <!-- Interactive Action Tools Bar (3D, Try On, Size Guide, Share) -->
+        <div class="interactive-tools-bar">
+          <button class="interactive-btn">
+            <span class="material-symbols-outlined tool-icon">view_in_ar</span>
+            <span>View in 3D</span>
           </button>
-          <button class="thumb-btn" [class.active]="selectedImage === '/nike_shoes.png'" (click)="selectedImage = '/nike_shoes.png'">
-            <img src="/nike_shoes.png" alt="Nike shoes thumbnail 2">
+          <button class="interactive-btn">
+            <span class="material-symbols-outlined tool-icon">accessibility_new</span>
+            <span>Try On</span>
           </button>
-          <button class="thumb-btn" [class.active]="selectedImage === '/adidas_shoe.png'" (click)="selectedImage = '/adidas_shoe.png'">
-            <img src="/adidas_shoe.png" alt="Adidas shoe thumbnail">
+          <button class="interactive-btn">
+            <span class="material-symbols-outlined tool-icon">straighten</span>
+            <span>Size Guide</span>
           </button>
-          <button class="thumb-btn" [class.active]="selectedImage === '/puma_shoe.png'" (click)="selectedImage = '/puma_shoe.png'">
-            <img src="/puma_shoe.png" alt="Puma shoe thumbnail">
-          </button>
-          <button class="thumb-btn" [class.active]="selectedImage === '/skechers_shoe.png'" (click)="selectedImage = '/skechers_shoe.png'">
-            <img src="/skechers_shoe.png" alt="Skechers shoe thumbnail">
+          <button class="interactive-btn">
+            <span class="material-symbols-outlined tool-icon">share</span>
+            <span>Share</span>
           </button>
         </div>
 
-        <!-- Main Display Card -->
-        <div class="main-image-card">
-          <img [src]="selectedImage" alt="Nike Revolution 6 Men's Running Shoes" class="main-product-image">
+        <!-- Brand Tech & Warranty Highlights Card -->
+        <div class="tech-highlights-card">
+          <div class="tech-card-header">
+            <span class="material-symbols-outlined tech-header-icon">auto_awesome</span>
+            <span class="tech-card-title">Nike Innovation & Warranty</span>
+          </div>
+          <div class="tech-pills-row">
+            <div class="tech-pill">
+              <span class="material-symbols-outlined pill-icon">workspace_premium</span>
+              <div class="pill-text">
+                <strong>6 Months Warranty</strong>
+                <span>Official Brand Cover</span>
+              </div>
+            </div>
+            <div class="tech-pill">
+              <span class="material-symbols-outlined pill-icon">credit_card</span>
+              <div class="pill-text">
+                <strong>No Cost EMI</strong>
+                <span>Starts @ ₹175/mo</span>
+              </div>
+            </div>
+            <div class="tech-pill">
+              <span class="material-symbols-outlined pill-icon">eco</span>
+              <div class="pill-text">
+                <strong>Sustainable Materials</strong>
+                <span>20%+ Recycled Weight</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Trust Badges Row -->
-      <div class="trust-badges-row">
-        <div class="trust-badge">
-          <span class="material-symbols-outlined badge-icon">verified_user</span>
-          <span class="badge-text">100% Authentic</span>
-        </div>
-        <div class="trust-badge">
-          <span class="material-symbols-outlined badge-icon">history</span>
-          <div class="badge-double-text">
-            <span class="badge-text-primary">Easy Returns</span>
-            <span class="badge-text-secondary">(7 Days)</span>
+      <!-- CENTER: Product Info & Variant Selection -->
+      <div class="product-center-details">
+        <!-- Brand Header -->
+        <div class="brand-header-row">
+          <div class="brand-logo-name">
+            <svg class="nike-swoosh-icon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+              <path d="M21.707 11.293l-8-8A.997.997 0 0013 3H4a1 1 0 00-1 1v9a1 1 0 00.293.707l8 8a.997.997 0 001.414 0l9-9a.997.997 0 000-1.414zM12.414 20L5 12.586V5h7.586L20 12.414 12.414 20z"/>
+            </svg>
+            <div class="brand-info-text">
+              <h4 class="brand-title-name">Nike</h4>
+              <a href="#" class="visit-store-link">Visit Store &gt;</a>
+            </div>
           </div>
         </div>
-        <div class="trust-badge">
-          <span class="material-symbols-outlined badge-icon">local_shipping</span>
-          <div class="badge-double-text">
-            <span class="badge-text-primary">Free Delivery</span>
-            <span class="badge-text-secondary">above ₹499</span>
+
+        <!-- Title & Subtitle -->
+        <h1 class="product-title-large">Nike Revolution 6</h1>
+        <p class="product-subtitle-text">Men's Running Shoes</p>
+
+        <!-- Ratings & Popularity Badge -->
+        <div class="ratings-sales-row">
+          <div class="rating-badge-green">
+            <span class="star-icon">★</span>
+            <span class="rating-val">4.4</span>
+          </div>
+          <span class="ratings-count-link">(2.3K ratings)</span>
+          <span class="vertical-pipe">|</span>
+          <span class="bought-count-badge">🔥 500+ bought this month</span>
+        </div>
+
+        <!-- Pricing & Savings Section -->
+        <div class="pricing-card-section">
+          <div class="price-figures-row">
+            <span class="price-current-large">₹2,099</span>
+            <span class="price-original-striked">₹4,695</span>
+            <span class="discount-green-badge">(55% OFF)</span>
+            <span class="save-amount-pill">Save ₹2,596</span>
+          </div>
+          <p class="tax-inclusive-text">Inclusive of all taxes</p>
+
+          <div class="promo-deal-badges-row">
+            <span class="promo-badge lowest-price-badge">
+              <span class="material-symbols-outlined icon-tiny">trending_down</span> Lowest price in 30 days
+            </span>
+            <span class="promo-badge limited-deal-badge">
+              <span class="material-symbols-outlined icon-tiny">bolt</span> Limited Time Deal
+            </span>
           </div>
         </div>
-        <div class="trust-badge">
-          <span class="material-symbols-outlined badge-icon">lock</span>
-          <span class="badge-text">Secure Payment</span>
+
+        <!-- Size Selection -->
+        <div class="variant-selection-group">
+          <div class="variant-header-row">
+            <label class="variant-label">Select Size (UK)</label>
+            <a href="#" class="size-guide-link">Size Guide</a>
+          </div>
+          <div class="size-options-flex">
+            @for (size of availableSizes; track size) {
+              <button class="size-box-btn" [class.selected]="selectedSize === size" (click)="selectSize(size)">
+                {{ size }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Color Selection -->
+        <div class="variant-selection-group">
+          <label class="variant-label">Color: <span class="selected-color-name">{{ selectedColor }}</span></label>
+          <div class="color-swatches-flex">
+            <button class="color-swatch-btn color-black" [class.selected]="selectedColor === 'Black/White'" (click)="selectColor('Black/White')" title="Black/White"></button>
+            <button class="color-swatch-btn color-grey" [class.selected]="selectedColor === 'Light Grey'" (click)="selectColor('Light Grey')" title="Light Grey"></button>
+            <button class="color-swatch-btn color-blue" [class.selected]="selectedColor === 'Royal Blue'" (click)="selectColor('Royal Blue')" title="Royal Blue"></button>
+            <button class="color-swatch-btn color-white" [class.selected]="selectedColor === 'Pure White'" (click)="selectColor('Pure White')" title="Pure White"></button>
+            <button class="color-swatch-btn color-green" [class.selected]="selectedColor === 'Olive Green'" (click)="selectColor('Olive Green')" title="Olive Green"></button>
+          </div>
+        </div>
+
+        <!-- Stock Status & Delivery Address Bar -->
+        <div class="stock-delivery-bar">
+          <div class="stock-dot-status">
+            <span class="green-dot"></span>
+            <span class="stock-text">In Stock</span>
+          </div>
+          <span class="delivery-eta-text">{{ deliveryDate }}</span>
+          <button class="change-location-btn" (click)="checkPincode()">Change</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Buy Box, Countdown Timer & Trust Badges -->
+      <div class="product-buy-box">
+        <!-- Deal Countdown Timer Card -->
+        <div class="countdown-timer-box">
+          <div class="timer-title-row">
+            <span class="material-symbols-outlined timer-clock-icon">schedule</span>
+            <span class="timer-heading">Deal Ends In</span>
+          </div>
+          <div class="timer-digits-row">
+            <div class="timer-unit">
+              <span class="unit-val">{{ getHrs() }}</span>
+              <span class="unit-name">HRS</span>
+            </div>
+            <span class="colon">:</span>
+            <div class="timer-unit">
+              <span class="unit-val">{{ getMins() }}</span>
+              <span class="unit-name">MINS</span>
+            </div>
+            <span class="colon">:</span>
+            <div class="timer-unit">
+              <span class="unit-val">{{ getSecs() }}</span>
+              <span class="unit-name">SECS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary Call to Action Buttons -->
+        <div class="cta-buttons-stack">
+          <button class="btn-primary-cart" (click)="addToCart()">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <span>{{ addedToCart ? 'Added to Cart ✓' : 'Add to Cart' }}</span>
+          </button>
+          
+          <button class="btn-secondary-buy">
+            <span class="material-symbols-outlined">bolt</span>
+            <span>Buy Now</span>
+          </button>
+        </div>
+
+        <!-- 4 USP Trust Assurance Items -->
+        <div class="usp-trust-list">
+          <div class="usp-item">
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">verified_user</span></div>
+            <div class="usp-text-block">
+              <strong>100% Authentic</strong>
+              <span>Genuine products only</span>
+            </div>
+          </div>
+
+          <div class="usp-item">
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">published_with_changes</span></div>
+            <div class="usp-text-block">
+              <strong>Easy Returns</strong>
+              <span>7 days return policy</span>
+            </div>
+          </div>
+
+          <div class="usp-item">
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">local_shipping</span></div>
+            <div class="usp-text-block">
+              <strong>Free Delivery</strong>
+              <span>Above ₹499</span>
+            </div>
+          </div>
+
+          <div class="usp-item">
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">lock</span></div>
+            <div class="usp-text-block">
+              <strong>Secure Payment</strong>
+              <span>Razorpay / UPI / Cards</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Feature Highlights Banner Row (4 Icon Badges) -->
+    <div class="feature-highlights-row">
+      <div class="feature-card">
+        <span class="material-symbols-outlined feature-icon">skateboarding</span>
+        <div class="feature-text">
+          <strong>Lightweight</strong>
+          <span>Easy Running</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <span class="material-symbols-outlined feature-icon">air</span>
+        <div class="feature-text">
+          <strong>Breathable Mesh</strong>
+          <span>All-day Comfort</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <span class="material-symbols-outlined feature-icon">steps</span>
+        <div class="feature-text">
+          <strong>Durable Outsole</strong>
+          <span>Better Grip</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <span class="material-symbols-outlined feature-icon">fitness_center</span>
+        <div class="feature-text">
+          <strong>Suitable For</strong>
+          <span>Running, Gym, Daily Use</span>
         </div>
       </div>
     </div>
 
-    <!-- Right Column: Product Specs + Price + Actions + Timer -->
-    <div class="product-purchase-section">
-      <div class="product-brand-header">
-        <h2 class="brand-title">Nike Revolution 6</h2>
-        <h3 class="product-sub-title">Men's Running Shoes</h3>
-        
-        <div class="store-info-row">
-          <span class="material-symbols-outlined store-icon">storefront</span>
-          <span class="store-name">Nike Official Store</span>
+    <!-- Tabs Navigation Bar (Overview, Specifications, Reviews, Questions, Similar) -->
+    <div class="product-tabs-navigation">
+      <button class="tab-btn" [class.active]="activeTab === 'overview'" (click)="activeTab = 'overview'">Overview</button>
+      <button class="tab-btn" [class.active]="activeTab === 'specifications'" (click)="activeTab = 'specifications'">Specifications</button>
+      <button class="tab-btn" [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reviews (2.3K)</button>
+      <button class="tab-btn" [class.active]="activeTab === 'questions'" (click)="activeTab = 'questions'">Questions (24)</button>
+      <button class="tab-btn" [class.active]="activeTab === 'similar'" (click)="activeTab = 'similar'">Similar Products</button>
+    </div>
+
+    <!-- Tab Content & Bottom Section Grid -->
+    <div class="tab-content-bottom-grid">
+      
+      <!-- Left Column: About & Reviews -->
+      <div class="content-left-block">
+        <!-- About this Product -->
+        <div class="details-section-card">
+          <h3 class="section-card-title">About this Product</h3>
+          <p class="product-description-paragraph">
+            The Nike Revolution 6 offers lightweight comfort and reliable support for everyday runs and all-day wear. Featuring breathable mesh, a soft foam midsole, and a durable outsole, it's designed to keep you moving in style.
+          </p>
+
+          <ul class="feature-bullets-green">
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> Lightweight textile for breathable comfort</li>
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> Soft foam midsole for cushioning</li>
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> Durable outsole for traction and durability</li>
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> Ideal for running, gym &amp; daily wear</li>
+          </ul>
+
+          <button class="show-more-link">Show More ∨</button>
         </div>
 
-        <div class="rating-info-row">
-          <span class="star-rating">★ 4.4</span>
-          <span class="rating-count">(2.3K)</span>
+        <!-- Customer Reviews Summary Block -->
+        <div class="details-section-card">
+          <h3 class="section-card-title">Customer Reviews</h3>
+          <div class="reviews-summary-flex">
+            <div class="rating-big-score-box">
+              <span class="score-num">4.4</span>
+              <span class="score-sub">out of 5</span>
+              <div class="stars-row-gold">★★★★★</div>
+              <span class="based-count">Based on 2,347 reviews</span>
+            </div>
+
+            <div class="rating-breakdown-bars">
+              <div class="rating-bar-line"><span>5 ★</span><div class="bar-track"><div class="bar-fill" style="width: 68%;"></div></div><span>68%</span></div>
+              <div class="rating-bar-line"><span>4 ★</span><div class="bar-track"><div class="bar-fill" style="width: 20%;"></div></div><span>20%</span></div>
+              <div class="rating-bar-line"><span>3 ★</span><div class="bar-track"><div class="bar-fill" style="width: 8%;"></div></div><span>8%</span></div>
+              <div class="rating-bar-line"><span>2 ★</span><div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div><span>2%</span></div>
+              <div class="rating-bar-line"><span>1 ★</span><div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div><span>2%</span></div>
+            </div>
+          </div>
+
+          <button class="btn-write-review">Write a Review</button>
         </div>
       </div>
 
-      <div class="price-info-card">
-        <div class="main-price-row">
-          <span class="price-current">₹2,099</span>
-          <span class="price-original">₹4,695</span>
-          <span class="discount-badge">(55% OFF)</span>
+      <!-- Right Column: Similar Deals Cards -->
+      <div class="content-right-block">
+        <div class="similar-deals-box">
+          <div class="similar-header-line">
+            <h3 class="section-card-title">Similar Deals</h3>
+            <a routerLink="/explore" class="view-all-pink">View All &gt;</a>
+          </div>
+
+          <div class="similar-cards-grid-2col">
+            <!-- Similar Deal Item 1 -->
+            <div class="similar-card-item" routerLink="/deal-details">
+              <span class="similar-disc-badge">30% OFF</span>
+              <button class="similar-wish-btn" (click)="$event.stopPropagation()"><span class="material-symbols-outlined">favorite_border</span></button>
+              <img src="/nike_shoes.png" alt="Nike Downshifter 12" class="sim-card-img">
+              <h4 class="sim-card-title">Nike Downshifter 12</h4>
+              <div class="sim-card-price-row">
+                <span class="sim-card-price">₹2,299</span>
+                <span class="sim-card-strike">₹4,795</span>
+              </div>
+              <span class="sim-card-rating">★ 4.3 (1.2K)</span>
+            </div>
+
+            <!-- Similar Deal Item 2 -->
+            <div class="similar-card-item" routerLink="/deal-details">
+              <span class="similar-disc-badge">42% OFF</span>
+              <button class="similar-wish-btn" (click)="$event.stopPropagation()"><span class="material-symbols-outlined">favorite_border</span></button>
+              <img src="/adidas_shoes.png" alt="Adidas Duramo SL" class="sim-card-img">
+              <h4 class="sim-card-title">Adidas Duramo SL</h4>
+              <div class="sim-card-price-row">
+                <span class="sim-card-price">₹2,199</span>
+                <span class="sim-card-strike">₹4,499</span>
+              </div>
+              <span class="sim-card-rating">★ 4.5 (980)</span>
+            </div>
+          </div>
         </div>
-        <span class="tax-info">Inclusive of all taxes</span>
       </div>
 
-      <!-- Timer Card -->
-      <div class="timer-card-container">
-        <span class="timer-title">Deal ends in</span>
-        <div class="countdown-timer">
-          <div class="timer-segment">
-            <div class="segment-box">{{ getHrs() }}</div>
-            <span class="segment-label">HRS</span>
-          </div>
-          <span class="timer-separator">:</span>
-          <div class="timer-segment">
-            <div class="segment-box">{{ getMins() }}</div>
-            <span class="segment-label">MINS</span>
-          </div>
-          <span class="timer-separator">:</span>
-          <div class="timer-segment">
-            <div class="segment-box">{{ getSecs() }}</div>
-            <span class="segment-label">SECS</span>
-          </div>
-        </div>
+    </div>
+
+    <!-- Frequently Bought Together Bar (Cross-Sell Combo Section) -->
+    <div class="frequently-bought-card">
+      <div class="frequently-header-block">
+        <h3 class="frequently-title">Frequently Bought Together</h3>
+        <p class="frequently-subtitle">Get more value with these items</p>
       </div>
 
-      <!-- CTA Action Buttons -->
-      <div class="action-buttons-container">
-        <button class="buy-now-btn">
-          <span class="material-symbols-outlined btn-icon">shopping_bag</span>
-          <span>Buy Now</span>
-        </button>
-        <button class="wishlist-btn">
-          <span class="material-symbols-outlined btn-icon-wish">favorite</span>
-          <span>Add to Wishlist</span>
-        </button>
+      <div class="frequently-combo-flex">
+        <!-- Main Product Item -->
+        <div class="combo-product-item">
+          <img src="/nike_shoe.png" alt="Nike Revolution 6" class="combo-img">
+          <span class="combo-item-price">₹2,099</span>
+        </div>
+
+        <span class="plus-icon">+</span>
+
+        <!-- Socks Accessory Item -->
+        <div class="combo-product-item">
+          <img src="/puma_shoe.png" alt="Nike Cushion Socks" class="combo-img">
+          <span class="combo-item-price">₹499</span>
+        </div>
+
+        <span class="plus-icon">+</span>
+
+        <!-- Gym Bag Accessory Item -->
+        <div class="combo-product-item">
+          <img src="/adidas_shoe.png" alt="Nike Gym Bag" class="combo-img">
+          <span class="combo-item-price">₹799</span>
+        </div>
+
+        <!-- Total Calculation & CTA -->
+        <div class="combo-checkout-box">
+          <div class="combo-price-calc">
+            <div class="calc-row">
+              <span class="calc-label">Total:</span>
+              <span class="calc-total-bold">₹{{ getBoughtTogetherTotal() }}</span>
+              <span class="calc-strike">₹{{ getBoughtTogetherOriginalTotal() }}</span>
+            </div>
+            <span class="calc-save-tag">You save ₹798</span>
+          </div>
+
+          <button class="btn-add-all-cart" (click)="addToCart()">
+            Add All to Cart
+          </button>
+        </div>
       </div>
     </div>
 
   </div>
 
-  <!-- Bottom Content: About + Similar -->
-  <div class="bottom-split-section">
-    <!-- About the Deal -->
-    <div class="about-deal-section">
-      <h3 class="section-title">About the Deal</h3>
-      <p class="about-description">
-        Lightweight comfort meets reliable support in the Nike Revolution for everyday runs and all-day wear.
-      </p>
-      <ul class="about-bullets">
-        <li>Lightweight textile for breathable comfort</li>
-        <li>Soft foam midsole for cushioning</li>
-        <li>Durable outsole for traction and durability</li>
-      </ul>
-      <button class="view-more-btn-link">View More</button>
+  <!-- Sticky Mobile Buy Bar (Mobile Responsive Bottom Bar) -->
+  <div class="sticky-mobile-buy-bar">
+    <div class="mobile-price-block">
+      <span class="mobile-price">₹2,099</span>
+      <span class="mobile-discount">55% OFF</span>
     </div>
-
-    <!-- Similar Deals -->
-    <div class="similar-deals-section">
-      <div class="similar-header">
-        <h3 class="section-title">Similar Deals</h3>
-        <button class="view-all-link" routerLink="/explore">View All</button>
-      </div>
-
-      <div class="similar-cards-row">
-        <!-- Card 1 -->
-        <div class="similar-deal-card" routerLink="/deal-details">
-          <div class="similar-card-img-wrapper">
-            <img src="/nike_shoes.png" alt="Nike Downshifter 12">
-          </div>
-          <div class="similar-card-details">
-            <h4 class="similar-prod-title">Nike Downshifter 12</h4>
-            <div class="similar-price-row">
-              <span class="sim-price-cur">₹2,299</span>
-              <span class="sim-price-orig">₹4,795</span>
-            </div>
-            <span class="sim-discount">50% OFF</span>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="similar-deal-card" routerLink="/deal-details">
-          <div class="similar-card-img-wrapper">
-            <img src="/adidas_shoes.png" alt="Adidas Duramo SL">
-          </div>
-          <div class="similar-card-details">
-            <h4 class="similar-prod-title">Adidas Duramo SL</h4>
-            <div class="similar-price-row">
-              <span class="sim-price-cur">₹2,199</span>
-              <span class="sim-price-orig">₹4,499</span>
-            </div>
-            <span class="sim-discount">51% OFF</span>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="similar-deal-card" routerLink="/deal-details">
-          <div class="similar-card-img-wrapper">
-            <img src="/puma_shoes.png" alt="Puma Flyer Runner">
-          </div>
-          <div class="similar-card-details">
-            <h4 class="similar-prod-title">Puma Flyer Runner</h4>
-            <div class="similar-price-row">
-              <span class="sim-price-cur">₹1,899</span>
-              <span class="sim-price-orig">₹3,799</span>
-            </div>
-            <span class="sim-discount">50% OFF</span>
-          </div>
-        </div>
-      </div>
+    <div class="mobile-btn-group">
+      <button class="btn-mobile-cart" (click)="addToCart()">Add to Cart</button>
+      <button class="btn-mobile-buy">Buy Now</button>
     </div>
   </div>
 </div>

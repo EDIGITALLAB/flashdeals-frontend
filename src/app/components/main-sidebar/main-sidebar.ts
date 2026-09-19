@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UpgradeModal } from '../upgrade-modal/upgrade-modal';
 import { BrandsModal } from '../brands-modal/brands-modal';
 import { AlertsModal } from '../alerts-modal/alerts-modal';
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-main-sidebar',
@@ -15,6 +16,13 @@ export class MainSidebar {
   showUpgradeModal = false;
   showBrandsModal = false;
   showAlertsModal = false;
+
+  constructor(public sidebarService: SidebarService) {}
+
+  @HostBinding('class.collapsed')
+  get isCollapsed() {
+    return this.sidebarService.isCollapsed();
+  }
 
   toggleUpgradeModal(event: Event) {
     event.preventDefault();

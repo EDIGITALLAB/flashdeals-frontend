@@ -1,15 +1,15 @@
 <div class="app-layout">
+    <!-- Navbar component (Full Width Sticky Top Bar with Brand Logo) -->
+    <app-navbar />
+
     <div class="app-body">
         <!-- Sidebar component -->
         <app-main-sidebar />
 
         <!-- Main Content Wrapper -->
         <div class="main-wrapper">
-            <!-- Navbar component -->
-            <app-navbar />
-
             <!-- Main Content Area -->
-        <main class="main-content">
+            <main class="main-content">
             <!-- Promo Hero Banner -->
             <section class="hero-carousel">
                 <div class="carousel-inner" [style.transform]="'translateX(' + (-currentSlide * 33.333) + '%)'">
@@ -447,7 +447,4 @@
         </main>
     </div>
 </div>
-
-<!-- Footer Component (Full Width Across Entire Screen Bottom) -->
-<app-footer />
 </div>

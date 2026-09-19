@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MainSidebar } from '../../components/main-sidebar/main-sidebar';
 import { Navbar } from '../../components/navbar/navbar';
-import { Footer } from '../../components/footer/footer';
 
 interface Deal {
   id: number;
@@ -17,7 +16,7 @@ interface Deal {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, MainSidebar, Navbar, Footer],
+  imports: [CommonModule, RouterLink, MainSidebar, Navbar],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
