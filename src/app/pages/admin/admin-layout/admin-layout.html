@@ -1,0 +1,36 @@
+<div class="admin-layout">
+  <!-- Top Header / Navbar -->
+  <header class="admin-header">
+    <div class="header-left">
+      <a routerLink="/admin/dashboard" class="logo-container">
+        <div class="logo-circle">
+          <span class="material-symbols-outlined logo-bolt">bolt</span>
+        </div>
+        <span class="logo-text">Flash<span class="logo-highlight">Deals</span></span>
+      </a>
+    </div>
+
+    <div class="header-right">
+      <button class="icon-btn notification-btn">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="notification-badge"></span>
+      </button>
+
+      <div class="user-profile">
+        <img src="cat_beauty.jpg" alt="Admin Avatar" class="avatar-img" onerror="this.src='nike_shoes.png'" />
+        <span class="user-name">Admin</span>
+        <span class="material-symbols-outlined chevron">expand_more</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-body">
+    <!-- Left Sidebar -->
+    <app-admin-sidebar />
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

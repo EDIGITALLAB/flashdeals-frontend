@@ -1,0 +1,42 @@
+<div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Settings</h1>
+            <p class="page-subtitle">Platform configuration and preferences</p>
+          </div>
+        </div>
+
+        <div class="alert alert-success" *ngIf="saved">
+          ✓ Settings saved successfully!
+        </div>
+
+        <div class="card form-card">
+          <h3 class="card-title">General Platform Settings</h3>
+
+          <div class="form-group">
+            <label class="form-label">Platform Name</label>
+            <input type="text" class="form-control" [(ngModel)]="siteName" />
+          </div>
+
+          <div class="form-group mt-3">
+            <label class="form-label">Support Email</label>
+            <input type="email" class="form-control" [(ngModel)]="supportEmail" />
+          </div>
+
+          <div class="form-group mt-4">
+            <label class="checkbox-label">
+              <input type="checkbox" [(ngModel)]="autoApproveDeals" />
+              Auto-approve new deal submissions
+            </label>
+          </div>
+
+          <div class="form-group mt-2">
+            <label class="checkbox-label">
+              <input type="checkbox" [(ngModel)]="emailNotifications" />
+              Send email notifications on new user registrations
+            </label>
+          </div>
+
+          <button class="btn btn-primary mt-4" (click)="saveSettings()">Save Settings</button>
+        </div>
+      </div>

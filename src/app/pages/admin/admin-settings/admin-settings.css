@@ -1,0 +1,27 @@
+.admin-layout { min-height: 100vh; background-color: #f8f9fc; color: #1e1e2e; font-family: 'Outfit', sans-serif; display: flex; flex-direction: column; }
+.admin-header { height: 80px; background: #ffffff; border-bottom: 1px solid #eef0f5; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: sticky; top: 0; z-index: 100; }
+.admin-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 20px; font-weight: 700; color: #1e1e2e; }
+.brand-icon { color: #ff3f6c; font-size: 22px; }
+.brand-highlight { color: #ff3f6c; }
+.search-box { display: flex; align-items: center; gap: 10px; background: #f1f3f9; border-radius: 20px; padding: 8px 16px; width: 380px; }
+.search-box input { border: none; background: transparent; outline: none; width: 100%; font-size: 13.5px; }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.user-profile { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.avatar-img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid #ff3f6c; }
+.admin-body { display: flex; flex: 1; }
+.admin-main { flex: 1; padding: 32px; }
+.page-header { margin-bottom: 24px; }
+.page-title { font-size: 26px; font-weight: 700; margin: 0; }
+.page-subtitle { font-size: 14px; color: #7e818c; margin: 2px 0 0 0; }
+.card { background: #ffffff; border: 1px solid #eef0f5; border-radius: 16px; padding: 24px; max-width: 600px; }
+.card-title { font-size: 16px; font-weight: 700; margin: 0 0 20px 0; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 13.5px; font-weight: 600; }
+.form-control { height: 44px; border-radius: 10px; border: 1px solid #e2e8f0; padding: 0 14px; font-size: 14px; outline: none; }
+.checkbox-label { font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.btn { height: 44px; padding: 0 24px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; }
+.btn-primary { background: #ff3f6c; color: #ffffff; }
+.alert-success { background: #e6fff4; color: #00ca72; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; font-weight: 600; font-size: 14px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 18px; }

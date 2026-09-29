@@ -1,0 +1,73 @@
+<div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Schedule Deals</h1>
+            <p class="page-subtitle">Plan and schedule deals to go live at the right time</p>
+          </div>
+
+          <a routerLink="/admin/add-deal" class="btn btn-primary">+ Schedule Deal</a>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="card filter-card">
+          <div class="filter-inputs">
+            <select class="form-control select-filter">
+              <option>All Status</option>
+              <option>Scheduled</option>
+              <option>Live</option>
+            </select>
+
+            <select class="form-control select-filter">
+              <option>All Brands</option>
+              <option>Apple</option>
+              <option>Nike</option>
+              <option>Samsung</option>
+            </select>
+
+            <div class="date-picker-wrapper">
+              <span>📅</span> Select Date Range
+            </div>
+          </div>
+        </div>
+
+        <!-- Scheduled Deals Table -->
+        <div class="card table-card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Deal</th>
+                <th>Brand</th>
+                <th>Scheduled Date & Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sd of scheduledDeals; let i = index">
+                <td>
+                  <div class="deal-cell">
+                    <span class="deal-icon-badge">{{sd.icon}}</span>
+                    <span class="deal-name-txt">{{sd.title}}</span>
+                  </div>
+                </td>
+                <td>{{sd.brand}}</td>
+                <td class="font-semibold text-blue">{{sd.scheduledTime}}</td>
+                <td><span class="badge badge-info">{{sd.status}}</span></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="icon-action-btn" title="Edit">✏️</button>
+                    <button class="icon-action-btn delete" (click)="deleteDeal(i)" title="Delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <span class="table-info">Showing 1 - {{scheduledDeals.length}} of {{scheduledDeals.length}} scheduled deals</span>
+            <div class="pagination">
+              <button class="page-btn">‹</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">›</button>
+            </div>
+      </div>

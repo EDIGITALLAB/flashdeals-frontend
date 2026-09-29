@@ -1,0 +1,142 @@
+<div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle">Overview of your FlashDeals platform</p>
+          </div>
+
+          <div class="date-filter">
+            <span class="d-flex align-items-center gap-1"><span class="material-symbols-outlined font-18">calendar_today</span> Last 7 days</span>
+            <span class="material-symbols-outlined arrow">expand_more</span>
+          </div>
+        </div>
+
+        <!-- Top Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card" *ngFor="let s of stats">
+            <div class="stat-header">
+              <span class="material-symbols-outlined stat-icon">{{s.icon}}</span>
+              <span class="stat-title">{{s.title}}</span>
+            </div>
+            <div class="stat-value-row">
+              <span class="stat-value">{{s.value}}</span>
+              <span class="stat-badge positive">{{s.change}} from last week</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics Charts Row -->
+        <div class="charts-grid">
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3>Deals Performance</h3>
+              <div class="chart-legend">
+                <span class="legend-item"><span class="dot views"></span> Views</span>
+                <span class="legend-item"><span class="dot clicks"></span> Clicks</span>
+                <span class="legend-item"><span class="dot conv"></span> Conversions</span>
+              </div>
+            </div>
+
+            <!-- Simulated Line Chart Visual -->
+            <div class="chart-area">
+              <svg viewBox="0 0 500 150" class="line-chart-svg">
+                <path d="M 0 100 Q 100 20, 200 80 T 400 40 T 500 60" fill="none" stroke="#ff3f6c" stroke-width="3" />
+                <path d="M 0 120 Q 100 60, 200 110 T 400 80 T 500 90" fill="none" stroke="#6200ea" stroke-width="2.5" stroke-dasharray="4" />
+                <path d="M 0 135 Q 100 110, 200 130 T 400 110 T 500 120" fill="none" stroke="#00ca72" stroke-width="2" />
+              </svg>
+              <div class="chart-labels">
+                <span>Apr 20</span>
+                <span>Apr 21</span>
+                <span>Apr 22</span>
+                <span>Apr 23</span>
+                <span>Apr 24</span>
+                <span>Apr 25</span>
+                <span>Apr 26</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Donut Chart Card -->
+          <div class="card donut-card">
+            <div class="card-header">
+              <h3>Deals by Category</h3>
+            </div>
+            <div class="donut-content">
+              <div class="donut-graphic">
+                <div class="donut-hole">
+                  <span class="total-num">286</span>
+                  <span class="total-label">Total Deals</span>
+                </div>
+              </div>
+              <ul class="donut-legend">
+                <li><span class="dot electronics"></span> Electronics <strong>32%</strong></li>
+                <li><span class="dot fashion"></span> Fashion <strong>21%</strong></li>
+                <li><span class="dot home"></span> Home & Living <strong>12%</strong></li>
+                <li><span class="dot beauty"></span> Beauty <strong>10%</strong></li>
+                <li><span class="dot food"></span> Food & Beverages <strong>8%</strong></li>
+                <li><span class="dot others"></span> Others <strong>17%</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: Recent Deals & Quick Actions -->
+        <div class="bottom-grid">
+          <!-- Recent Deals Table -->
+          <div class="card table-card">
+            <div class="card-header">
+              <h3>Recent Deals</h3>
+              <a routerLink="/admin/add-deal" class="link-btn">View All</a>
+            </div>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Deal</th>
+                  <th>Brand</th>
+                  <th>Category</th>
+                  <th>Discount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let d of recentDeals">
+                  <td class="font-semibold">{{d.title}}</td>
+                  <td>{{d.brand}}</td>
+                  <td>{{d.category}}</td>
+                  <td>{{d.discount}}</td>
+                  <td><span class="badge badge-success">{{d.status}}</span></td>
+                  <td>
+                    <label class="switch">
+                      <input type="checkbox" [checked]="d.published" (change)="toggleDealStatus(d)" />
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Quick Actions Box -->
+          <div class="card quick-actions-card">
+            <div class="card-header">
+              <h3>Quick Actions</h3>
+            </div>
+            <div class="quick-actions-btns">
+              <a routerLink="/admin/brands" class="btn btn-action">
+                <span class="material-symbols-outlined icon">stars</span> Add Brand
+              </a>
+              <a routerLink="/admin/categories" class="btn btn-action">
+                <span class="material-symbols-outlined icon">category</span> Add Category
+              </a>
+              <a routerLink="/admin/add-deal" class="btn btn-action btn-highlight">
+                <span class="material-symbols-outlined icon">bolt</span> Add Deal
+              </a>
+              <a routerLink="/admin/announcements" class="btn btn-action">
+                <span class="material-symbols-outlined icon">campaign</span> Send Announcement
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>

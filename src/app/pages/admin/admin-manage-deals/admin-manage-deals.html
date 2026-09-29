@@ -1,0 +1,68 @@
+<div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Manage Deals</h1>
+            <p class="page-subtitle">View, edit and control all platform deals</p>
+          </div>
+
+          <a routerLink="/admin/add-deal" class="btn btn-primary">+ Add New Deal</a>
+        </div>
+
+        <div class="card filter-card">
+          <div class="filter-inputs">
+            <div class="search-input-wrapper">
+              <span>🔍</span>
+              <input type="text" placeholder="Search by deal title or brand..." [(ngModel)]="searchQuery" />
+            </div>
+
+            <select class="form-control select-filter" [(ngModel)]="statusFilter">
+              <option>All Status</option>
+              <option>Active</option>
+              <option>Scheduled</option>
+              <option>Draft</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card table-card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Deal Title</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Clicks</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let d of filteredDeals; let i = index">
+                <td class="font-semibold">{{d.title}}</td>
+                <td>{{d.brand}}</td>
+                <td>{{d.category}}</td>
+                <td>
+                  <span class="font-bold">{{d.price}}</span>
+                  <span class="original-price">{{d.originalPrice}}</span>
+                </td>
+                <td><span class="discount-pill">{{d.discount}}</span></td>
+                <td class="font-semibold">{{d.clicks}}</td>
+                <td>
+                  <span class="badge" [ngClass]="{
+                    'badge-success': d.status === 'Active',
+                    'badge-info': d.status === 'Scheduled',
+                    'badge-gray': d.status === 'Draft'
+                  }">{{d.status}}</span>
+                </td>
+                <td>
+                  <div class="action-btns">
+                    <a routerLink="/admin/add-deal" class="icon-action-btn" title="Edit">✏️</a>
+                    <button class="icon-action-btn delete" (click)="deleteDeal(i)" title="Delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>

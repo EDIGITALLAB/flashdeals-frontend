@@ -1,0 +1,106 @@
+<div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Send Notification</h1>
+            <p class="page-subtitle">Send notifications to your users</p>
+          </div>
+        </div>
+
+        <div class="notification-grid">
+          <!-- Notification Details Card -->
+          <div class="card form-card">
+            <h3 class="card-title">Notification Details</h3>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Notification Type <span class="required">*</span></label>
+                <select class="form-control" [(ngModel)]="notificationType">
+                  <option>Flash Sale Alert</option>
+                  <option>Promotional Announcement</option>
+                  <option>System Update</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Template</label>
+                <select class="form-control" [(ngModel)]="template">
+                  <option>Select Template</option>
+                  <option>Default Flash Sale</option>
+                  <option>Discount Coupon Alert</option>
+                </select>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label">Subject <span class="required">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="subject" />
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label">Message <span class="required">*</span></label>
+                <textarea class="form-control textarea" rows="4" [(ngModel)]="message" maxlength="500"></textarea>
+                <div class="char-counter">{{message.length}}/500</div>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label">Delivery Channels</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="channels.email" /> Email
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="channels.sms" /> SMS
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="channels.whatsapp" /> WhatsApp
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="channels.push" /> Push Notification
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="channels.inApp" /> In-App
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Target Audience Card -->
+          <div class="card audience-card">
+            <h3 class="card-title">Target Audience</h3>
+
+            <div class="radio-group-vertical">
+              <label class="radio-option">
+                <input type="radio" name="audience" value="All Users" [(ngModel)]="targetAudience" />
+                All Users
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="audience" value="Specific Users" [(ngModel)]="targetAudience" />
+                Specific Users
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="audience" value="By Brand" [(ngModel)]="targetAudience" />
+                By Brand
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="audience" value="By Category" [(ngModel)]="targetAudience" />
+                By Category
+              </label>
+            </div>
+          </div>
+        <div class="bottom-bar">
+          <button class="btn btn-primary" (click)="sendNotification()">🚀 Send Notification</button>
+        </div>
+      </div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showSuccessModal">
+  <div class="modal-card text-center">
+    <div class="icon-circle">🎉</div>
+    <h2>Notification Sent!</h2>
+    <p>Your notification has been broadcast to {{targetAudience}} successfully.</p>
+    <button class="btn btn-primary mt-4" (click)="showSuccessModal = false">Done</button>
+  </div>
+</div>
