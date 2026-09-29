@@ -1,0 +1,100 @@
+<div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Category Management</h1>
+            <p class="page-subtitle">Manage product categories and sub-categories</p>
+          </div>
+
+          <button class="btn btn-primary" (click)="showAddModal = true">+ Add Category</button>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="card filter-card">
+          <div class="filter-inputs">
+            <div class="search-input-wrapper">
+              <span>🔍</span>
+              <input type="text" placeholder="Search categories..." [(ngModel)]="searchQuery" />
+            </div>
+
+            <select class="form-control select-filter">
+              <option>All Status</option>
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Categories Table Card -->
+        <div class="card table-card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Parent Category</th>
+                <th>Status</th>
+                <th>Display Order</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of filteredCategories; let i = index">
+                <td>
+                  <div class="cat-cell">
+                    <span class="cat-icon-badge">{{c.icon}}</span>
+                    <span class="cat-name-txt">{{c.name}}</span>
+                  </div>
+                </td>
+                <td>{{c.parent}}</td>
+                <td><span class="badge badge-success">{{c.status}}</span></td>
+                <td class="font-semibold">{{c.order}}</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="icon-action-btn" title="Edit">✏️</button>
+                    <button class="icon-action-btn delete" (click)="deleteCategory(i)" title="Delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <span class="table-info">Showing 1 - {{filteredCategories.length}} of {{categories.length}} categories</span>
+            <div class="pagination">
+              <button class="page-btn">‹</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">›</button>
+            </div>
+      </div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showAddModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Add New Category</h3>
+      <button class="modal-close" (click)="showAddModal = false">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Category Name</label>
+        <input type="text" class="form-control" placeholder="e.g. Wearables" [(ngModel)]="newCategoryName" />
+      </div>
+      <div class="form-group mt-3">
+        <label class="form-label">Parent Category</label>
+        <select class="form-control" [(ngModel)]="newParentCategory">
+          <option value="None">None (Root Category)</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Home & Living">Home & Living</option>
+        </select>
+      </div>
+      <div class="form-group mt-3">
+        <label class="form-label">Icon Emoji</label>
+        <input type="text" class="form-control" placeholder="e.g. ⌚" [(ngModel)]="newIcon" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="showAddModal = false">Cancel</button>
+      <button class="btn btn-primary" (click)="addCategory()">Save Category</button>
+    </div>
+  </div>
+</div>

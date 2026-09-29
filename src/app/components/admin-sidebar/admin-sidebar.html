@@ -1,0 +1,95 @@
+<aside class="admin-sidebar">
+  <nav class="sidebar-nav">
+    <ul>
+      <li>
+        <a routerLink="/admin/dashboard" class="nav-item" routerLinkActive="active">
+          <span class="material-symbols-outlined nav-icon">grid_view</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/brands" class="nav-item" routerLinkActive="active">
+          <span class="material-symbols-outlined nav-icon">stars</span>
+          <span class="nav-label">Brands</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/categories" class="nav-item" routerLinkActive="active">
+          <span class="material-symbols-outlined nav-icon">category</span>
+          <span class="nav-label">Categories</span>
+        </a>
+      </li>
+
+      <!-- Deals Menu (Expanded) -->
+      <li class="nav-group" [class.expanded]="dealsExpanded">
+        <div class="nav-item group-header" (click)="toggleDeals()">
+          <span class="material-symbols-outlined nav-icon">bolt</span>
+          <span class="nav-label">Deals</span>
+          <span class="material-symbols-outlined arrow">{{ dealsExpanded ? 'expand_less' : 'expand_more' }}</span>
+        </div>
+        <ul class="submenu" *ngIf="dealsExpanded">
+          <li>
+            <a routerLink="/admin/add-deal" class="submenu-item" routerLinkActive="active">
+              <span class="bullet"></span> Add New Deal
+            </a>
+          </li>
+          <li>
+            <a routerLink="/admin/manage-deals" class="submenu-item" routerLinkActive="active">
+              <span class="bullet"></span> Manage Deals
+            </a>
+          </li>
+          <li>
+            <a routerLink="/admin/scheduled-deals" class="submenu-item" routerLinkActive="active">
+              <span class="bullet"></span> Schedule Deals
+            </a>
+          </li>
+          <li>
+            <a routerLink="/admin/deal-analytics" class="submenu-item" routerLinkActive="active">
+              <span class="bullet"></span> Deal Analytics
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a routerLink="/admin/announcements" class="nav-item" routerLinkActive="active">
+          <span class="material-symbols-outlined nav-icon">campaign</span>
+          <span class="nav-label">Announcements</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/notifications" class="nav-item" routerLinkActive="active">
+          <span class="material-symbols-outlined nav-icon">notifications</span>
+          <span class="nav-label">Notifications</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/users" class="nav-item" routerLinkActive="active">
+          <span class="material-symbols-outlined nav-icon">group</span>
+          <span class="nav-label">Users</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/settings" class="nav-item" routerLinkActive="active">
+          <span class="material-symbols-outlined nav-icon">settings</span>
+          <span class="nav-label">Settings</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Bottom Admin Info & Logout -->
+  <div class="sidebar-bottom-profile">
+    <div class="user-info">
+      <img src="cat_beauty.jpg" alt="Admin Avatar" class="avatar-img" onerror="this.src='nike_shoes.png'" />
+      <div class="user-text">
+        <span class="user-name">Admin</span>
+        <span class="user-role">Super Admin</span>
+      </div>
+    </div>
+    <button class="btn-logout" (click)="logout()" title="Logout Admin">
+      <span class="material-symbols-outlined">logout</span>
+    </button>
+  </div>
+</aside>
+

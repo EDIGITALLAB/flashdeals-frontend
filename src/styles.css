@@ -69,3 +69,42 @@ body {
     padding-bottom: 88px !important;
   }
 }
+
+/* Shared Logo Styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.logo-circle {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #ff6900 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(255, 63, 108, 0.3);
+}
+
+.logo-bolt {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.logo-highlight {
+  color: var(--primary-color);
+}
+

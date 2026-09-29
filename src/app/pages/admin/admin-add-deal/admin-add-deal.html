@@ -1,0 +1,662 @@
+<div class="page-container">
+        <!-- Page Title Header -->
+        <div class="page-header">
+          <h1 class="page-title">Add New Deal</h1>
+          <p class="page-subtitle">Create a new flash deal and make it live for your users</p>
+        </div>
+
+        <!-- Stepper Progress Header -->
+        <div class="stepper-wrapper">
+          <div class="step-item" [class.active]="currentStep === 1" [class.completed]="currentStep > 1" (click)="goToStep(1)">
+            <div class="step-circle">
+              <span *ngIf="currentStep > 1">✓</span>
+              <span *ngIf="currentStep <= 1">1</span>
+            </div>
+            <span class="step-label">Basic Details</span>
+          </div>
+
+          <div class="step-line" [class.filled]="currentStep > 1"></div>
+
+          <div class="step-item" [class.active]="currentStep === 2" [class.completed]="currentStep > 2" (click)="goToStep(2)">
+            <div class="step-circle">
+              <span *ngIf="currentStep > 2">✓</span>
+              <span *ngIf="currentStep <= 2">2</span>
+            </div>
+            <span class="step-label">Images & Tags</span>
+          </div>
+
+          <div class="step-line" [class.filled]="currentStep > 2"></div>
+
+          <div class="step-item" [class.active]="currentStep === 3" [class.completed]="currentStep > 3" (click)="goToStep(3)">
+            <div class="step-circle">
+              <span *ngIf="currentStep > 3">✓</span>
+              <span *ngIf="currentStep <= 3">3</span>
+            </div>
+            <span class="step-label">Pricing & Schedule</span>
+          </div>
+
+          <div class="step-line" [class.filled]="currentStep > 3"></div>
+
+          <div class="step-item" [class.active]="currentStep === 4" [class.completed]="currentStep > 4" (click)="goToStep(4)">
+            <div class="step-circle">
+              <span *ngIf="currentStep > 4">✓</span>
+              <span *ngIf="currentStep <= 4">4</span>
+            </div>
+            <span class="step-label">Review</span>
+          </div>
+        </div>
+
+        <!-- STEP 1: Basic Details -->
+        <div class="step-content" *ngIf="currentStep === 1">
+          <div class="step-grid">
+            <!-- Left Form Card -->
+            <div class="form-card">
+              <div class="card-section-header">
+                <h3 class="section-title">• Basic Details</h3>
+                <p class="section-sub">Provide the essential information about the deal</p>
+              </div>
+
+              <div class="form-grid">
+                <!-- Row 1: Deal Title & Brand -->
+                <div class="form-group">
+                  <label class="form-label">Deal Title <span class="required">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Flat 50% Off on Nike Running Shoes"
+                    [(ngModel)]="dealTitle"
+                    maxlength="100"
+                  />
+                  <div class="char-counter">{{dealTitle.length}}/100</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Brand <span class="required">*</span></label>
+                  <select class="form-control" [(ngModel)]="brand">
+                    <option value="">Select Brand</option>
+                    <option *ngFor="let b of brands" [value]="b">{{b}}</option>
+                  </select>
+                  <button type="button" class="btn-link" (click)="openAddBrand()">+ Add Brand</button>
+                </div>
+
+                <!-- Row 2: Short Description & Category -->
+                <div class="form-group">
+                  <label class="form-label">Short Description <span class="required">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Get up to 50% off on selected running shoes from Nike."
+                    [(ngModel)]="shortDescription"
+                    maxlength="200"
+                  />
+                  <div class="char-counter">{{shortDescription.length}}/200</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Category <span class="required">*</span></label>
+                  <select class="form-control" [(ngModel)]="category">
+                    <option value="">Select Category</option>
+                    <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+                  </select>
+                  <button type="button" class="btn-link" (click)="openAddCategory()">+ Add Category</button>
+                </div>
+
+                <!-- Row 3: Deal Source & Status -->
+                <div class="form-group">
+                  <label class="form-label">Deal Source <span class="required">*</span></label>
+                  <select class="form-control" [(ngModel)]="dealSource">
+                    <option value="">Select Source</option>
+                    <option *ngFor="let s of sources" [value]="s">{{s}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Status <span class="required">*</span></label>
+                  <select class="form-control" [(ngModel)]="status">
+                    <option value="Draft">Draft</option>
+                    <option value="Active">Active</option>
+                    <option value="Scheduled">Scheduled</option>
+                  </select>
+                </div>
+
+                <!-- Row 4: Full Description -->
+                <div class="form-group col-span-2">
+                  <label class="form-label">Full Description <span class="required">*</span></label>
+                  <div class="wysiwyg-wrapper">
+                    <div class="wysiwyg-toolbar">
+                      <button type="button" class="tool-btn font-bold">B</button>
+                      <button type="button" class="tool-btn italic">I</button>
+                      <button type="button" class="tool-btn underline">U</button>
+                      <span class="tool-divider"></span>
+                      <button type="button" class="tool-btn">🔗</button>
+                      <button type="button" class="tool-btn">🖼️</button>
+                      <span class="tool-divider"></span>
+                      <button type="button" class="tool-btn">≡</button>
+                      <button type="button" class="tool-btn">⋮≡</button>
+                    </div>
+                    <textarea
+                      class="wysiwyg-textarea"
+                      rows="3"
+                      placeholder="Enter detailed description about the deal..."
+                      [(ngModel)]="fullDescription"
+                      maxlength="2000"
+                    ></textarea>
+                  </div>
+                  <div class="char-counter">{{fullDescription.length}}/2000</div>
+                </div>
+
+                <!-- Row 5: Deal Type (Radio Buttons) -->
+                <div class="form-group col-span-2">
+                  <label class="form-label">Deal Type <span class="required">*</span></label>
+                  <div class="radio-group">
+                    <label class="radio-option">
+                      <input type="radio" name="dealType" value="Flash Sale" [(ngModel)]="dealType" />
+                      <span class="radio-custom"></span>
+                      Flash Sale
+                    </label>
+                    <label class="radio-option">
+                      <input type="radio" name="dealType" value="Coupon" [(ngModel)]="dealType" />
+                      <span class="radio-custom"></span>
+                      Coupon
+                    </label>
+                    <label class="radio-option">
+                      <input type="radio" name="dealType" value="Deal of the Day" [(ngModel)]="dealType" />
+                      <span class="radio-custom"></span>
+                      Deal of the Day
+                    </label>
+                    <label class="radio-option">
+                      <input type="radio" name="dealType" value="Exclusive" [(ngModel)]="dealType" />
+                      <span class="radio-custom"></span>
+                      Exclusive
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Upload Card -->
+            <div class="side-card upload-card">
+              <div class="upload-dropzone" (click)="fileInput.click()">
+                <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*" />
+                <div class="upload-icon-circle">
+                  <span class="upload-plus">+</span>
+                </div>
+                <h4 class="upload-title">Upload Deal Image</h4>
+                <p class="upload-sub">Drag and drop or click to upload</p>
+                <span class="upload-note">(JPG, PNG, WebP - Max 5MB)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="bottom-action-bar">
+            <button type="button" class="btn btn-outline" routerLink="/">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="nextStep()">
+              Next: Images & Tags <span class="arrow-right">→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Images & Tags -->
+        <div class="step-content" *ngIf="currentStep === 2">
+          <div class="step-grid">
+            <!-- Left Section -->
+            <div class="form-card">
+              <div class="card-section-header">
+                <h3 class="section-title">Images & Tags</h3>
+                <p class="section-sub">Add product images, tags and additional details to make your deal more attractive.</p>
+              </div>
+
+              <!-- Upload Images Gallery -->
+              <div class="form-section">
+                <label class="form-label">Upload Images</label>
+                <div class="images-gallery">
+                  <div
+                    class="image-thumb-card"
+                    *ngFor="let img of images; let i = index"
+                    [class.is-main]="i === mainImageIndex"
+                    (click)="setMainImage(i)"
+                  >
+                    <img [src]="img" alt="Deal image" />
+                    <span class="main-badge" *ngIf="i === mainImageIndex">Main Image</span>
+                    <button type="button" class="thumb-delete-btn" (click)="removeImage(i); $event.stopPropagation()">×</button>
+                  </div>
+
+                  <div class="add-image-box" (click)="fileInputStep2.click()">
+                    <input type="file" #fileInputStep2 hidden (change)="onFileSelected($event)" accept="image/*" />
+                    <span class="plus-icon">+</span>
+                    <span class="add-txt">Add Image</span>
+                  </div>
+                </div>
+                <p class="field-hint">Recommended size: 800 x 800 px | Max 5MB | JPG, PNG, WebP</p>
+              </div>
+
+              <!-- Tags Section -->
+              <div class="form-section">
+                <label class="form-label">Tags</label>
+                <div class="tags-wrapper">
+                  <div class="tag-chip" *ngFor="let tag of tags; let i = index">
+                    <span>{{tag}}</span>
+                    <button type="button" class="tag-remove" (click)="removeTag(i)">×</button>
+                  </div>
+                  <div class="add-tag-inline">
+                    <input
+                      type="text"
+                      class="tag-input"
+                      placeholder="Add Tag"
+                      [(ngModel)]="newTagInput"
+                      (keyup.enter)="addTag()"
+                    />
+                    <button type="button" class="btn-add-tag" (click)="addTag()">+ Add Tag</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Deal Highlights Section -->
+              <div class="form-section">
+                <label class="form-label">Deal Highlights <span class="optional">(Optional)</span></label>
+                <div class="highlights-list">
+                  <div class="highlight-item" *ngFor="let h of highlights; let i = index">
+                    <span class="drag-handle">☰</span>
+                    <span class="highlight-text">{{h}}</span>
+                    <button type="button" class="btn-icon-remove" (click)="removeHighlight(i)">🗑️</button>
+                  </div>
+                </div>
+
+                <div class="add-highlight-box">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Premium quality fabric"
+                    [(ngModel)]="newHighlightInput"
+                    (keyup.enter)="addHighlight()"
+                  />
+                  <button type="button" class="btn btn-secondary-outline" (click)="addHighlight()">+ Add Highlight</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Info Summary Card -->
+            <div class="side-card info-summary-card">
+              <!-- Brand Info -->
+              <div class="info-block">
+                <div class="info-header">
+                  <span class="info-title">Brand Information</span>
+                </div>
+                <div class="info-content-row">
+                  <div class="info-brand-icon">
+                    <img src="nike_shoes.png" alt="Nike" class="mini-logo" />
+                  </div>
+                  <div class="info-text">
+                    <h5 class="info-name">{{brand}}</h5>
+                    <span class="info-sub">Sports & Fitness</span>
+                  </div>
+                  <button type="button" class="btn-change" (click)="goToStep(1)">Change Brand</button>
+                </div>
+              </div>
+
+              <!-- Category Info -->
+              <div class="info-block">
+                <div class="info-header">
+                  <span class="info-title">Category</span>
+                </div>
+                <div class="info-content-row">
+                  <div class="info-cat-icon">🛍️</div>
+                  <div class="info-text">
+                    <h5 class="info-name">{{category}}</h5>
+                  </div>
+                  <button type="button" class="btn-change" (click)="goToStep(1)">Change Category</button>
+                </div>
+              </div>
+
+              <!-- Source Info -->
+              <div class="info-block">
+                <div class="info-header">
+                  <span class="info-title">Source</span>
+                </div>
+                <div class="info-content-row">
+                  <div class="info-source-icon">a</div>
+                  <div class="info-text">
+                    <h5 class="info-name">{{dealSource}}</h5>
+                  </div>
+                  <button type="button" class="btn-change" (click)="goToStep(1)">Change Source</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="bottom-action-bar">
+            <button type="button" class="btn btn-outline" (click)="prevStep()">← Back</button>
+            <button type="button" class="btn btn-primary" (click)="nextStep()">
+              Next: Pricing & Schedule <span class="arrow-right">→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Pricing & Schedule -->
+        <div class="step-content" *ngIf="currentStep === 3">
+          <div class="step-grid">
+            <!-- Left Form Card -->
+            <div class="form-card">
+              <div class="card-section-header">
+                <h3 class="section-title">Pricing Details</h3>
+                <p class="section-sub">Set the original price, discounted price and other pricing details.</p>
+              </div>
+
+              <div class="form-grid">
+                <!-- Original Price -->
+                <div class="form-group">
+                  <label class="form-label">Original Price <span class="required">*</span></label>
+                  <div class="input-currency-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" class="form-control price-input" [(ngModel)]="originalPrice" />
+                  </div>
+                </div>
+
+                <!-- Discounted Price -->
+                <div class="form-group">
+                  <label class="form-label">Discounted Price <span class="required">*</span></label>
+                  <div class="input-currency-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" class="form-control price-input" [(ngModel)]="discountedPrice" />
+                  </div>
+                </div>
+
+                <!-- Discount Percentage -->
+                <div class="form-group">
+                  <label class="form-label">Discount Percentage</label>
+                  <input type="text" class="form-control disabled-input" [value]="discountPercentage + '%'" readonly />
+                  <span class="field-hint">(Auto calculated)</span>
+                </div>
+
+                <!-- Coupon Code -->
+                <div class="form-group">
+                  <label class="form-label">Coupon Code <span class="optional">(Optional)</span></label>
+                  <input type="text" class="form-control" placeholder="e.g. FLASH50" [(ngModel)]="couponCode" />
+                </div>
+
+                <!-- Max Discounted Quantity -->
+                <div class="form-group">
+                  <label class="form-label">Max Discounted Quantity</label>
+                  <input type="number" class="form-control" placeholder="100" [(ngModel)]="maxQuantity" />
+                  <span class="field-hint">(Leave empty for no limit)</span>
+                </div>
+
+                <!-- Stock Status -->
+                <div class="form-group">
+                  <label class="form-label">Stock Status</label>
+                  <select class="form-control" [(ngModel)]="stockStatus">
+                    <option value="In Stock">In Stock</option>
+                    <option value="Limited Stock">Limited Stock</option>
+                    <option value="Out of Stock">Out of Stock</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Schedule Section -->
+              <div class="card-section-header mt-6">
+                <h3 class="section-title">Schedule</h3>
+                <p class="section-sub">Set the deal start and end date and time.</p>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Start Date & Time <span class="required">*</span></label>
+                  <input type="datetime-local" class="form-control" [(ngModel)]="startDate" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">End Date & Time <span class="required">*</span></label>
+                  <input type="datetime-local" class="form-control" [(ngModel)]="endDate" />
+                </div>
+              </div>
+
+              <!-- Deal Visibility -->
+              <div class="form-section mt-6">
+                <label class="form-label">Deal Visibility</label>
+                <div class="radio-group-vertical">
+                  <label class="radio-option">
+                    <input type="radio" name="visibility" value="Publish Immediately" [(ngModel)]="visibility" />
+                    <span class="radio-custom"></span>
+                    Publish Immediately
+                  </label>
+
+                  <label class="radio-option">
+                    <input type="radio" name="visibility" value="Schedule for Later" [(ngModel)]="visibility" />
+                    <span class="radio-custom"></span>
+                    Schedule for Later
+                  </label>
+
+                  <label class="radio-option">
+                    <input type="radio" name="visibility" value="Keep as Draft" [(ngModel)]="visibility" />
+                    <span class="radio-custom"></span>
+                    Keep as Draft
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Live Preview Card -->
+            <div class="side-card preview-side-card">
+              <div class="preview-header">• Deal Preview</div>
+
+              <div class="deal-preview-card">
+                <div class="preview-img-container">
+                  <span class="preview-discount-badge">{{discountPercentage}}% OFF</span>
+                  <img [src]="mainImage" alt="Deal Preview" class="preview-img" />
+                </div>
+
+                <div class="preview-details">
+                  <h4 class="preview-title">{{dealTitle}}</h4>
+                  <p class="preview-brand">{{brand}}</p>
+
+                  <div class="preview-rating">
+                    <span class="star-rating">★★★★☆</span>
+                    <span class="rating-num">4.5 (230)</span>
+                  </div>
+
+                  <div class="preview-price-row">
+                    <span class="preview-price">₹{{discountedPrice | number}}</span>
+                    <span class="preview-original">₹{{originalPrice | number}}</span>
+                    <span class="preview-badge-green">{{discountPercentage}}% OFF</span>
+                  </div>
+
+                  <div class="preview-timer">
+                    <span class="clock-icon">⏱️</span> Ends in 5 days
+                  </div>
+
+                  <button type="button" class="preview-btn">FLASH DEAL</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="bottom-action-bar">
+            <button type="button" class="btn btn-outline" (click)="prevStep()">← Back</button>
+            <button type="button" class="btn btn-primary" (click)="nextStep()">
+              Next: Review <span class="arrow-right">→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Review & Publish -->
+        <div class="step-content" *ngIf="currentStep === 4">
+          <div class="form-card review-card">
+            <div class="card-section-header">
+              <h3 class="section-title">Review & Publish</h3>
+              <p class="section-sub">Please review all the details before publishing the deal.</p>
+            </div>
+
+            <!-- Top Banner Summary -->
+            <div class="review-top-banner">
+              <div class="review-thumb">
+                <img [src]="mainImage" alt="Main Deal Image" />
+              </div>
+
+              <div class="review-main-info">
+                <h3 class="review-deal-title">{{dealTitle}}</h3>
+                <h4 class="review-deal-sub">{{shortDescription}}</h4>
+
+                <div class="review-meta-line">
+                  <span>Brand: <strong>{{brand}}</strong></span>
+                  <span class="dot">•</span>
+                  <span>Category: <strong>{{category}}</strong></span>
+                  <span class="dot">•</span>
+                  <span>Source: <strong>{{dealSource}}</strong></span>
+                </div>
+
+                <div class="review-price-bar">
+                  <span class="review-price">₹{{discountedPrice | number}}</span>
+                  <span class="review-original">₹{{originalPrice | number}}</span>
+                  <span class="review-discount-pill">{{discountPercentage}}% OFF</span>
+                </div>
+
+                <div class="review-schedule-info">
+                  <span class="badge-flash">{{dealType}}</span>
+                  <span class="schedule-text">Ends on 30 Apr 2025, 11:59 PM</span>
+                </div>
+
+                <div class="review-tags-row">
+                  <span class="review-tag" *ngFor="let t of tags">{{t}}</span>
+                </div>
+              </div>
+
+              <!-- Side Campaign Box -->
+              <div class="campaign-summary-box">
+                <h4 class="box-title">Campaign / Source</h4>
+                <div class="campaign-row">
+                  <span class="key">Brand</span>
+                  <span class="val">{{brand}}</span>
+                </div>
+                <div class="campaign-row">
+                  <span class="key">Category</span>
+                  <span class="val">{{category}}</span>
+                </div>
+                <div class="campaign-row">
+                  <span class="key">Source</span>
+                  <span class="val">{{dealSource}}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Grid -->
+            <div class="review-details-grid">
+              <!-- Description Column -->
+              <div class="review-section">
+                <h4 class="review-section-heading">Description</h4>
+                <p class="review-body-text">{{fullDescription}}</p>
+
+                <h4 class="review-section-heading mt-4">Highlights</h4>
+                <ul class="review-bullets">
+                  <li *ngFor="let h of highlights">• {{h}}</li>
+                </ul>
+              </div>
+
+              <!-- Pricing & Schedule Table -->
+              <div class="review-section">
+                <h4 class="review-section-heading">Pricing & Schedule</h4>
+                <div class="table-key-value">
+                  <div class="kv-row">
+                    <span class="k">Original Price</span>
+                    <span class="v">₹{{originalPrice | number}}</span>
+                  </div>
+                  <div class="kv-row">
+                    <span class="k">Discounted Price</span>
+                    <span class="v font-semibold">₹{{discountedPrice | number}}</span>
+                  </div>
+                  <div class="kv-row">
+                    <span class="k">Discount</span>
+                    <span class="v text-pink font-semibold">{{discountPercentage}}%</span>
+                  </div>
+                  <div class="kv-row">
+                    <span class="k">Start Date & Time</span>
+                    <span class="v">25 Apr 2025, 10:00 AM</span>
+                  </div>
+                  <div class="kv-row">
+                    <span class="k">End Date & Time</span>
+                    <span class="v">30 Apr 2025, 11:59 PM</span>
+                  </div>
+                  <div class="kv-row">
+                    <span class="k">Stock Status</span>
+                    <span class="v text-green font-semibold">{{stockStatus}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Images Gallery Section -->
+            <div class="review-gallery-section">
+              <div class="gallery-header">
+                <h4 class="review-section-heading">Images ({{images.length}})</h4>
+                <span class="btn-link">View All</span>
+              </div>
+              <div class="gallery-row">
+                <div class="gallery-thumb" *ngFor="let img of images">
+                  <img [src]="img" alt="Gallery image" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="bottom-action-bar">
+            <button type="button" class="btn btn-outline" (click)="prevStep()">← Back</button>
+            <button type="button" class="btn btn-primary btn-publish" (click)="publishDeal()">
+              🚀 Publish Deal
+            </button>
+          </div>
+        </div>
+      </div>
+
+<!-- Add Brand Modal -->
+<div class="modal-backdrop" *ngIf="showAddBrandModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Add New Brand</h3>
+      <button class="modal-close" (click)="closeAddBrand()">×</button>
+    </div>
+    <div class="modal-body">
+      <label class="form-label">Brand Name</label>
+      <input type="text" class="form-control" placeholder="e.g. Under Armour" [(ngModel)]="newBrandName" />
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="closeAddBrand()">Cancel</button>
+      <button class="btn btn-primary" (click)="saveBrand()">Save Brand</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Category Modal -->
+<div class="modal-backdrop" *ngIf="showAddCategoryModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Add New Category</h3>
+      <button class="modal-close" (click)="closeAddCategory()">×</button>
+    </div>
+    <div class="modal-body">
+      <label class="form-label">Category Name</label>
+      <input type="text" class="form-control" placeholder="e.g. Wearable Tech" [(ngModel)]="newCategoryName" />
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="closeAddCategory()">Cancel</button>
+      <button class="btn btn-primary" (click)="saveCategory()">Save Category</button>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-backdrop" *ngIf="showSuccessModal">
+  <div class="modal-card success-modal">
+    <div class="success-icon-circle">🎉</div>
+    <h2 class="modal-success-title">Deal Published Successfully!</h2>
+    <p class="modal-success-sub">
+      "{{dealTitle}}" is now live on FlashDeals platform and visible to customers.
+    </p>
+    <div class="modal-footer justify-center">
+      <button class="btn btn-outline" (click)="resetForm()">Create Another Deal</button>
+      <button class="btn btn-primary" routerLink="/">Go to Dashboard</button>
+    </div>
+  </div>
+</div>

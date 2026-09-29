@@ -95,6 +95,16 @@
   background-color: var(--primary-light);
 }
 
+.top-nav-link.admin-nav-btn {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border: 1px solid #ffd0db;
+}
+
+.top-nav-link.admin-nav-btn .nav-link-icon {
+  color: var(--primary-color);
+}
+
 .top-nav-link .nav-link-icon {
   font-size: 19px;
   color: #64748b;

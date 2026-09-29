@@ -45,10 +45,19 @@
         <span class="material-symbols-outlined">manage_accounts</span>
         <span class="nav-label">Profile & Settings</span>
       </a>
-      <a href="#" class="nav-item" title="Logout">
+
+      <!-- Show Logout if Logged In -->
+      <a *ngIf="authService.isLoggedIn()" (click)="logoutUser()" class="nav-item cursor-pointer" title="Logout">
         <span class="material-symbols-outlined">logout</span>
         <span class="nav-label">Logout</span>
       </a>
+
+      <!-- Show Login if Not Logged In -->
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/admin/login" class="nav-item" title="Login">
+        <span class="material-symbols-outlined">login</span>
+        <span class="nav-label">Login</span>
+      </a>
+
       <button class="nav-item collapse-btn" (click)="sidebarService.toggle()" [attr.title]="sidebarService.isCollapsed() ? 'Expand Sidebar' : 'Collapse Sidebar'">
         <span class="material-symbols-outlined">{{ sidebarService.isCollapsed() ? 'chevron_right' : 'chevron_left' }}</span>
         <span class="nav-label">Collapse</span>

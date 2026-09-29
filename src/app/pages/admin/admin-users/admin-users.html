@@ -1,0 +1,30 @@
+<div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Users Management</h1>
+            <p class="page-subtitle">View and manage platform users and roles</p>
+          </div>
+        </div>
+
+        <div class="card table-card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Joined Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let u of users">
+                <td class="font-semibold">{{u.name}}</td>
+                <td>{{u.email}}</td>
+                <td><span class="role-badge">{{u.role}}</span></td>
+                <td><span class="badge" [class.badge-success]="u.status === 'Active'" [class.badge-gray]="u.status !== 'Active'">{{u.status}}</span></td>
+                <td>{{u.joined}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
