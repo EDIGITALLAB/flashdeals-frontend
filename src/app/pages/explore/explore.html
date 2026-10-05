@@ -21,7 +21,7 @@
       <!-- Products List (List View) -->
       <div class="products-list-vertical">
         @for (product of products; track product.id) {
-        <div class="product-item-card" routerLink="/deal-details">
+        <div class="product-item-card" [routerLink]="['/deal-details']" [queryParams]="{ id: product.id }">
           <!-- Product Image Left -->
           <div class="product-image-section">
             <img [src]="product.image" [alt]="product.name" class="prod-img">
@@ -66,7 +66,7 @@
       <!-- Products Grid (Grid View) -->
       <div class="products-grid-horizontal">
         @for (product of products; track product.id) {
-        <div class="product-grid-card" routerLink="/deal-details">
+        <div class="product-grid-card" [routerLink]="['/deal-details']" [queryParams]="{ id: product.id }">
           <div class="grid-image-container">
             <img [src]="product.image" [alt]="product.name" class="grid-img">
             <div class="grid-rating-badge">

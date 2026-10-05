@@ -9,6 +9,8 @@ import { EarlyAccess } from './pages/early-access/early-access';
 import { Notifications } from './pages/notifications/notifications';
 import { AdminAddDeal } from './pages/admin/admin-add-deal/admin-add-deal';
 import { AdminLogin } from './pages/admin/admin-login/admin-login';
+import { AdminRegister } from './pages/admin/admin-register/admin-register';
+import { SellerRegister } from './pages/admin/seller-register/seller-register';
 import { AdminDashboard } from './pages/admin/admin-dashboard/admin-dashboard';
 import { AdminBrands } from './pages/admin/admin-brands/admin-brands';
 import { AdminCategories } from './pages/admin/admin-categories/admin-categories';
@@ -34,6 +36,10 @@ export const routes: Routes = [
 
   // Admin Portal Routes
   { path: 'admin/login', component: AdminLogin },
+  { path: 'admin/register', component: AdminRegister },
+  { path: 'register', component: AdminRegister },
+  { path: 'admin/seller-register', component: SellerRegister },
+  { path: 'seller/register', component: SellerRegister },
   {
     path: 'admin',
     component: AdminLayout,

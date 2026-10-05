@@ -4,29 +4,26 @@
 
   <div class="details-page-container">
     <!-- Breadcrumbs -->
-    <app-breadcrumb />
+    <app-breadcrumb [productName]="currentProduct.name" [category]="'Footwear'" />
 
-    <!-- Main Product Section (2-Column Grid Layout) -->
+    <!-- Main Product & Offline Store Section (2-Column Grid Layout) -->
     <div class="product-main-grid">
 
-      <!-- LEFT: Image Gallery with 360/3D Tools -->
+      <!-- LEFT: Image Gallery with 3D Tools -->
       <div class="product-gallery-container">
         <div class="gallery-wrapper">
           <!-- Thumbnails Strip -->
           <div class="thumbnails-strip">
-            @for (img of images; track $index) {
+            @for (img of currentProduct.images; track $index) {
               <button class="thumb-btn" [class.active]="currentImgIndex === $index" (click)="selectImg($index)">
                 <img [src]="img" [alt]="'Product thumbnail ' + ($index + 1)">
               </button>
             }
-            <button class="thumb-btn thumb-more-btn" (click)="nextImg()">
-              <span>+3</span>
-            </button>
           </div>
 
           <!-- Main Display Card with Controls & Overlay Badges -->
           <div class="main-image-viewport">
-            <span class="discount-overlay-badge">55% OFF</span>
+            <span class="discount-overlay-badge">{{ currentProduct.discount }}% OFF IN-STORE</span>
             
             <div class="top-overlay-tools">
               <button class="tool-circle-btn" [class.active]="isWishlisted" (click)="toggleWishlist()" title="Wishlist">
@@ -46,7 +43,7 @@
             </button>
 
             <!-- Main Product Image -->
-            <img [src]="selectedImage" alt="Nike Revolution 6 Men's Running Shoes" class="main-shoe-image">
+            <img [src]="selectedImage" [alt]="currentProduct.name" class="main-shoe-image">
           </div>
         </div>
 
@@ -66,105 +63,147 @@
           </button>
           <button class="interactive-btn">
             <span class="material-symbols-outlined tool-icon">share</span>
-            <span>Share</span>
+            <span>Share Deal</span>
           </button>
         </div>
 
-        <!-- Brand Tech & Warranty Highlights Card -->
+        <!-- Offline Store Verification Highlights Card -->
         <div class="tech-highlights-card">
           <div class="tech-card-header">
-            <span class="material-symbols-outlined tech-header-icon">auto_awesome</span>
-            <span class="tech-card-title">Nike Innovation & Warranty</span>
+            <span class="material-symbols-outlined tech-header-icon">storefront</span>
+            <span class="tech-card-title">Verified Offline Partner Store</span>
           </div>
           <div class="tech-pills-row">
             <div class="tech-pill">
-              <span class="material-symbols-outlined pill-icon">workspace_premium</span>
+              <span class="material-symbols-outlined pill-icon">verified</span>
               <div class="pill-text">
-                <strong>6 Months Warranty</strong>
-                <span>Official Brand Cover</span>
+                <strong>100% Genuine Product</strong>
+                <span>Official {{ currentProduct.brand }}</span>
               </div>
             </div>
             <div class="tech-pill">
-              <span class="material-symbols-outlined pill-icon">credit_card</span>
+              <span class="material-symbols-outlined pill-icon">pin_drop</span>
               <div class="pill-text">
-                <strong>No Cost EMI</strong>
-                <span>Starts @ ₹175/mo</span>
+                <strong>{{ currentProduct.storeDistance }}</strong>
+                <span>{{ currentProduct.storeCity }}</span>
               </div>
             </div>
             <div class="tech-pill">
-              <span class="material-symbols-outlined pill-icon">eco</span>
+              <span class="material-symbols-outlined pill-icon">schedule</span>
               <div class="pill-text">
-                <strong>Sustainable Materials</strong>
-                <span>20%+ Recycled Weight</span>
+                <strong>Open Today</strong>
+                <span>{{ currentProduct.storeTimings }}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- CENTER: Product Info & Variant Selection -->
+      <!-- CENTER: Product Info & In-Store Availability Details -->
       <div class="product-center-details">
         <!-- Brand Header -->
         <div class="brand-header-row">
           <div class="brand-logo-name">
-            <svg class="nike-swoosh-icon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+            <svg class="nike-swoosh-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
               <path d="M21.707 11.293l-8-8A.997.997 0 0013 3H4a1 1 0 00-1 1v9a1 1 0 00.293.707l8 8a.997.997 0 001.414 0l9-9a.997.997 0 000-1.414zM12.414 20L5 12.586V5h7.586L20 12.414 12.414 20z"/>
             </svg>
             <div class="brand-info-text">
-              <h4 class="brand-title-name">Nike</h4>
-              <a href="#" class="visit-store-link">Visit Store &gt;</a>
+              <h4 class="brand-title-name">{{ currentProduct.brand }}</h4>
+              <a (click)="openDirections()" class="visit-store-link">Get Store Directions &gt;</a>
             </div>
           </div>
         </div>
 
         <!-- Title & Subtitle -->
-        <h1 class="product-title-large">Nike Revolution 6</h1>
-        <p class="product-subtitle-text">Men's Running Shoes</p>
+        <h1 class="product-title-large">{{ currentProduct.name }}</h1>
+        <p class="product-subtitle-text">{{ currentProduct.category }} (In-Store Exclusive Deal)</p>
 
         <!-- Ratings & Popularity Badge -->
         <div class="ratings-sales-row">
           <div class="rating-badge-green">
             <span class="star-icon">★</span>
-            <span class="rating-val">4.4</span>
+            <span class="rating-val">{{ currentProduct.storeRating }}</span>
           </div>
-          <span class="ratings-count-link">(2.3K ratings)</span>
+          <span class="ratings-count-link">({{ currentProduct.storeReviewsCount }} Store Ratings)</span>
           <span class="vertical-pipe">|</span>
-          <span class="bought-count-badge">🔥 500+ bought this month</span>
+          <span class="bought-count-badge">🔥 100+ In-Store Coupons Claimed This Week</span>
         </div>
 
         <!-- Pricing & Savings Section -->
         <div class="pricing-card-section">
           <div class="price-figures-row">
-            <span class="price-current-large">₹2,099</span>
-            <span class="price-original-striked">₹4,695</span>
-            <span class="discount-green-badge">(55% OFF)</span>
-            <span class="save-amount-pill">Save ₹2,596</span>
+            <span class="price-current-large">₹{{ currentProduct.price | number:'1.0-0' }}</span>
+            <span class="price-original-striked">₹{{ currentProduct.originalPrice | number:'1.0-0' }}</span>
+            <span class="discount-green-badge">({{ currentProduct.discount }}% OFF)</span>
+            <span class="save-amount-pill">Save ₹{{ (currentProduct.originalPrice - currentProduct.price) | number:'1.0-0' }}</span>
           </div>
-          <p class="tax-inclusive-text">Inclusive of all taxes</p>
+          <p class="tax-inclusive-text">Pay directly at store counter upon redemption</p>
 
           <div class="promo-deal-badges-row">
             <span class="promo-badge lowest-price-badge">
-              <span class="material-symbols-outlined icon-tiny">trending_down</span> Lowest price in 30 days
+              <span class="material-symbols-outlined icon-tiny">sell</span> In-Store Coupon Discount
             </span>
             <span class="promo-badge limited-deal-badge">
-              <span class="material-symbols-outlined icon-tiny">bolt</span> Limited Time Deal
+              <span class="material-symbols-outlined icon-tiny">bolt</span> Flash Deal - Limited Stock
             </span>
+          </div>
+        </div>
+
+        <!-- REAL-TIME STORE STOCK DETAILS SECTION -->
+        <div class="store-stock-card">
+          <div class="stock-header-row">
+            <div class="stock-title-badge" [class.urgent-badge]="currentProduct.totalStockLeft <= 5">
+              <span class="pulse-fire">🔥</span>
+              <span>{{ currentProduct.stockStatusText }}</span>
+            </div>
+            <span class="units-count-text">{{ currentProduct.totalStockLeft }} / {{ currentProduct.totalInitialStock }} Units Available</span>
+          </div>
+
+          <!-- Stock Progress Bar -->
+          <div class="stock-progress-track">
+            <div class="stock-progress-fill" [style.width.%]="stockPercentage" [class.fill-urgent]="currentProduct.totalStockLeft <= 5"></div>
+          </div>
+
+          <!-- Size Wise Stock Breakdown -->
+          <div class="size-stock-breakdown">
+            <span class="breakdown-label">Size Stock Availability:</span>
+            <div class="size-stock-pills">
+              @for (size of currentProduct.availableSizes; track size) {
+                <div class="size-stock-item" [class.out-of-stock]="currentProduct.sizeStockMap[size] === 0">
+                  <span class="size-num">UK {{ size }}</span>
+                  <span class="size-qty" *ngIf="currentProduct.sizeStockMap[size] > 0">{{ currentProduct.sizeStockMap[size] }} left</span>
+                  <span class="size-qty out" *ngIf="currentProduct.sizeStockMap[size] === 0">Out of Stock</span>
+                </div>
+              }
+            </div>
           </div>
         </div>
 
         <!-- Size Selection -->
         <div class="variant-selection-group">
           <div class="variant-header-row">
-            <label class="variant-label">Select Size (UK)</label>
-            <a href="#" class="size-guide-link">Size Guide</a>
+            <label class="variant-label">Select Size in Store (UK)</label>
+            <a href="#" class="size-guide-link">Size Chart</a>
           </div>
           <div class="size-options-flex">
-            @for (size of availableSizes; track size) {
-              <button class="size-box-btn" [class.selected]="selectedSize === size" (click)="selectSize(size)">
+            @for (size of currentProduct.availableSizes; track size) {
+              <button 
+                class="size-box-btn" 
+                [class.selected]="selectedSize === size" 
+                [class.disabled-size]="currentProduct.sizeStockMap[size] === 0"
+                (click)="selectSize(size)"
+              >
                 {{ size }}
+                <span class="mini-stock-dot" *ngIf="currentProduct.sizeStockMap[size] > 0"></span>
               </button>
             }
           </div>
+          <p class="selected-size-stock-msg" *ngIf="currentSizeStock > 0">
+            ✓ Size UK {{ selectedSize }} is <strong>In Stock</strong> ({{ currentSizeStock }} units available at store)
+          </p>
+          <p class="selected-size-stock-msg out-msg" *ngIf="currentSizeStock === 0">
+            ⚠️ Size UK {{ selectedSize }} is currently <strong>Out of Stock</strong> at this store.
+          </p>
         </div>
 
         <!-- Color Selection -->
@@ -179,24 +218,23 @@
           </div>
         </div>
 
-        <!-- Stock Status & Delivery Address Bar -->
-        <div class="stock-delivery-bar">
+        <!-- Stock Status & Store Address Bar -->
+        <div class="stock-delivery-bar store-location-bar">
           <div class="stock-dot-status">
             <span class="green-dot"></span>
-            <span class="stock-text">In Stock</span>
+            <span class="stock-text">In Stock ({{ currentProduct.totalStockLeft }} Left)</span>
           </div>
-          <span class="delivery-eta-text">{{ deliveryDate }}</span>
-          <button class="change-location-btn" (click)="checkPincode()">Change</button>
+          <span class="delivery-eta-text">📍 {{ currentProduct.storeName }} ({{ currentProduct.storeDistance }})</span>
         </div>
       </div>
 
-      <!-- RIGHT: Buy Box, Countdown Timer & Trust Badges -->
-      <div class="product-buy-box">
+      <!-- RIGHT: In-Store Redemption Box, Timer & Merchant Contact -->
+      <div class="product-buy-box store-redemption-card">
         <!-- Deal Countdown Timer Card -->
         <div class="countdown-timer-box">
           <div class="timer-title-row">
             <span class="material-symbols-outlined timer-clock-icon">schedule</span>
-            <span class="timer-heading">Deal Ends In</span>
+            <span class="timer-heading">Flash Deal Expires In</span>
           </div>
           <div class="timer-digits-row">
             <div class="timer-unit">
@@ -216,50 +254,66 @@
           </div>
         </div>
 
-        <!-- Primary Call to Action Buttons -->
+        <!-- Urgent Stock Notice Box -->
+        <div class="urgent-stock-box">
+          <span class="urgent-icon">⚠️</span>
+          <span><strong>Only {{ currentProduct.totalStockLeft }} items left</strong> in store. Claim your coupon before stock runs out!</span>
+        </div>
+
+        <!-- Primary Call to Action Buttons for In-Store Redemption -->
         <div class="cta-buttons-stack">
-          <button class="btn-primary-cart" (click)="addToCart()">
-            <span class="material-symbols-outlined">shopping_cart</span>
-            <span>{{ addedToCart ? 'Added to Cart ✓' : 'Add to Cart' }}</span>
+          <button class="btn-claim-coupon" (click)="claimCoupon()">
+            <span class="material-symbols-outlined">confirmation_number</span>
+            <span>Claim In-Store Coupon</span>
           </button>
           
-          <button class="btn-secondary-buy">
-            <span class="material-symbols-outlined">bolt</span>
-            <span>Buy Now</span>
+          <button class="btn-store-directions" (click)="openDirections()">
+            <span class="material-symbols-outlined">near_me</span>
+            <span>Get Store Directions</span>
           </button>
         </div>
 
-        <!-- 4 USP Trust Assurance Items -->
+        <!-- Merchant Contact Actions (Call & WhatsApp) -->
+        <div class="merchant-contact-row">
+          <button class="btn-contact-store btn-call" (click)="callStore()">
+            <span class="material-symbols-outlined">call</span> Call Store
+          </button>
+          <button class="btn-contact-store btn-whatsapp" (click)="whatsappStore()">
+            <span class="material-symbols-outlined">chat</span> WhatsApp
+          </button>
+        </div>
+
+        <!-- In-Store Redemption Guide List -->
         <div class="usp-trust-list">
           <div class="usp-item">
-            <div class="usp-icon-circle"><span class="material-symbols-outlined">verified_user</span></div>
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">qr_code_2</span></div>
             <div class="usp-text-block">
-              <strong>100% Authentic</strong>
-              <span>Genuine products only</span>
+              <strong>Redeem In-Store</strong>
+              <span>Show coupon code at billing counter</span>
             </div>
           </div>
 
           <div class="usp-item">
-            <div class="usp-icon-circle"><span class="material-symbols-outlined">published_with_changes</span></div>
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">pin_drop</span></div>
             <div class="usp-text-block">
-              <strong>Easy Returns</strong>
-              <span>7 days return policy</span>
+              <strong>Nearby Store</strong>
+              <span>{{ currentProduct.storeAddress }}</span>
             </div>
           </div>
 
           <div class="usp-item">
-            <div class="usp-icon-circle"><span class="material-symbols-outlined">local_shipping</span></div>
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">inventory_2</span></div>
             <div class="usp-text-block">
-              <strong>Free Delivery</strong>
-              <span>Above ₹499</span>
+              <strong>Live Stock Tracked</strong>
+              <span>{{ currentProduct.totalStockLeft }} units remaining</span>
             </div>
           </div>
 
           <div class="usp-item">
-            <div class="usp-icon-circle"><span class="material-symbols-outlined">lock</span></div>
+            <div class="usp-icon-circle"><span class="material-symbols-outlined">payments</span></div>
             <div class="usp-text-block">
-              <strong>Secure Payment</strong>
-              <span>Razorpay / UPI / Cards</span>
+              <strong>Pay at Store</strong>
+              <span>No online payment required</span>
             </div>
           </div>
         </div>
@@ -267,7 +321,92 @@
 
     </div>
 
-    <!-- Feature Highlights Banner Row (4 Icon Badges) -->
+    <!-- DEDICATED OFFLINE STORE DETAILS & INTERACTIVE GOOGLE MAP CARD -->
+    <div class="offline-store-details-section">
+      <div class="store-section-header">
+        <div class="header-left">
+          <span class="material-symbols-outlined store-main-icon">storefront</span>
+          <div>
+            <h2 class="store-section-title">Offline Store & Redemption Center</h2>
+            <p class="store-section-subtitle">Visit this store in-person to inspect product & redeem your {{ currentProduct.discount }}% OFF discount coupon</p>
+          </div>
+        </div>
+        <span class="verified-store-tag">✓ Verified Store Partner</span>
+      </div>
+
+      <div class="store-details-grid">
+        <!-- Store Information Column -->
+        <div class="store-info-column">
+          <h3 class="store-display-name">{{ currentProduct.storeName }}</h3>
+
+          <div class="store-info-list">
+            <div class="info-row-item">
+              <span class="material-symbols-outlined info-icon">location_on</span>
+              <div>
+                <strong>Physical Store Address</strong>
+                <p>{{ currentProduct.storeAddress }}</p>
+              </div>
+            </div>
+
+            <div class="info-row-item">
+              <span class="material-symbols-outlined info-icon">schedule</span>
+              <div>
+                <strong>Store Timings & Open Hours</strong>
+                <p>{{ currentProduct.storeTimings }}</p>
+              </div>
+            </div>
+
+            <div class="info-row-item">
+              <span class="material-symbols-outlined info-icon">phone</span>
+              <div>
+                <strong>Store Contact & WhatsApp</strong>
+                <p>{{ currentProduct.storePhone }}</p>
+              </div>
+            </div>
+
+            <div class="info-row-item">
+              <span class="material-symbols-outlined info-icon">inventory</span>
+              <div>
+                <strong>Current Available Stock</strong>
+                <p>{{ currentProduct.totalStockLeft }} Units available in store right now</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Store Action Buttons -->
+          <div class="store-action-buttons">
+            <button class="btn-store-act btn-primary-act" (click)="openDirections()">
+              <span class="material-symbols-outlined">directions</span> Get Directions
+            </button>
+            <button class="btn-store-act btn-outline-act" (click)="callStore()">
+              <span class="material-symbols-outlined">call</span> Call Store
+            </button>
+            <button class="btn-store-act btn-whatsapp-act" (click)="whatsappStore()">
+              <span class="material-symbols-outlined">chat</span> WhatsApp Inquiry
+            </button>
+          </div>
+        </div>
+
+        <!-- Google Maps Embed Column -->
+        <div class="store-map-column">
+          <div class="map-container-box">
+            <iframe
+              *ngIf="mapEmbedUrl"
+              [src]="mapEmbedUrl"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="store-google-map"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Highlights Banner Row -->
     <div class="feature-highlights-row">
       <div class="feature-card">
         <span class="material-symbols-outlined feature-icon">skateboarding</span>
@@ -302,160 +441,117 @@
       </div>
     </div>
 
-    <!-- Tabs Navigation Bar (Overview, Specifications, Reviews, Questions, Similar) -->
+    <!-- Tabs Navigation Bar -->
     <div class="product-tabs-navigation">
-      <button class="tab-btn" [class.active]="activeTab === 'overview'" (click)="activeTab = 'overview'">Overview</button>
-      <button class="tab-btn" [class.active]="activeTab === 'specifications'" (click)="activeTab = 'specifications'">Specifications</button>
-      <button class="tab-btn" [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reviews (2.3K)</button>
-      <button class="tab-btn" [class.active]="activeTab === 'questions'" (click)="activeTab = 'questions'">Questions (24)</button>
-      <button class="tab-btn" [class.active]="activeTab === 'similar'" (click)="activeTab = 'similar'">Similar Products</button>
+      <button class="tab-btn" [class.active]="activeTab === 'overview'" (click)="activeTab = 'overview'">Deal Overview</button>
+      <button class="tab-btn" [class.active]="activeTab === 'specifications'" (click)="activeTab = 'specifications'">Product Specifications</button>
+      <button class="tab-btn" [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Store Reviews ({{ currentProduct.storeReviewsCount }})</button>
+      <button class="tab-btn" [class.active]="activeTab === 'similar'" (click)="activeTab = 'similar'">Nearby Deals</button>
     </div>
 
     <!-- Tab Content & Bottom Section Grid -->
     <div class="tab-content-bottom-grid">
-      
       <!-- Left Column: About & Reviews -->
       <div class="content-left-block">
-        <!-- About this Product -->
         <div class="details-section-card">
-          <h3 class="section-card-title">About this Product</h3>
+          <h3 class="section-card-title">About this In-Store Deal</h3>
           <p class="product-description-paragraph">
-            The Nike Revolution 6 offers lightweight comfort and reliable support for everyday runs and all-day wear. Featuring breathable mesh, a soft foam midsole, and a durable outsole, it's designed to keep you moving in style.
+            {{ currentProduct.name }} offers lightweight comfort and reliable support for everyday activities. Claim this exclusive {{ currentProduct.discount }}% OFF coupon on FlashDeals and redeem it directly at {{ currentProduct.storeName }}.
           </p>
 
           <ul class="feature-bullets-green">
-            <li><span class="material-symbols-outlined check-icon">check_circle</span> Lightweight textile for breathable comfort</li>
-            <li><span class="material-symbols-outlined check-icon">check_circle</span> Soft foam midsole for cushioning</li>
-            <li><span class="material-symbols-outlined check-icon">check_circle</span> Durable outsole for traction and durability</li>
-            <li><span class="material-symbols-outlined check-icon">check_circle</span> Ideal for running, gym &amp; daily wear</li>
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> {{ currentProduct.discount }}% Flat Discount valid on in-store purchases</li>
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> Show coupon code {{ currentProduct.couponCode }} at billing counter</li>
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> Only {{ currentProduct.totalStockLeft }} units left in stock at store</li>
+            <li><span class="material-symbols-outlined check-icon">check_circle</span> Try &amp; inspect product in-person before purchasing</li>
           </ul>
-
-          <button class="show-more-link">Show More ∨</button>
-        </div>
-
-        <!-- Customer Reviews Summary Block -->
-        <div class="details-section-card">
-          <h3 class="section-card-title">Customer Reviews</h3>
-          <div class="reviews-summary-flex">
-            <div class="rating-big-score-box">
-              <span class="score-num">4.4</span>
-              <span class="score-sub">out of 5</span>
-              <div class="stars-row-gold">★★★★★</div>
-              <span class="based-count">Based on 2,347 reviews</span>
-            </div>
-
-            <div class="rating-breakdown-bars">
-              <div class="rating-bar-line"><span>5 ★</span><div class="bar-track"><div class="bar-fill" style="width: 68%;"></div></div><span>68%</span></div>
-              <div class="rating-bar-line"><span>4 ★</span><div class="bar-track"><div class="bar-fill" style="width: 20%;"></div></div><span>20%</span></div>
-              <div class="rating-bar-line"><span>3 ★</span><div class="bar-track"><div class="bar-fill" style="width: 8%;"></div></div><span>8%</span></div>
-              <div class="rating-bar-line"><span>2 ★</span><div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div><span>2%</span></div>
-              <div class="rating-bar-line"><span>1 ★</span><div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div><span>2%</span></div>
-            </div>
-          </div>
-
-          <button class="btn-write-review">Write a Review</button>
         </div>
       </div>
 
-      <!-- Right Column: Similar Deals Cards -->
+      <!-- Right Column: Similar Local Deals Cards -->
       <div class="content-right-block">
         <div class="similar-deals-box">
           <div class="similar-header-line">
-            <h3 class="section-card-title">Similar Deals</h3>
+            <h3 class="section-card-title">Nearby Local Deals</h3>
             <a routerLink="/explore" class="view-all-pink">View All &gt;</a>
           </div>
 
           <div class="similar-cards-grid-2col">
             <!-- Similar Deal Item 1 -->
-            <div class="similar-card-item" routerLink="/deal-details">
-              <span class="similar-disc-badge">30% OFF</span>
+            <div class="similar-card-item" [routerLink]="['/deal-details']" [queryParams]="{ id: 2 }">
+              <span class="similar-disc-badge">50% OFF</span>
               <button class="similar-wish-btn" (click)="$event.stopPropagation()"><span class="material-symbols-outlined">favorite_border</span></button>
-              <img src="/nike_shoes.png" alt="Nike Downshifter 12" class="sim-card-img">
-              <h4 class="sim-card-title">Nike Downshifter 12</h4>
+              <img src="/adidas_shoe.png" alt="Adidas Ultraboost 22" class="sim-card-img">
+              <h4 class="sim-card-title">Adidas Ultraboost 22</h4>
               <div class="sim-card-price-row">
-                <span class="sim-card-price">₹2,299</span>
-                <span class="sim-card-strike">₹4,795</span>
+                <span class="sim-card-price">₹8,999</span>
+                <span class="sim-card-strike">₹17,999</span>
               </div>
-              <span class="sim-card-rating">★ 4.3 (1.2K)</span>
+              <span class="sim-card-rating">📍 Adidas Store (7 Left)</span>
             </div>
 
             <!-- Similar Deal Item 2 -->
-            <div class="similar-card-item" routerLink="/deal-details">
-              <span class="similar-disc-badge">42% OFF</span>
+            <div class="similar-card-item" [routerLink]="['/deal-details']" [queryParams]="{ id: 3 }">
+              <span class="similar-disc-badge">60% OFF</span>
               <button class="similar-wish-btn" (click)="$event.stopPropagation()"><span class="material-symbols-outlined">favorite_border</span></button>
-              <img src="/adidas_shoes.png" alt="Adidas Duramo SL" class="sim-card-img">
-              <h4 class="sim-card-title">Adidas Duramo SL</h4>
+              <img src="/puma_shoe.png" alt="Puma Smashic v2" class="sim-card-img">
+              <h4 class="sim-card-title">Puma Smashic v2</h4>
               <div class="sim-card-price-row">
-                <span class="sim-card-price">₹2,199</span>
-                <span class="sim-card-strike">₹4,499</span>
+                <span class="sim-card-price">₹1,599</span>
+                <span class="sim-card-strike">₹3,999</span>
               </div>
-              <span class="sim-card-rating">★ 4.5 (980)</span>
+              <span class="sim-card-rating">📍 Puma Store (2 Left)</span>
             </div>
           </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Frequently Bought Together Bar (Cross-Sell Combo Section) -->
-    <div class="frequently-bought-card">
-      <div class="frequently-header-block">
-        <h3 class="frequently-title">Frequently Bought Together</h3>
-        <p class="frequently-subtitle">Get more value with these items</p>
-      </div>
-
-      <div class="frequently-combo-flex">
-        <!-- Main Product Item -->
-        <div class="combo-product-item">
-          <img src="/nike_shoe.png" alt="Nike Revolution 6" class="combo-img">
-          <span class="combo-item-price">₹2,099</span>
-        </div>
-
-        <span class="plus-icon">+</span>
-
-        <!-- Socks Accessory Item -->
-        <div class="combo-product-item">
-          <img src="/puma_shoe.png" alt="Nike Cushion Socks" class="combo-img">
-          <span class="combo-item-price">₹499</span>
-        </div>
-
-        <span class="plus-icon">+</span>
-
-        <!-- Gym Bag Accessory Item -->
-        <div class="combo-product-item">
-          <img src="/adidas_shoe.png" alt="Nike Gym Bag" class="combo-img">
-          <span class="combo-item-price">₹799</span>
-        </div>
-
-        <!-- Total Calculation & CTA -->
-        <div class="combo-checkout-box">
-          <div class="combo-price-calc">
-            <div class="calc-row">
-              <span class="calc-label">Total:</span>
-              <span class="calc-total-bold">₹{{ getBoughtTogetherTotal() }}</span>
-              <span class="calc-strike">₹{{ getBoughtTogetherOriginalTotal() }}</span>
-            </div>
-            <span class="calc-save-tag">You save ₹798</span>
-          </div>
-
-          <button class="btn-add-all-cart" (click)="addToCart()">
-            Add All to Cart
-          </button>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- Sticky Mobile Buy Bar (Mobile Responsive Bottom Bar) -->
+  <!-- IN-STORE COUPON CLAIM MODAL (POPUP) -->
+  <div class="coupon-modal-backdrop" *ngIf="showCouponModal" (click)="closeCouponModal()">
+    <div class="coupon-modal-card" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeCouponModal()">✕</button>
+
+      <div class="modal-header-icon">🎟️</div>
+      <h3 class="modal-title">In-Store Deal Coupon Claimed!</h3>
+      <p class="modal-subtitle">Show this coupon code at billing counter to get <strong>{{ currentProduct.discount }}% OFF</strong></p>
+
+      <div class="coupon-code-box">
+        <span class="code-text">{{ currentProduct.couponCode }}</span>
+        <button class="btn-copy-code" (click)="copyCouponCode()">
+          {{ codeCopied ? 'Copied ✓' : 'Copy Code' }}
+        </button>
+      </div>
+
+      <div class="modal-store-info">
+        <div class="store-mini-badge">🏬 {{ currentProduct.storeName }}</div>
+        <p class="store-mini-addr">📍 {{ currentProduct.storeAddress }}</p>
+        <p class="store-mini-timing">🕒 Open Today: {{ currentProduct.storeTimings }}</p>
+        <p class="store-mini-stock">🔥 Remaining Stock: {{ currentProduct.totalStockLeft }} units</p>
+      </div>
+
+      <div class="modal-action-buttons">
+        <button class="btn-modal-action btn-dir" (click)="openDirections()">
+          📍 Get Directions
+        </button>
+        <button class="btn-modal-action btn-wa" (click)="whatsappStore()">
+          💬 WhatsApp Store
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Mobile Bottom Bar -->
   <div class="sticky-mobile-buy-bar">
     <div class="mobile-price-block">
-      <span class="mobile-price">₹2,099</span>
-      <span class="mobile-discount">55% OFF</span>
+      <span class="mobile-price">₹{{ currentProduct.price | number:'1.0-0' }}</span>
+      <span class="mobile-discount">{{ currentProduct.discount }}% OFF</span>
     </div>
     <div class="mobile-btn-group">
-      <button class="btn-mobile-cart" (click)="addToCart()">Add to Cart</button>
-      <button class="btn-mobile-buy">Buy Now</button>
+      <button class="btn-mobile-cart" (click)="claimCoupon()">🎟️ Claim Coupon</button>
+      <button class="btn-mobile-buy" (click)="openDirections()">📍 Directions</button>
     </div>
   </div>
 </div>
