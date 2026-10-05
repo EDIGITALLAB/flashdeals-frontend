@@ -1,0 +1,469 @@
+<div class="seller-register-page">
+  <!-- Left Graphic Banner (38% Width) -->
+  <div class="seller-banner">
+    <div class="banner-top">
+      <a routerLink="/" class="brand-logo">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-text">Flash<span class="brand-highlight">Deals</span> <span class="seller-badge">Store Partner</span></span>
+      </a>
+    </div>
+
+    <div class="banner-content">
+      <h1 class="banner-heading">Drive Local Footfalls To Your Store</h1>
+      <p class="banner-subheading">Publish your store deals, flash discounts & exclusive coupons to attract thousands of nearby buyers directly to your shop.</p>
+
+      <div class="stats-cards">
+        <div class="stat-card">
+          <span class="stat-num">10,000+</span>
+          <span class="stat-label">Local Stores</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Free Deal Listing</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">Direct</span>
+          <span class="stat-label">Customer Visits</span>
+        </div>
+      </div>
+
+      <div class="seller-features">
+        <div class="feature-item">
+          <span class="feature-icon">📍</span>
+          <div>
+            <strong>City & Area Targeting</strong>
+            <p>Customers nearby find your shop when searching for discounts in your locality.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🏷️</span>
+          <div>
+            <strong>Post Custom Discounts</strong>
+            <p>Publish Flat % OFF, Buy 1 Get 1, or In-store redeemable coupon codes easily.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📞</span>
+          <div>
+            <strong>Direct Customer Inquiries</strong>
+            <p>Get customer calls, WhatsApp messages, and store visits with zero commission.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner-footer">
+      <p>Questions about listing your shop? <a href="#" class="help-link">Partner Support</a></p>
+    </div>
+  </div>
+
+  <!-- Right Offline Store Register Form (62% Width) -->
+  <div class="seller-form-container">
+    <div class="seller-card">
+      <div class="form-header">
+        <h2 class="form-title">Store Partner Registration</h2>
+        <p class="form-subtitle">Register your offline shop in 3 steps to publish deals & attract buyers</p>
+      </div>
+
+      <!-- Step Indicator Bar -->
+      <div class="step-wizard">
+        <div class="step-item" [class.active]="currentStep >= 1" [class.completed]="currentStep > 1" (click)="goToStep(1)">
+          <div class="step-circle">1</div>
+          <span class="step-title">Owner & Account</span>
+        </div>
+        <div class="step-line" [class.active]="currentStep >= 2"></div>
+        <div class="step-item" [class.active]="currentStep >= 2" [class.completed]="currentStep > 2" (click)="goToStep(2)">
+          <div class="step-circle">2</div>
+          <span class="step-title">Store Location & Timing</span>
+        </div>
+        <div class="step-line" [class.active]="currentStep >= 3"></div>
+        <div class="step-item" [class.active]="currentStep >= 3" (click)="goToStep(3)">
+          <div class="step-circle">3</div>
+          <span class="step-title">Deals & Publishing</span>
+        </div>
+      </div>
+
+      <!-- Error / Success Notifications -->
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        ⚠️ {{errorMessage}}
+      </div>
+
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{successMessage}}
+      </div>
+
+      <!-- Form Content -->
+      <form (ngSubmit)="onSubmit()" class="seller-form">
+        
+        <!-- STEP 1: Owner & Account Credentials -->
+        <div class="step-content" *ngIf="currentStep === 1">
+          <div class="section-title">
+            <span>👤</span> Store Owner / Manager Details
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label class="form-label">Store Owner / Manager Name *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="e.g. Ramesh Kumar"
+                [(ngModel)]="ownerName"
+                name="ownerName"
+                required
+              />
+            </div>
+            <div class="form-group flex-1">
+              <label class="form-label">Shop / Store Name *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="e.g. Royal Fashion Hub or City Supermarket"
+                [(ngModel)]="storeName"
+                name="storeName"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label class="form-label">Business Email Address *</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="shop@example.com"
+                [(ngModel)]="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form-group flex-1">
+              <label class="form-label">Owner Mobile / Contact Number *</label>
+              <div class="phone-input-wrapper">
+                <span class="country-code">+91</span>
+                <input
+                  type="tel"
+                  class="form-control phone-input"
+                  placeholder="9876543210"
+                  [(ngModel)]="phone"
+                  name="phone"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label class="form-label">Account Password *</label>
+              <div class="password-input-wrapper">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  class="form-control"
+                  placeholder="Min. 6 characters"
+                  [(ngModel)]="password"
+                  name="password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-pwd-btn"
+                  (click)="togglePasswordVisibility()"
+                  title="Toggle password view"
+                >
+                  {{showPassword ? '👁️' : '🔒'}}
+                </button>
+              </div>
+            </div>
+            <div class="form-group flex-1">
+              <label class="form-label">Confirm Password *</label>
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                placeholder="Re-enter password"
+                [(ngModel)]="confirmPassword"
+                name="confirmPassword"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <div></div>
+            <button type="button" class="btn btn-primary btn-next" (click)="goToStep(2)">
+              Next: Store Location & Timings →
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Store Physical Location & Timing -->
+        <div class="step-content" *ngIf="currentStep === 2">
+          <div class="section-title">
+            <span>📍</span> Physical Store Address & Locality
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Store Category / Industry *</label>
+            <select class="form-control" [(ngModel)]="storeCategory" name="storeCategory">
+              <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+            </select>
+          </div>
+
+          <!-- Manual Address Details Fields -->
+          <div class="form-group">
+            <label class="form-label">Complete Shop Address *</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Shop No., Market / Mall Name, Street Address"
+              [(ngModel)]="storeAddress"
+              (input)="onAddressChange()"
+              name="storeAddress"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label class="form-label">Area / Locality *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="e.g. MG Road or Bandra West"
+                [(ngModel)]="areaLocality"
+                (input)="onAddressChange()"
+                name="areaLocality"
+                required
+              />
+            </div>
+            <div class="form-group flex-1">
+              <label class="form-label">City *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="e.g. Mumbai / Delhi / Bangalore"
+                [(ngModel)]="city"
+                (input)="onAddressChange()"
+                name="city"
+                required
+              />
+            </div>
+            <div class="form-group flex-1">
+              <label class="form-label">Pincode *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="400001"
+                [(ngModel)]="pincode"
+                name="pincode"
+                maxlength="6"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Store Opening & Closing Timings Dropdowns -->
+          <div class="form-group">
+            <label class="form-label">Store Opening & Closing Hours *</label>
+            <div class="timings-dropdown-row">
+              <div class="timing-col flex-1">
+                <span class="timing-sublabel">Opening Time</span>
+                <select class="form-control" [(ngModel)]="selectedOpenTime" name="selectedOpenTime">
+                  <option *ngFor="let t of openingTimes" [value]="t">{{t}}</option>
+                </select>
+              </div>
+
+              <div class="timing-col flex-1">
+                <span class="timing-sublabel">Closing Time</span>
+                <select class="form-control" [(ngModel)]="selectedCloseTime" name="selectedCloseTime">
+                  <option *ngFor="let t of closingTimes" [value]="t">{{t}}</option>
+                </select>
+              </div>
+
+              <div class="timing-col flex-1">
+                <span class="timing-sublabel">Working Days</span>
+                <select class="form-control" [(ngModel)]="selectedWorkingDays" name="selectedWorkingDays">
+                  <option *ngFor="let d of workingDaysOptions" [value]="d">{{d}}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Formatted Display Badge -->
+            <div class="timing-preview-badge">
+              <span class="preview-clock">🕒</span> 
+              <strong>Formatted Display:</strong> {{formattedTimings}}
+            </div>
+          </div>
+
+          <!-- Interactive Google Map GPS Detection Box -->
+          <div class="form-group">
+            <div class="map-label-header">
+              <label class="form-label">Google Maps Store Pinpoint</label>
+              <button type="button" class="btn btn-gps-small" (click)="detectLocation()" [disabled]="isDetectingLocation">
+                <span *ngIf="!isDetectingLocation">📍 Detect GPS Location</span>
+                <span *ngIf="isDetectingLocation">⏳ Detecting...</span>
+              </button>
+            </div>
+
+            <div class="map-box">
+              <iframe
+                *ngIf="mapEmbedUrl"
+                [src]="mapEmbedUrl"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="google-map-iframe"
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Google Maps Location Link (Optional)</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="https://maps.google.com/..."
+              [(ngModel)]="googleMapsUrl"
+              name="googleMapsUrl"
+            />
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-outline" (click)="goToStep(1)">
+              ← Back
+            </button>
+            <button type="button" class="btn btn-primary btn-next" (click)="goToStep(3)">
+              Next: Deals & Offers Setup →
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Deals & Discount Setup + Registration -->
+        <div class="step-content" *ngIf="currentStep === 3">
+          <div class="section-title">
+            <span>🏷️</span> Store Deals, Discount Type & Contact Info
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Primary Offer Type You Want to Post *</label>
+            <select class="form-control" [(ngModel)]="primaryOfferType" name="primaryOfferType">
+              <option *ngFor="let offer of offerTypes" [value]="offer">{{offer}}</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label class="form-label">WhatsApp / Contact No. for Customers *</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="e.g. 9876543210 (For deal inquiries)"
+                [(ngModel)]="storeContactForCustomers"
+                name="storeContactForCustomers"
+              />
+              <span class="field-hint">Customers can call or WhatsApp your shop for deal inquiries</span>
+            </div>
+            <div class="form-group flex-1">
+              <label class="form-label">GSTIN or Trade License No. (Optional)</label>
+              <input
+                type="text"
+                class="form-control uppercase"
+                placeholder="e.g. 27AAAAA0000A1Z5 or License No."
+                [(ngModel)]="gstinOrTradeLicense"
+                name="gstinOrTradeLicense"
+              />
+              <span class="field-hint">Helps get a Verified Store Badge on FlashDeals</span>
+            </div>
+          </div>
+
+          <!-- Legal Documents & Verification Uploads Section -->
+          <div class="legal-docs-section">
+            <div class="sub-heading">📄 Legal Documents & Store Verification Uploads</div>
+            <p class="section-desc">Upload shop proof documents to obtain the <strong>Verified Store Badge</strong> on your deal listings.</p>
+
+            <div class="doc-upload-grid">
+              <!-- GST / Trade License Upload -->
+              <div class="doc-upload-card" [class.file-selected]="gstDocFileName">
+                <div class="doc-icon">📜</div>
+                <div class="doc-info">
+                  <span class="doc-title">GSTIN Certificate / Trade License</span>
+                  <span class="doc-desc">PDF, JPG, PNG (Max 5MB)</span>
+                  <span class="file-selected-name" *ngIf="gstDocFileName">✅ {{gstDocFileName}}</span>
+                </div>
+                <label class="btn-upload-file">
+                  <span>{{gstDocFileName ? 'Change File' : 'Upload File'}}</span>
+                  <input type="file" (change)="onGstDocSelected($event)" class="file-input-hidden" accept=".pdf,.jpg,.jpeg,.png" />
+                </label>
+              </div>
+
+              <!-- PAN Card Upload -->
+              <div class="doc-upload-card" [class.file-selected]="panDocFileName">
+                <div class="doc-icon">💳</div>
+                <div class="doc-info">
+                  <span class="doc-title">Business / Owner PAN Card Copy</span>
+                  <span class="doc-desc">PDF, JPG, PNG (Max 5MB)</span>
+                  <span class="file-selected-name" *ngIf="panDocFileName">✅ {{panDocFileName}}</span>
+                </div>
+                <label class="btn-upload-file">
+                  <span>{{panDocFileName ? 'Change File' : 'Upload File'}}</span>
+                  <input type="file" (change)="onPanDocSelected($event)" class="file-input-hidden" accept=".pdf,.jpg,.jpeg,.png" />
+                </label>
+              </div>
+
+              <!-- Store Front Photo Upload -->
+              <div class="doc-upload-card" [class.file-selected]="storePhotoFileName">
+                <div class="doc-icon">🏪</div>
+                <div class="doc-info">
+                  <span class="doc-title">Store Front / Shop Name Board Photo</span>
+                  <span class="doc-desc">JPG, PNG (Max 10MB)</span>
+                  <span class="file-selected-name" *ngIf="storePhotoFileName">✅ {{storePhotoFileName}}</span>
+                </div>
+                <label class="btn-upload-file">
+                  <span>{{storePhotoFileName ? 'Change File' : 'Upload File'}}</span>
+                  <input type="file" (change)="onStorePhotoSelected($event)" class="file-input-hidden" accept=".jpg,.jpeg,.png" />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="deal-preview-banner">
+            <div class="preview-badge">✨ Deal Discovery Feature</div>
+            <p>Once registered, you can upload unlimited store deals with discount percentages, images, coupon codes, and expiry dates to showcase to customers searching for deals in <strong>{{city || 'your city'}}</strong>!</p>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" [(ngModel)]="agreePartnerTerms" name="agreePartnerTerms" required />
+              <span class="checkmark"></span>
+              I agree to the <a href="#" class="terms-link">Store Partner Terms</a>, <a href="#" class="terms-link">Deal Publishing Guidelines</a> & <a href="#" class="terms-link">Privacy Policy</a>
+            </label>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-outline" (click)="goToStep(2)">
+              ← Back
+            </button>
+            <button type="submit" class="btn btn-primary btn-submit" [disabled]="isLoading">
+              <span *ngIf="!isLoading">🚀 Register Store & Publish Deals</span>
+              <span *ngIf="isLoading">Registering Store...</span>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="login-prompt">
+        <p>Already registered your store? <a routerLink="/admin/login" class="login-link">Sign In to Partner Portal</a></p>
+      </div>
+
+      <div class="seller-footer">
+        <p>© 2025 FlashDeals Local Store Platform. Connect local shops with smart buyers.</p>
+        <a routerLink="/" class="back-home-link">← Return to Main Website</a>
+      </div>
+    </div>
+  </div>
+</div>
