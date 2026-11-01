@@ -10,441 +10,652 @@
         <div class="main-wrapper">
             <!-- Main Content Area -->
             <main class="main-content">
-            <!-- Promo Hero Banner -->
-            <section class="hero-carousel">
-                <div class="carousel-inner" [style.transform]="'translateX(' + (-currentSlide * 33.333) + '%)'">
-                    @for (slide of slides; track $index) {
-                    <div class="hero-slide" [className]="'hero-slide ' + slide.gradientClass">
-                        <div class="slide-content">
-                            <h1 class="hero-title-large">{{ slide.title }}</h1>
-                            <p class="hero-subtitle">{{ slide.subtitle }}</p>
-                            <button class="btn btn-explore" routerLink="/explore">{{ slide.btnText }}</button>
-                        </div>
 
-                        <div class="slide-badge-container">
-                            <div class="lightning-graphic">
-                                <span class="material-symbols-outlined icon-bolt-large">{{ slide.icon }}</span>
-                            </div>
-                            <div class="discount-badge">
-                                <span class="badge-prefix">{{ slide.badgePrefix }}</span>
-                                <span class="badge-percentage">{{ slide.badgePercent }}</span>
-                                <span class="badge-suffix">{{ slide.badgeSuffix }}</span>
-                            </div>
-                        </div>
+                <!-- 1. Amazon-Style Sub-Navigation Ribbon -->
+                <nav class="amazon-subnav-ribbon">
+                    <div class="subnav-scroll-container">
+                        @for (item of amazonSubNav; track item.name) {
+                        <a [routerLink]="item.link" class="subnav-pill" [class.subnav-menu-btn]="item.isMenu" [class.subnav-prime]="item.isPrime">
+                            <span class="material-symbols-outlined subnav-icon">{{ item.icon }}</span>
+                            <span class="subnav-label">{{ item.name }}</span>
+                        </a>
+                        }
                     </div>
-                    }
-                </div>
-
-                <div class="carousel-dots">
-                    @for (slide of slides; track $index) {
-                    <span class="dot" [class.active]="$index === currentSlide" (click)="setSlide($index)"></span>
-                    }
-                </div>
-            </section>
-
-            <!-- Top Deals Ending Soon -->
-            <section class="deals-section mt-4">
-                <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="header-icon-circle">
-                            <span class="material-symbols-outlined deal-header-icon">bolt</span>
-                        </div>
-                        <h2 class="section-title mb-0">Top Deals Ending Soon</h2>
-                        <div class="header-timer-pill">
-                            <span class="ends-in-text">Ends in</span>
-                            <span class="timer-digits">{{ headerTimerString }}</span>
-                        </div>
+                    <div class="subnav-right-highlight" routerLink="/early-access">
+                        <span class="highlight-fire-icon">🔥</span>
+                        <span class="highlight-text">Great Indian Festival Deals Live</span>
+                        <span class="material-symbols-outlined highlight-chevron">chevron_right</span>
                     </div>
-                    <a href="#" class="view-all-deals-link">View All Deals <span
-                            class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
-                </div>
+                </nav>
 
-                <div class="deals-layout-row">
-                    <!-- 4 Product Cards Grid (Left side) -->
-                    <div class="deals-cards-grid">
-                        @for (deal of deals; track deal.id) {
-                        <div class="vertical-deal-card">
-                            <div class="card-top-row">
-                                <span class="discount-badge-pill">{{ deal.discount }}</span>
-                                <button class="wishlist-btn">
-                                    <span class="material-symbols-outlined">favorite_border</span>
-                                </button>
-                            </div>
-                            <div class="card-image-box">
-                                <img [src]="deal.image" [alt]="deal.brand" class="product-card-img" />
-                            </div>
-                            <div class="card-info-box">
-                                <h3 class="card-brand-name">{{ deal.brand }}</h3>
-                                <p class="card-product-title">{{ deal.title }}</p>
-                                <div class="card-price-row">
-                                    <div class="prices-group">
-                                        <span class="current-price">{{ deal.price }}</span>
-                                        <span class="original-price">{{ deal.originalPrice }}</span>
+                <!-- 2. Promo Hero Carousel Banner -->
+                <section class="hero-carousel" (mouseenter)="pauseCarousel()" (mouseleave)="resumeCarousel()">
+                    <!-- Carousel Nav Buttons -->
+                    <button class="carousel-nav-btn prev-btn" (click)="prevSlide()" aria-label="Previous Slide">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button class="carousel-nav-btn next-btn" (click)="nextSlide()" aria-label="Next Slide">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+
+                    <div class="carousel-inner" [style.transform]="'translateX(' + (-currentSlide * 33.3333) + '%)'">
+                        @for (slide of slides; track $index) {
+                        <div class="hero-slide" [className]="'hero-slide ' + slide.gradientClass">
+                            <!-- Decorative Background Mesh & Glow Orbs -->
+                            <div class="hero-mesh-overlay"></div>
+                            <div class="hero-glow-orb hero-glow-1"></div>
+                            <div class="hero-glow-orb hero-glow-2"></div>
+
+                            <!-- Centered Hero Slide Wrapper to eliminate dead space on all screens -->
+                            <div class="hero-slide-wrapper">
+                                <!-- Left Content Area -->
+                                <div class="slide-content">
+                                    <div class="hero-event-tag">
+                                        <span class="tag-pulse"></span>
+                                        <span class="material-symbols-outlined tag-icon">{{ slide.tagIcon }}</span>
+                                        <span>{{ slide.tag }}</span>
                                     </div>
-                                    <button class="add-cart-btn">
-                                        <span class="material-symbols-outlined">shopping_cart</span>
-                                    </button>
+
+                                    <h1 class="hero-title-large">
+                                        {{ slide.title }} <span class="highlight-text">{{ slide.highlightText }}</span>
+                                    </h1>
+
+                                    <p class="hero-subtitle">{{ slide.subtitle }}</p>
+
+                                    <!-- Quick Interactive Category Chips -->
+                                    @if (slide.quickTags && slide.quickTags.length) {
+                                    <div class="hero-quick-tags-row">
+                                        @for (qtag of slide.quickTags; track qtag) {
+                                        <a routerLink="/explore" class="hero-quick-tag">{{ qtag }}</a>
+                                        }
+                                    </div>
+                                    }
+
+                                    <div class="hero-perks-row">
+                                        @for (perk of slide.perks; track perk) {
+                                        <div class="hero-perk-item">
+                                            <span class="material-symbols-outlined perk-icon">check_circle</span>
+                                            <span>{{ perk }}</span>
+                                        </div>
+                                        }
+                                    </div>
+
+                                    <div class="hero-action-row">
+                                        <button class="btn btn-explore" routerLink="/explore">
+                                            <span>{{ slide.btnText }}</span>
+                                            <span class="material-symbols-outlined btn-arrow">arrow_forward</span>
+                                        </button>
+
+                                        <div class="hero-coupon-pill" (click)="copyCoupon(slide.coupon, $event)" [title]="'Click to copy code ' + slide.coupon">
+                                            <span class="coupon-prefix">CODE:</span>
+                                            <span class="coupon-code">{{ slide.coupon }}</span>
+                                            <span class="material-symbols-outlined coupon-copy-icon">
+                                                {{ copiedCoupon === slide.coupon ? 'done' : 'content_copy' }}
+                                            </span>
+                                            @if (copiedCoupon === slide.coupon) {
+                                            <span class="copied-badge">Copied!</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right Showcase Spotlight Stage Area -->
+                                <div class="slide-showcase-container">
+                                    <!-- Showcase Product Card -->
+                                    <div class="showcase-card" routerLink="/explore">
+                                        <div class="showcase-card-top">
+                                            <div class="showcase-chip">
+                                                <span class="chip-dot"></span>
+                                                <span>{{ slide.floatingTag }}</span>
+                                            </div>
+                                            @if (slide.rating) {
+                                            <div class="showcase-rating-badge">
+                                                <span class="star-sym">★</span>
+                                                <span>{{ slide.rating }}</span>
+                                            </div>
+                                            }
+                                        </div>
+
+                                        <div class="showcase-image-wrapper">
+                                            <img [src]="slide.productImage" [alt]="slide.productName" class="showcase-product-img" />
+                                        </div>
+
+                                        <div class="showcase-info">
+                                            <div class="showcase-category">{{ slide.productCategory }}</div>
+                                            <div class="showcase-product-name">{{ slide.productName }}</div>
+                                            <div class="showcase-pricing">
+                                                <span class="showcase-deal-price">{{ slide.dealPrice }}</span>
+                                                <span class="showcase-orig-price">{{ slide.origPrice }}</span>
+                                                <span class="showcase-save-tag">SAVE {{ slide.badgePercent }}</span>
+                                            </div>
+                                        </div>
+
+                                        @if (slide.urgencyText) {
+                                        <div class="showcase-urgency-strip">
+                                            <span class="urgency-dot"></span>
+                                            <span>{{ slide.urgencyText }}</span>
+                                        </div>
+                                        }
+                                    </div>
+
+                                    <!-- 3D Discount Badge -->
+                                    <div class="discount-badge-3d">
+                                        <div class="badge-ring"></div>
+                                        <span class="badge-prefix">{{ slide.badgePrefix }}</span>
+                                        <span class="badge-percentage">{{ slide.badgePercent }}</span>
+                                        <span class="badge-suffix">{{ slide.badgeSuffix }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         }
                     </div>
 
-                    <!-- Right Side Promo Banner -->
-                    <div class="brands-promo-card-img-wrapper" routerLink="/explore">
-                        <img src="/top_brands_banner.png" alt="Top Brands - Big Savings Everyday"
-                            class="brands-promo-banner-img" />
+                    <div class="carousel-dots">
+                        @for (slide of slides; track $index) {
+                        <button class="dot" [class.active]="$index === currentSlide" (click)="setSlide($index)" [attr.aria-label]="'Go to slide ' + ($index + 1)"></button>
+                        }
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Categories For You -->
-            <section class="categories-section mt-5">
-                <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center gap-2">
-                        <h2 class="section-title mb-0">Categories For You</h2>
-                    </div>
-                    <a href="javascript:void(0)" class="view-all-deals-link" (click)="toggleMoreCategories()">
-                        {{ showExpandedCategories ? 'Show Less' : 'Explore All' }}
-                        <span class="material-symbols-outlined align-middle fs-6">{{ showExpandedCategories ?
-                            'keyboard_arrow_up' : 'chevron_right' }}</span>
-                    </a>
-                </div>
-
-                <div class="categories-grid">
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle fashion-gradient">
-                            <span class="material-symbols-outlined">shopping_bag</span>
-                        </div>
-                        <span class="category-title">Fashion</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle electronics-gradient">
-                            <span class="material-symbols-outlined">phone_iphone</span>
-                        </div>
-                        <span class="category-title">Electronics</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle home-gradient">
-                            <span class="material-symbols-outlined">home</span>
-                        </div>
-                        <span class="category-title">Home & Living</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle beauty-gradient">
-                            <span class="material-symbols-outlined">face</span>
-                        </div>
-                        <span class="category-title">Beauty</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle food-gradient">
-                            <span class="material-symbols-outlined">restaurant</span>
-                        </div>
-                        <span class="category-title">Food & Dining</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle travel-gradient">
-                            <span class="material-symbols-outlined">flight_takeoff</span>
-                        </div>
-                        <span class="category-title">Travel</span>
-                    </div>
-
-                    @if (!showExpandedCategories) {
-                    <div class="category-card more-card" (click)="toggleMoreCategories()">
-                        <div class="category-icon-circle more-gradient">
-                            <span class="material-symbols-outlined">grid_view</span>
-                        </div>
-                        <span class="category-title">More</span>
-                    </div>
-                    }
-
-                    @if (showExpandedCategories) {
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle toys-gradient">
-                            <span class="material-symbols-outlined">toys</span>
-                        </div>
-                        <span class="category-title">Toys & Games</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle sports-gradient">
-                            <span class="material-symbols-outlined">sports_soccer</span>
-                        </div>
-                        <span class="category-title">Sports</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle books-gradient">
-                            <span class="material-symbols-outlined">book</span>
-                        </div>
-                        <span class="category-title">Books</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle health-gradient">
-                            <span class="material-symbols-outlined">medical_services</span>
-                        </div>
-                        <span class="category-title">Health</span>
-                    </div>
-
-                    <div class="category-card" routerLink="/explore">
-                        <div class="category-icon-circle auto-gradient">
-                            <span class="material-symbols-outlined">directions_car</span>
-                        </div>
-                        <span class="category-title">Automotive</span>
-                    </div>
-
-                    <div class="category-card less-card" (click)="toggleMoreCategories()">
-                        <div class="category-icon-circle less-gradient">
-                            <span class="material-symbols-outlined">unfold_less</span>
-                        </div>
-                        <span class="category-title">Less</span>
-                    </div>
-                    }
-                </div>
-            </section>
-
-            <!-- Based on Your Interests -->
-            <section class="interests-section mt-5 mb-5">
-                <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-baseline gap-2">
-                        <h2 class="section-title mb-0">Based on Your Interests</h2>
-                        <span class="section-subtitle">Handpicked for you</span>
-                    </div>
-                    <a href="#" class="view-all-deals-link">View All <span
-                            class="material-symbols-outlined align-middle fs-6">chevron_right</span></a>
-                </div>
-
-                <div class="interests-grid">
-                    <!-- Card 1 -->
-                    <div class="interest-banner-card card-gaming">
-                        <img src="/gaming_setup.png" alt="Gaming Setup" class="banner-bg-img">
-                        <div class="banner-gradient-overlay overlay-gaming"></div>
-                        <div class="banner-content">
-                            <h3 class="banner-title text-white">Pro Gaming<br>Accessories</h3>
-                            <div class="banner-offer-text text-white">
-                                <span class="offer-prefix">UP TO</span>
-                                <span class="offer-amount">40% OFF</span>
+                <!-- 3. Amazon Signature 4-Column Multi-Card Grid (Quad 2x2 & Spotlight) -->
+                <section class="amazon-quad-section mt-4">
+                    <div class="amazon-quad-grid">
+                        <!-- Cards 1, 2, 3: Quad 2x2 Category Cards -->
+                        @for (card of quadCards; track card.title) {
+                        <div class="amazon-quad-card">
+                            <div class="quad-header">
+                                <h3 class="quad-title">{{ card.title }}</h3>
+                                <p class="quad-subtitle">{{ card.subtitle }}</p>
                             </div>
-                            <button class="banner-pill-btn btn-pink">
-                                Shop Now <span class="material-symbols-outlined">chevron_right</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="interest-banner-card card-smarthome">
-                        <img src="/smart_home.png" alt="Smart Home" class="banner-bg-img">
-                        <div class="banner-gradient-overlay overlay-smarthome"></div>
-                        <div class="banner-content">
-                            <h3 class="banner-title text-dark">Smart Home<br>Essentials</h3>
-                            <div class="banner-offer-text text-success-green">
-                                <span class="offer-prefix">Flat</span>
-                                <span class="offer-amount">25% OFF</span>
+                            <div class="quad-items-grid">
+                                @for (tile of card.items; track tile.label) {
+                                <div class="quad-tile" [routerLink]="tile.link">
+                                    <div class="quad-tile-img-box">
+                                        <img [src]="tile.image" [alt]="tile.label" class="quad-tile-img" />
+                                    </div>
+                                    <span class="quad-tile-label">{{ tile.label }}</span>
+                                </div>
+                                }
                             </div>
-                            <button class="banner-pill-btn btn-white">
-                                Shop Now <span class="material-symbols-outlined">chevron_right</span>
-                            </button>
+                            <a [routerLink]="card.link" class="quad-footer-link">
+                                <span>{{ card.linkText }}</span>
+                                <span class="material-symbols-outlined link-arrow">chevron_right</span>
+                            </a>
                         </div>
-                    </div>
+                        }
 
-                    <!-- Card 3 -->
-                    <div class="interest-banner-card card-fitness">
-                        <img src="/fitness_gear.png" alt="Fitness Gear" class="banner-bg-img">
-                        <div class="banner-gradient-overlay overlay-fitness"></div>
-                        <div class="banner-content">
-                            <h3 class="banner-title text-white">Fitness &<br>Gym Gear</h3>
-                            <div class="banner-offer-text text-bright-red">
-                                <span class="offer-prefix">Min.</span>
-                                <span class="offer-amount">50% OFF</span>
+                        <!-- Card 4: Amazon Spotlight "Deal of the Day" Card -->
+                        <div class="amazon-quad-card spotlight-quad-card">
+                            <div class="quad-header">
+                                <div class="spotlight-badge-row">
+                                    <span class="spotlight-tag-pill">
+                                        <span class="material-symbols-outlined bolt-mini">bolt</span> {{ spotlightDeal.badge }}
+                                    </span>
+                                    <span class="spotlight-discount-tag">{{ spotlightDeal.discount }}</span>
+                                </div>
+                                <h3 class="quad-title mt-2">{{ spotlightDeal.title }}</h3>
                             </div>
-                            <button class="banner-pill-btn btn-white">
-                                Buy Now <span class="material-symbols-outlined">chevron_right</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="interest-banner-card card-audio">
-                        <img src="/boat_headphones.png" alt="Premium Audio" class="banner-bg-img">
-                        <div class="banner-gradient-overlay overlay-audio"></div>
-                        <div class="banner-content">
-                            <h3 class="banner-title text-dark">Premium<br>Audio Gear</h3>
-                            <div class="banner-offer-text text-indigo">
-                                <span class="offer-prefix">Min.</span>
-                                <span class="offer-amount">35% OFF</span>
+                            <div class="spotlight-body" [routerLink]="spotlightDeal.link">
+                                <div class="spotlight-img-box">
+                                    <img [src]="spotlightDeal.image" [alt]="spotlightDeal.title" class="spotlight-img" />
+                                    <span class="prime-pill">
+                                        <span class="material-symbols-outlined prime-icon">bolt</span> Flash Prime
+                                    </span>
+                                </div>
+                                <div class="spotlight-meta">
+                                    <div class="spotlight-ratings">
+                                        <span class="stars-gold">★★★★★</span>
+                                        <span class="rating-num">{{ spotlightDeal.rating }}</span>
+                                        <span class="rating-count">({{ spotlightDeal.reviews }})</span>
+                                    </div>
+                                    <div class="spotlight-price-row">
+                                        <span class="spotlight-deal-price">{{ spotlightDeal.price }}</span>
+                                        <span class="spotlight-mrp">M.R.P.: <del>{{ spotlightDeal.originalPrice }}</del></span>
+                                    </div>
+                                    <div class="spotlight-delivery">
+                                        <span class="material-symbols-outlined delivery-icon">local_shipping</span>
+                                        <span>{{ spotlightDeal.delivery }}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="banner-pill-btn btn-white">
-                                Shop Now <span class="material-symbols-outlined">chevron_right</span>
-                            </button>
+                            <div class="spotlight-card-footer">
+                                <button class="btn-spotlight-cart" [routerLink]="spotlightDeal.link">
+                                    <span class="material-symbols-outlined">storefront</span> {{ spotlightDeal.btnText }}
+                                </button>
+                                <a [routerLink]="spotlightDeal.link" class="quad-footer-link">
+                                    <span>{{ spotlightDeal.linkText }}</span>
+                                    <span class="material-symbols-outlined link-arrow">chevron_right</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-
-
-            <!-- Trending Today Section -->
-            <section class="trending-today-section mt-5 mb-5">
-                <div class="trending-container-card">
-                    <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="flame-icon-circle">
-                                <span class="material-symbols-outlined flame-icon">local_fire_department</span>
+                <!-- 5. Today's Deals (Amazon Lightning Deals Shelf with Timer & Filter Tabs) -->
+                <section class="deals-section mt-4">
+                    <div class="section-header d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                        <div class="d-flex align-items-center gap-3 flex-wrap">
+                            <div class="header-icon-circle">
+                                <span class="material-symbols-outlined deal-header-icon">bolt</span>
                             </div>
                             <div>
-                                <h2 class="section-title mb-0">Trending Today</h2>
-                                <p class="trending-subtitle mb-0">Most popular deals in the last 24 hours</p>
+                                <div class="d-flex align-items-center gap-2">
+                                    <h2 class="section-title mb-0">Today's Deals</h2>
+                                    <div class="header-timer-pill">
+                                        <span class="ends-in-text">Ends in</span>
+                                        <span class="timer-digits">{{ headerTimerString }}</span>
+                                    </div>
+                                </div>
+                                <p class="section-subtext mb-0">Grab lightning flash deals before stock runs out</p>
                             </div>
                         </div>
-                        <a href="#" class="view-all-deals-link">View All <span
-                                class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
+
+                        <!-- Category Filter Pills -->
+                        <div class="deal-category-filters">
+                            @for (filter of dealFilters; track filter.id) {
+                            <button class="deal-filter-btn" [class.active]="selectedDealFilter === filter.id" (click)="setDealFilter(filter.id)">
+                                {{ filter.label }}
+                            </button>
+                            }
+                        </div>
                     </div>
 
-                    <div class="trending-carousel-wrapper position-relative">
-                        <button class="carousel-nav-btn prev-btn">
-                            <span class="material-symbols-outlined">chevron_left</span>
-                        </button>
-
-                        <div class="trending-cards-grid">
-                            @for (item of trendingDeals; track item.id) {
-                            <div class="vertical-deal-card trending-card">
+                    <div class="deals-layout-row">
+                        <!-- Product Cards Grid (Left side) -->
+                        <div class="deals-cards-grid">
+                            @for (deal of filteredDeals; track deal.id) {
+                            <div class="vertical-deal-card amazon-deal-card">
                                 <div class="card-top-row">
-                                    <span class="discount-badge-pill">{{ item.discount }}</span>
-                                    <button class="wishlist-btn">
-                                        <span class="material-symbols-outlined">favorite_border</span>
+                                    <span class="discount-badge-pill">{{ deal.discount }}</span>
+                                    <button class="wishlist-btn" [class.active]="wishlistMap[deal.id]" (click)="toggleWishlist(deal.id, $event)" [title]="wishlistMap[deal.id] ? 'Remove from Wishlist' : 'Add to Wishlist'">
+                                        <span class="material-symbols-outlined">{{ wishlistMap[deal.id] ? 'favorite' : 'favorite_border' }}</span>
                                     </button>
                                 </div>
-                                <div class="card-image-box">
-                                    <img [src]="item.image" [alt]="item.title" class="product-card-img" />
+                                <div class="card-image-box" routerLink="/explore">
+                                    <img [src]="deal.image" [alt]="deal.brand" class="product-card-img" />
                                 </div>
                                 <div class="card-info-box">
-                                    <h3 class="card-brand-name">{{ item.title }}</h3>
-                                    <div class="card-price-row mt-2">
+                                    <div class="card-brand-badge">{{ deal.brand }}</div>
+                                    <p class="card-product-title" [title]="deal.title">{{ deal.title }}</p>
+                                    
+                                    @if (deal.rating) {
+                                    <div class="card-rating-row">
+                                        <span class="rating-stars">★★★★☆</span>
+                                        <span class="rating-score">{{ deal.rating }}</span>
+                                        <span class="rating-count">({{ deal.ratingCount }})</span>
+                                    </div>
+                                    }
+
+                                    <div class="card-price-row">
                                         <div class="prices-group">
-                                            <span class="current-price">{{ item.price }}</span>
-                                            <span class="original-price">{{ item.originalPrice }}</span>
+                                            <span class="current-price">{{ deal.price }}</span>
+                                            <span class="original-price"><del>{{ deal.originalPrice }}</del></span>
                                         </div>
-                                        <button class="add-cart-btn">
+                                        <button class="add-cart-btn" (click)="addToCart(deal.title, $event)" title="Add to cart">
                                             <span class="material-symbols-outlined">shopping_cart</span>
                                         </button>
                                     </div>
-                                </div>
-                            </div>
-                            }
-                        </div>
 
-                        <button class="carousel-nav-btn next-btn">
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-
-
-            <!-- Dual Promo Banners Section (Deals Under ₹999 & Eco Friendly Picks) -->
-            <section class="dual-promo-banners-section mt-5 mb-5">
-                <div class="dual-promo-grid">
-                    <!-- Banner 1: Deals Under ₹999 -->
-                    <div class="full-img-promo-card" routerLink="/explore">
-                        <img src="/deals_under_999_banner.png" alt="Deals Under ₹999" class="promo-full-banner-img" />
-                    </div>
-
-                    <!-- Banner 2: Eco Friendly Picks -->
-                    <div class="full-img-promo-card" routerLink="/explore">
-                        <img src="/eco_friendly_banner.png" alt="Eco Friendly Picks" class="promo-full-banner-img" />
-                    </div>
-                </div>
-            </section>
-
-            <!-- Recently Viewed & Recommended Dual Section -->
-            <section class="dual-recommendations-section mt-5 mb-5">
-                <div class="dual-rec-grid">
-                    <!-- Left Block: Recently Viewed -->
-                    <div class="rec-block-card">
-                        <div class="rec-block-header">
-                            <div class="header-left">
-                                <div class="header-icon-circle blue-circle">
-                                    <span class="material-symbols-outlined icon-blue">schedule</span>
-                                </div>
-                                <div>
-                                    <h2 class="rec-block-title">Recently Viewed</h2>
-                                    <p class="rec-block-subtitle">Continue where you left off</p>
-                                </div>
-                            </div>
-                            <a routerLink="/explore" class="rec-view-all-link link-blue">View All <span
-                                    class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
-                        </div>
-
-                        <div class="rec-cards-row">
-                            @for (item of recentlyViewedDeals; track item.id) {
-                            <div class="rec-mini-card">
-                                <button class="mini-wishlist-btn">
-                                    <span class="material-symbols-outlined">favorite_border</span>
-                                </button>
-                                <div class="mini-card-img-box">
-                                    <img [src]="item.image" [alt]="item.title" class="mini-product-img" />
-                                </div>
-                                <div class="mini-card-info">
-                                    <h3 class="mini-product-title">{{ item.title }}</h3>
-                                    <div class="mini-price-row">
-                                        <span class="mini-current-price">{{ item.price }}</span>
-                                        <span class="mini-original-price">{{ item.originalPrice }}</span>
+                                    @if (deal.isPrime) {
+                                    <div class="card-prime-tag">
+                                        <span class="material-symbols-outlined prime-bolt">bolt</span>
+                                        <span>Flash Delivery</span>
                                     </div>
-                                    <p class="mini-viewed-time">*{{ item.viewedTime }}</p>
+                                    }
                                 </div>
                             </div>
                             }
                         </div>
                     </div>
+                </section>
 
-                    <!-- Right Block: Recommended For You -->
-                    <div class="rec-block-card">
-                        <div class="rec-block-header">
-                            <div class="header-left">
-                                <div class="header-icon-circle orange-circle">
-                                    <span class="material-symbols-outlined icon-orange">star</span>
-                                </div>
-                                <div>
-                                    <h2 class="rec-block-title">Recommended For You</h2>
-                                    <p class="rec-block-subtitle">Personalized picks just for you</p>
-                                </div>
-                            </div>
-                            <a routerLink="/explore" class="rec-view-all-link link-orange">View All <span
-                                    class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
+                <!-- 6. Based on Your Interests -->
+                <section class="interests-section mt-5 mb-5">
+                    <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-baseline gap-2">
+                            <h2 class="section-title mb-0">Based on Your Interests</h2>
+                            <span class="section-subtitle">Handpicked for you</span>
                         </div>
+                        <a routerLink="/explore" class="view-all-deals-link">View All <span
+                                class="material-symbols-outlined align-middle fs-6">chevron_right</span></a>
+                    </div>
 
-                        <div class="rec-cards-row">
-                            @for (item of recommendedDeals; track item.id) {
-                            <div class="rec-mini-card">
-                                <button class="mini-wishlist-btn">
-                                    <span class="material-symbols-outlined">favorite_border</span>
+                    <div class="interests-grid">
+                        <!-- Card 1: Pro Gaming Accessories -->
+                        <div class="interest-banner-card card-gaming" routerLink="/explore">
+                            <img src="/gaming_setup.png" alt="Gaming Setup" class="banner-bg-img">
+                            <div class="banner-gradient-overlay overlay-gaming"></div>
+                            <div class="banner-content">
+                                <h3 class="banner-title text-white">Pro Gaming<br>Accessories</h3>
+                                <div class="banner-offer-text text-white">
+                                    <span class="offer-prefix">UP TO</span>
+                                    <span class="offer-amount">40% OFF</span>
+                                </div>
+                                <button class="banner-pill-btn btn-pink" routerLink="/explore">
+                                    Shop Now <span class="material-symbols-outlined">chevron_right</span>
                                 </button>
-                                <div class="mini-card-img-box">
-                                    <img [src]="item.image" [alt]="item.title" class="mini-product-img" />
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Smart Home Essentials -->
+                        <div class="interest-banner-card card-smarthome" routerLink="/explore">
+                            <img src="/smart_home.png" alt="Smart Home" class="banner-bg-img">
+                            <div class="banner-gradient-overlay overlay-smarthome"></div>
+                            <div class="banner-content">
+                                <h3 class="banner-title text-dark">Smart Home<br>Essentials</h3>
+                                <div class="banner-offer-text text-success-green">
+                                    <span class="offer-prefix">Flat</span>
+                                    <span class="offer-amount">25% OFF</span>
                                 </div>
-                                <div class="mini-card-info">
-                                    <h3 class="mini-product-title">{{ item.title }}</h3>
-                                    <div class="mini-price-row">
-                                        <span class="mini-current-price">{{ item.price }}</span>
-                                        <span class="mini-original-price">{{ item.originalPrice }}</span>
+                                <button class="banner-pill-btn btn-white" routerLink="/explore">
+                                    Shop Now <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Fitness & Gym Gear -->
+                        <div class="interest-banner-card card-fitness" routerLink="/explore">
+                            <img src="/fitness_gear.png" alt="Fitness Gear" class="banner-bg-img">
+                            <div class="banner-gradient-overlay overlay-fitness"></div>
+                            <div class="banner-content">
+                                <h3 class="banner-title text-white">Fitness &<br>Gym Gear</h3>
+                                <div class="banner-offer-text text-bright-red">
+                                    <span class="offer-prefix">Min.</span>
+                                    <span class="offer-amount">50% OFF</span>
+                                </div>
+                                <button class="banner-pill-btn btn-white" routerLink="/explore">
+                                    Buy Now <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Premium Audio Gear -->
+                        <div class="interest-banner-card card-audio" routerLink="/explore">
+                            <img src="/boat_headphones.png" alt="Premium Audio" class="banner-bg-img">
+                            <div class="banner-gradient-overlay overlay-audio"></div>
+                            <div class="banner-content">
+                                <h3 class="banner-title text-dark">Premium<br>Audio Gear</h3>
+                                <div class="banner-offer-text text-indigo">
+                                    <span class="offer-prefix">Min.</span>
+                                    <span class="offer-amount">35% OFF</span>
+                                </div>
+                                <button class="banner-pill-btn btn-white" routerLink="/explore">
+                                    Shop Now <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. Shop by Category (with High Quality PNG Images) -->
+                <section class="categories-section mt-5">
+                    <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="header-icon-circle blue-circle">
+                                <span class="material-symbols-outlined text-white">grid_view</span>
+                            </div>
+                            <div>
+                                <h2 class="section-title mb-0">Shop by Category</h2>
+                                <p class="section-subtext mb-0">Explore millions of curated products</p>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" class="view-all-deals-link" (click)="toggleMoreCategories()">
+                            {{ showExpandedCategories ? 'Show Less' : 'Explore All Categories' }}
+                            <span class="material-symbols-outlined align-middle fs-6">{{ showExpandedCategories ? 'keyboard_arrow_up' : 'chevron_right' }}</span>
+                        </a>
+                    </div>
+
+                    <div class="categories-grid">
+                        @for (cat of categoriesList; track cat.title) {
+                        <div class="category-card" routerLink="/explore">
+                            <div [className]="'category-img-container ' + cat.bgClass">
+                                <img [src]="cat.image" [alt]="cat.title" class="category-png-img" [class.contain-fit]="cat.isContain" />
+                            </div>
+                            <div class="category-card-info">
+                                <span class="category-title">{{ cat.title }}</span>
+                                <span class="category-offer-pill">{{ cat.offer }}</span>
+                            </div>
+                        </div>
+                        }
+
+                        @if (!showExpandedCategories) {
+                        <div class="category-card toggle-card" (click)="toggleMoreCategories()">
+                            <div class="category-img-container toggle-circle">
+                                <span class="material-symbols-outlined toggle-icon">grid_view</span>
+                            </div>
+                            <div class="category-card-info">
+                                <span class="category-title">Explore All</span>
+                                <span class="category-offer-pill toggle-pill">+7 More</span>
+                            </div>
+                        </div>
+                        }
+
+                        @if (showExpandedCategories) {
+                        @for (cat of expandedCategoriesList; track cat.title) {
+                        <div class="category-card" routerLink="/explore">
+                            <div [className]="'category-img-container ' + cat.bgClass">
+                                <img [src]="cat.image" [alt]="cat.title" class="category-png-img" [class.contain-fit]="cat.isContain" />
+                            </div>
+                            <div class="category-card-info">
+                                <span class="category-title">{{ cat.title }}</span>
+                                <span class="category-offer-pill">{{ cat.offer }}</span>
+                            </div>
+                        </div>
+                        }
+
+                        <div class="category-card toggle-card less-card" (click)="toggleMoreCategories()">
+                            <div class="category-img-container toggle-circle less-circle">
+                                <span class="material-symbols-outlined toggle-icon">unfold_less</span>
+                            </div>
+                            <div class="category-card-info">
+                                <span class="category-title">Show Less</span>
+                                <span class="category-offer-pill toggle-pill">Collapse</span>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </section>
+
+                <!-- 8. Amazon-Style 4-Quadrant Collections Shelf (FlashDeals Theme Look) -->
+                <section class="quad-showcase-section mt-5 mb-5">
+                    <div class="quad-showcase-container">
+                        <div class="quad-cards-grid">
+                            @for (card of quadFeaturedDeals; track card.id) {
+                            <div class="quad-feature-card">
+                                <a routerLink="/explore" class="quad-card-head">
+                                    <h3 class="quad-card-heading">{{ card.title }}</h3>
+                                    <span class="material-symbols-outlined quad-head-arrow">chevron_right</span>
+                                </a>
+
+                                <div class="quad-card-grid">
+                                    @for (item of card.items; track item.id) {
+                                    <div class="quad-tile-item" routerLink="/explore">
+                                        <div class="quad-tile-visual">
+                                            <img [src]="item.image" [alt]="item.label" class="quad-tile-img" />
+                                            @if (item.badge) {
+                                            <span class="quad-tag-pill" [class.badge-gold]="item.isGoldBadge">{{ item.badge }}</span>
+                                            }
+                                        </div>
+
+                                        <div class="quad-tile-details">
+                                            @if (item.price) {
+                                            <div class="quad-price-line">
+                                                <span class="quad-price-val">{{ item.price }}</span>
+                                                @if (item.originalPrice) {
+                                                <span class="quad-mrp-val"><del>{{ item.originalPrice }}</del></span>
+                                                }
+                                            </div>
+                                            }
+
+                                            <div class="quad-tile-text" [title]="item.label">
+                                                @if (item.prefix) {
+                                                <span class="quad-prefix">{{ item.prefix }}</span> | <span class="quad-suffix">{{ item.suffix }}</span>
+                                                } @else {
+                                                {{ item.label }}
+                                                }
+                                            </div>
+
+                                            @if (item.discount) {
+                                            <div class="quad-discount-badge-line">
+                                                <span class="quad-discount-text">{{ item.discount }}</span>
+                                            </div>
+                                            }
+                                        </div>
                                     </div>
-                                    <p class="mini-viewed-time opacity-0">&nbsp;</p>
+                                    }
+                                </div>
+
+                                <div class="quad-card-foot">
+                                    <a routerLink="/explore" class="quad-foot-link">
+                                        <span>{{ card.footerLinkText }}</span>
+                                        <span class="material-symbols-outlined foot-arrow">arrow_forward</span>
+                                    </a>
                                 </div>
                             </div>
                             }
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-        </main>
+                <!-- 9. Dual Promo Banners (Under ₹999 & Eco Friendly) -->
+                <section class="dual-promo-banners-section mt-5 mb-5">
+                    <div class="dual-promo-grid">
+                        <div class="full-img-promo-card" routerLink="/explore">
+                            <img src="/deals_under_999_banner.png" alt="Deals Under ₹999" class="promo-full-banner-img" />
+                        </div>
+                        <div class="full-img-promo-card" routerLink="/explore">
+                            <img src="/eco_friendly_banner.png" alt="Eco Friendly Picks" class="promo-full-banner-img" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10. Recently Viewed & Recommended Dual Section -->
+                <section class="dual-recommendations-section mt-5 mb-5">
+                    <div class="dual-rec-grid">
+                        <!-- Left Block: Recently Viewed -->
+                        <div class="rec-block-card">
+                            <div class="rec-block-header">
+                                <div class="header-left">
+                                    <div class="header-icon-circle blue-circle">
+                                        <span class="material-symbols-outlined icon-blue">schedule</span>
+                                    </div>
+                                    <div>
+                                        <h2 class="rec-block-title">Recently Viewed</h2>
+                                        <p class="rec-block-subtitle">Continue where you left off</p>
+                                    </div>
+                                </div>
+                                <a routerLink="/explore" class="rec-view-all-link link-blue">View All <span class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
+                            </div>
+
+                            <div class="rec-cards-row">
+                                @for (item of recentlyViewedDeals; track item.id) {
+                                <div class="rec-mini-card">
+                                    <div class="mini-card-img-box" routerLink="/explore">
+                                        <img [src]="item.image" [alt]="item.title" class="mini-product-img" />
+                                    </div>
+                                    <div class="mini-card-info">
+                                        <h3 class="mini-product-title">{{ item.title }}</h3>
+                                        <div class="mini-rating-row">
+                                            <span class="mini-stars">★★★★☆</span>
+                                            <span class="mini-reviews">{{ item.reviews }}</span>
+                                        </div>
+                                        <div class="mini-price-row">
+                                            <span class="mini-current-price">{{ item.price }}</span>
+                                            <span class="mini-original-price"><del>{{ item.originalPrice }}</del></span>
+                                        </div>
+                                        <p class="mini-viewed-time">{{ item.viewedTime }}</p>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Right Block: Recommended For You -->
+                        <div class="rec-block-card">
+                            <div class="rec-block-header">
+                                <div class="header-left">
+                                    <div class="header-icon-circle orange-circle">
+                                        <span class="material-symbols-outlined icon-orange">star</span>
+                                    </div>
+                                    <div>
+                                        <h2 class="rec-block-title">Recommended For You</h2>
+                                        <p class="rec-block-subtitle">Personalized picks based on your trends</p>
+                                    </div>
+                                </div>
+                                <a routerLink="/explore" class="rec-view-all-link link-orange">View All <span class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
+                            </div>
+
+                            <div class="rec-cards-row">
+                                @for (item of recommendedDeals; track item.id) {
+                                <div class="rec-mini-card">
+                                    <div class="mini-card-img-box" routerLink="/explore">
+                                        <img [src]="item.image" [alt]="item.title" class="mini-product-img" />
+                                    </div>
+                                    <div class="mini-card-info">
+                                        <h3 class="mini-product-title">{{ item.title }}</h3>
+                                        <div class="mini-rating-row">
+                                            <span class="mini-stars">★★★★★</span>
+                                            <span class="mini-reviews">{{ item.reviews }}</span>
+                                        </div>
+                                        <div class="mini-price-row">
+                                            <span class="mini-current-price">{{ item.price }}</span>
+                                            <span class="mini-original-price"><del>{{ item.originalPrice }}</del></span>
+                                        </div>
+                                        <button class="mini-add-cart-btn" (click)="addToCart(item.title, $event)">
+                                            + Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. Amazon-Style Trust & Guarantee Footer Strip -->
+                <section class="amazon-footer-guarantee mt-5 mb-4">
+                    <div class="guarantee-grid">
+                        <div class="guarantee-box">
+                            <span class="material-symbols-outlined guarantee-icon">verified_user</span>
+                            <div class="guarantee-text">
+                                <strong>100% Purchase Protection</strong>
+                                <span>Genuine products & secure refunds</span>
+                            </div>
+                        </div>
+                        <div class="guarantee-box">
+                            <span class="material-symbols-outlined guarantee-icon">security</span>
+                            <div class="guarantee-text">
+                                <strong>Secure Payment Gateway</strong>
+                                <span>SSL 256-bit encrypted transactions</span>
+                            </div>
+                        </div>
+                        <div class="guarantee-box">
+                            <span class="material-symbols-outlined guarantee-icon">local_shipping</span>
+                            <div class="guarantee-text">
+                                <strong>Real-time Tracking</strong>
+                                <span>Live updates from warehouse to doorstep</span>
+                            </div>
+                        </div>
+                        <div class="guarantee-box">
+                            <span class="material-symbols-outlined guarantee-icon">support_agent</span>
+                            <div class="guarantee-text">
+                                <strong>24/7 Dedicated Support</strong>
+                                <span>Always here to help with your orders</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Floating Added to Cart Toast Feedback -->
+                @if (addedToCartToast) {
+                <div class="cart-toast-banner">
+                    <span class="material-symbols-outlined toast-check">check_circle</span>
+                    <span>{{ addedToCartToast }}</span>
+                </div>
+                }
+
+            </main>
+        </div>
     </div>
-</div>
 </div>
