@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Explore } from './pages/explore/explore';
+import { Stores } from './pages/stores/stores';
+import { StoreDetails } from './pages/store-details/store-details';
 import { DealDetails } from './pages/deal-details/deal-details';
 import { Profile } from './pages/profile/profile';
 import { MyDealsFollowups } from './pages/my-deals-followups/my-deals-followups';
@@ -27,6 +29,8 @@ import { AdminLayout } from './pages/admin/admin-layout/admin-layout';
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'explore', component: Explore },
+  { path: 'stores', component: Stores },
+  { path: 'store-details', component: StoreDetails },
   { path: 'deal-details', component: DealDetails },
   { path: 'profile', component: Profile },
   { path: 'my-deals', component: MyDealsFollowups },

@@ -209,6 +209,56 @@
                 </div>
             </section>
 
+            <!-- Popular Local Stores Section -->
+            <section class="popular-stores-section mt-5 mb-4">
+                <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="header-icon-circle store-header-icon-circle">
+                            <span class="material-symbols-outlined deal-header-icon">storefront</span>
+                        </div>
+                        <div>
+                            <h2 class="section-title mb-0">Popular Local Stores</h2>
+                            <span class="section-subtitle">Top rated verified partner shops near you</span>
+                        </div>
+                    </div>
+                    <a routerLink="/stores" class="view-all-deals-link">View All Stores <span
+                            class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
+                </div>
+
+                <div class="popular-stores-grid">
+                    @for (store of popularStores; track store.id) {
+                    <div class="store-partner-card" [routerLink]="['/store-details']" [queryParams]="{ id: store.id }">
+                        <div class="store-card-header">
+                            <div class="store-img-box">
+                                <img [src]="store.image" [alt]="store.name" class="store-thumb-img" />
+                            </div>
+                            <div class="store-meta-info">
+                                <div class="store-name-row">
+                                    <h3 class="store-title">{{ store.name }}</h3>
+                                    <span class="verified-badge-mini" *ngIf="store.verified" title="Verified Store Partner">✓</span>
+                                </div>
+                                <span class="store-category-tag">{{ store.category }}</span>
+                                <div class="store-rating-row">
+                                    <span class="star-rating">★ {{ store.rating }}</span>
+                                    <span class="reviews-count">({{ store.reviewsCount }} ratings)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="store-offer-banner">
+                            <span class="offer-icon">🏷️</span>
+                            <span class="offer-text">{{ store.featuredOffer }}</span>
+                        </div>
+
+                        <div class="store-card-footer">
+                            <span class="store-distance-text">📍 {{ store.locality }} ({{ store.distance }})</span>
+                            <span class="active-deals-pill">{{ store.activeDealsCount }} Active Deals</span>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </section>
+
             <!-- Based on Your Interests -->
             <section class="interests-section mt-5 mb-5">
                 <div class="section-header d-flex justify-content-between align-items-center mb-3">

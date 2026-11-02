@@ -1,0 +1,151 @@
+<div class="app-layout">
+  <!-- Sticky Navbar -->
+  <app-navbar />
+
+  <div class="app-body">
+    <!-- Sidebar -->
+    <app-main-sidebar />
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+      <main class="main-content">
+        <!-- Hero Header Banner -->
+        <div class="stores-hero-banner">
+          <div class="banner-content-text">
+            <div class="hero-badge">🏬 Verified Store Partner Directory</div>
+            <h1 class="hero-title">Popular Offline Partner Stores</h1>
+            <p class="hero-subtitle">
+              Browse top-rated local shops in <strong>Bengaluru</strong>. Visit in-person to inspect products, talk to store owners & redeem exclusive <strong>FlashDeals</strong> in-store discount coupons!
+            </p>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="stat-pill">
+              <span class="stat-num">500+</span>
+              <span class="stat-label">Verified Local Shops</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">Zero Commission</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num">Direct</span>
+              <span class="stat-label">In-Store Coupon Claim</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search & Filter Control Bar -->
+        <div class="stores-filter-bar">
+          <div class="search-input-wrapper">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input 
+              type="text" 
+              class="search-input" 
+              placeholder="Search store name, locality, or category..." 
+              [(ngModel)]="searchQuery" 
+            />
+            <button class="btn-clear" *ngIf="searchQuery" (click)="searchQuery = ''">✕</button>
+          </div>
+
+          <div class="sort-select-wrapper">
+            <label class="sort-label">Sort By:</label>
+            <select class="sort-dropdown" [(ngModel)]="selectedSort">
+              <option value="popular">🔥 Most Popular</option>
+              <option value="rating">⭐ Highest Rated</option>
+              <option value="deals">🏷️ Most Active Deals</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills Bar -->
+        <div class="category-pills-row">
+          @for (cat of categories; track cat) {
+            <button 
+              class="category-pill-btn" 
+              [class.active]="selectedCategory === cat" 
+              (click)="selectCategory(cat)"
+            >
+              {{ cat }}
+            </button>
+          }
+        </div>
+
+        <!-- Stores Grid -->
+        <div class="stores-section-title-bar">
+          <h2 class="section-title">
+            Showing {{ filteredStores.length }} Partner Stores
+          </h2>
+        </div>
+
+        <div class="stores-cards-grid" *ngIf="filteredStores.length > 0">
+          @for (store of filteredStores; track store.id) {
+            <div class="store-card" [routerLink]="['/store-details']" [queryParams]="{ id: store.id }">
+              <!-- Top Row: Logo & Basic Info -->
+              <div class="card-top-info">
+                <div class="store-logo-box">
+                  <img [src]="store.image" [alt]="store.name" class="store-logo-img" />
+                </div>
+                <div class="store-main-meta">
+                  <div class="title-verified-row">
+                    <h3 class="store-name-text">{{ store.name }}</h3>
+                    <span class="verified-badge-icon" *ngIf="store.verified" title="Verified Store Partner">✓</span>
+                  </div>
+                  <span class="category-badge">{{ store.category }}</span>
+                  <div class="rating-reviews-row">
+                    <span class="green-star-badge">★ {{ store.rating }}</span>
+                    <span class="reviews-text">({{ store.reviewsCount }} ratings)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Offer Highlight Ribbon -->
+              <div class="offer-ribbon-box">
+                <span class="ribbon-icon">🏷️</span>
+                <span class="ribbon-text">{{ store.featuredOffer }}</span>
+              </div>
+
+              <!-- Store Details List (Address & Timings) -->
+              <div class="store-meta-details">
+                <div class="meta-item">
+                  <span class="material-symbols-outlined item-icon">location_on</span>
+                  <span class="item-text">{{ store.address }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="material-symbols-outlined item-icon">schedule</span>
+                  <span class="item-text">Open Today: {{ store.openTimings }}</span>
+                </div>
+              </div>
+
+              <!-- Footer Actions Stack -->
+              <div class="card-footer-actions">
+                <div class="footer-left-info">
+                  <span class="distance-pill">📍 {{ store.distance }}</span>
+                  <span class="active-deals-count-badge">{{ store.activeDealsCount }} Active Deals</span>
+                </div>
+
+                <div class="footer-btn-group">
+                  <button class="btn-store-action btn-call" (click)="callStore(store.phone, $event)" title="Call Store">
+                    <span class="material-symbols-outlined">call</span> Call
+                  </button>
+                  <button class="btn-store-action btn-directions" (click)="openDirections(store, $event)" title="Get Google Map Directions">
+                    <span class="material-symbols-outlined">near_me</span> Directions
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- No Results State -->
+        <div class="no-stores-found" *ngIf="filteredStores.length === 0">
+          <div class="empty-icon">🏪</div>
+          <h3>No Partner Stores Found</h3>
+          <p>Try searching with a different category or store name.</p>
+          <button class="btn-reset-filters" (click)="selectedCategory = 'All'; searchQuery = ''">Reset Filters</button>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>

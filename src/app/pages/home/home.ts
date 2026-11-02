@@ -14,6 +14,20 @@ interface Deal {
   image: string;
 }
 
+export interface PopularStore {
+  id: number;
+  name: string;
+  category: string;
+  rating: number;
+  reviewsCount: number;
+  distance: string;
+  locality: string;
+  activeDealsCount: number;
+  featuredOffer: string;
+  image: string;
+  verified: boolean;
+}
+
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterLink, MainSidebar, Navbar],
@@ -25,6 +39,61 @@ export class Home implements OnInit, OnDestroy {
 
   headerSecondsLeft = 2 * 3600 + 14 * 60 + 22;
   headerTimerString = '02 : 14 : 22';
+
+  popularStores: PopularStore[] = [
+    {
+      id: 1,
+      name: 'Adidas Performance Hub',
+      category: 'Footwear & Apparel',
+      rating: 4.9,
+      reviewsCount: 184,
+      distance: '1.2 km away',
+      locality: 'Koramangala, Bengaluru',
+      activeDealsCount: 14,
+      featuredOffer: 'Flat 50% OFF In-Store Deals',
+      image: 'adidas_shoe.png',
+      verified: true
+    },
+    {
+      id: 2,
+      name: 'boAt Experience Centre',
+      category: 'Electronics & Audio',
+      rating: 4.8,
+      reviewsCount: 312,
+      distance: '2.5 km away',
+      locality: 'Indiranagar, Bengaluru',
+      activeDealsCount: 22,
+      featuredOffer: 'Up to 70% OFF Flash Coupon',
+      image: 'boat_headphones.png',
+      verified: true
+    },
+    {
+      id: 3,
+      name: 'Royal Fashion Superstore',
+      category: 'Fashion & Apparel',
+      rating: 4.7,
+      reviewsCount: 96,
+      distance: '0.8 km away',
+      locality: 'MG Road, Bengaluru',
+      activeDealsCount: 18,
+      featuredOffer: 'Buy 1 Get 1 Free on Wearables',
+      image: 'myntra_fashion.jpg',
+      verified: true
+    },
+    {
+      id: 4,
+      name: 'City Supermarket Hub',
+      category: 'Groceries & Household',
+      rating: 4.9,
+      reviewsCount: 420,
+      distance: '1.5 km away',
+      locality: 'HSR Layout, Bengaluru',
+      activeDealsCount: 35,
+      featuredOffer: 'Flat ₹300 OFF Coupon',
+      image: 'swiggy_meal.jpg',
+      verified: true
+    }
+  ];
 
   deals: Deal[] = [
     { id: 1, brand: 'Nike', discount: '60% OFF', title: "Men's Running Shoes", price: '₹2,399', originalPrice: '₹5,999', image: 'nike_shoes.png' },

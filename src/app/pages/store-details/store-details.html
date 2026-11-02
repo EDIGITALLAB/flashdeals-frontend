@@ -1,0 +1,298 @@
+<div class="app-layout">
+  <!-- Sticky Top Navbar -->
+  <app-navbar />
+
+  <div class="app-body">
+    <!-- Main Sidebar -->
+    <app-main-sidebar />
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+      <main class="main-content" *ngIf="currentStore">
+        
+        <!-- Top Store Profile Hero Banner -->
+        <div class="store-hero-card">
+          <!-- Cover Backdrop Image -->
+          <div class="store-cover-image" [style.backgroundImage]="'url(' + currentStore.coverImage + ')'">
+            <div class="cover-gradient-overlay"></div>
+          </div>
+
+          <!-- Store Header Info Overlay -->
+          <div class="store-profile-header-content">
+            <div class="store-logo-large-box">
+              <img [src]="currentStore.logoImage" [alt]="currentStore.name" class="store-logo-large" />
+            </div>
+
+            <div class="store-header-text">
+              <div class="title-verified-row">
+                <h1 class="store-name-heading">{{ currentStore.name }}</h1>
+                <span class="verified-badge-large" *ngIf="currentStore.verified">✓ Verified Store Partner</span>
+              </div>
+
+              <p class="store-category-locality">
+                <span>{{ currentStore.category }}</span> • <span>📍 {{ currentStore.locality }}, {{ currentStore.city }}</span>
+              </p>
+
+              <div class="store-rating-bar">
+                <span class="rating-badge-star">★ {{ currentStore.rating }}</span>
+                <span class="reviews-count-text">({{ currentStore.reviewsCount }} verified store ratings)</span>
+                <span class="dot-separator">•</span>
+                <span class="active-deals-pill">🏷️ {{ currentStore.deals.length }} Deals Published</span>
+              </div>
+            </div>
+
+            <!-- Quick Action CTA Buttons Stack -->
+            <div class="store-header-actions">
+              <button class="btn-store-cta btn-dir" (click)="openDirections()">
+                <span class="material-symbols-outlined">directions</span> Get Directions
+              </button>
+              <button class="btn-store-cta btn-call" (click)="callStore()">
+                <span class="material-symbols-outlined">call</span> Call
+              </button>
+              <button class="btn-store-cta btn-wa" (click)="whatsappStore()">
+                <span class="material-symbols-outlined">chat</span> WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main 2-Column Content Grid -->
+        <div class="store-main-layout-grid">
+          
+          <!-- LEFT COLUMN: Deals, About, and Reviews Tabs -->
+          <div class="store-content-left">
+            <!-- Tabs Bar -->
+            <div class="store-tabs-navigation">
+              <button class="tab-btn" [class.active]="activeTab === 'deals'" (click)="activeTab = 'deals'">
+                🏷️ Store Deals & Coupons ({{ currentStore.deals.length }})
+              </button>
+              <button class="tab-btn" [class.active]="activeTab === 'about'" (click)="activeTab = 'about'">
+                🏬 About Store & Amenities
+              </button>
+              <button class="tab-btn" [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">
+                💬 Customer Reviews ({{ currentStore.reviewsCount }})
+              </button>
+            </div>
+
+            <!-- TAB 1: STORE DEALS & COUPONS -->
+            <div class="tab-panel" *ngIf="activeTab === 'deals'">
+              <div class="section-title-row">
+                <h3 class="panel-section-title">Active In-Store Discount Coupons</h3>
+                <span class="panel-section-sub">Show coupon at billing counter upon store redemption</span>
+              </div>
+
+              <div class="store-deals-grid">
+                @for (deal of currentStore.deals; track deal.id) {
+                  <div class="store-deal-card">
+                    <div class="deal-image-viewport">
+                      <span class="deal-discount-badge">{{ deal.discountPercent }}</span>
+                      <img [src]="deal.image" [alt]="deal.title" class="deal-img" />
+                    </div>
+
+                    <div class="deal-card-body">
+                      <span class="deal-category-tag">{{ deal.category }}</span>
+                      <h4 class="deal-title">{{ deal.title }}</h4>
+
+                      <div class="deal-pricing-row">
+                        <div class="deal-prices">
+                          <span class="price-discounted">₹{{ deal.discountPrice | number:'1.0-0' }}</span>
+                          <span class="price-original">₹{{ deal.originalPrice | number:'1.0-0' }}</span>
+                        </div>
+                        <span class="stock-left-pill">🔥 {{ deal.unitsLeft }} units left</span>
+                      </div>
+
+                      <div class="deal-timer-bar">
+                        <span class="material-symbols-outlined timer-icon">schedule</span>
+                        <span class="timer-text">Expires: {{ deal.expiresIn }}</span>
+                      </div>
+
+                      <div class="deal-actions-row">
+                        <button class="btn-claim-deal-coupon" (click)="claimCoupon(deal)">
+                          🎟️ Claim Store Coupon
+                        </button>
+                        <button class="btn-view-deal" [routerLink]="['/deal-details']" [queryParams]="{ id: deal.id }">
+                          Details →
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- TAB 2: ABOUT STORE & AMENITIES -->
+            <div class="tab-panel" *ngIf="activeTab === 'about'">
+              <div class="about-card-box">
+                <h3 class="panel-section-title">About {{ currentStore.name }}</h3>
+                <p class="store-desc-paragraph">{{ currentStore.description }}</p>
+
+                <div class="amenities-section mt-4">
+                  <h4 class="sub-heading-title">Store Amenities & Highlights</h4>
+                  <div class="amenities-flex">
+                    @for (item of currentStore.amenities; track item) {
+                      <div class="amenity-chip">
+                        <span class="chip-check">✓</span>
+                        <span>{{ item }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+
+                <div class="store-timing-breakdown mt-4">
+                  <h4 class="sub-heading-title">Opening & Closing Hours</h4>
+                  <div class="timing-info-row">
+                    <span class="material-symbols-outlined clock-icon">schedule</span>
+                    <div>
+                      <strong>{{ currentStore.openTimings }}</strong>
+                      <span class="working-days-text">({{ currentStore.workingDays }})</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: CUSTOMER REVIEWS -->
+            <div class="tab-panel" *ngIf="activeTab === 'reviews'">
+              <div class="reviews-summary-card">
+                <div class="rating-big-box">
+                  <span class="rating-number">{{ currentStore.rating }}</span>
+                  <div class="stars-gold">★★★★★</div>
+                  <span class="total-ratings-label">Based on {{ currentStore.reviewsCount }} ratings</span>
+                </div>
+
+                <div class="reviews-list mt-4">
+                  <div class="review-item">
+                    <div class="review-header">
+                      <strong>Rahul Sharma</strong>
+                      <span class="review-date">2 days ago</span>
+                    </div>
+                    <div class="stars-gold-small">★★★★★</div>
+                    <p class="review-comment">Great store experience! Claimed 50% OFF coupon on FlashDeals and got instant discount at billing counter without any hassle.</p>
+                  </div>
+
+                  <div class="review-item">
+                    <div class="review-header">
+                      <strong>Priya Sundaram</strong>
+                      <span class="review-date">1 week ago</span>
+                    </div>
+                    <div class="stars-gold-small">★★★★★</div>
+                    <p class="review-comment">Store staff was very helpful and verified coupon code quickly. Products are 100% genuine!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Interactive Google Map & Location Details -->
+          <div class="store-content-right">
+            <!-- Google Maps Embed Card -->
+            <div class="store-map-card">
+              <div class="map-card-header">
+                <span class="material-symbols-outlined map-icon">pin_drop</span>
+                <div>
+                  <h4 class="map-card-title">Store Pinpoint Location</h4>
+                  <span class="map-distance-sub">{{ currentStore.distance }}</span>
+                </div>
+              </div>
+
+              <div class="google-map-container">
+                <iframe
+                  *ngIf="mapEmbedUrl"
+                  [src]="mapEmbedUrl"
+                  width="100%"
+                  height="100%"
+                  style="border:0;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  class="store-google-map"
+                ></iframe>
+              </div>
+
+              <button class="btn-full-directions" (click)="openDirections()">
+                📍 Open Google Maps Directions
+              </button>
+            </div>
+
+            <!-- Store Quick Contact & Verification Box -->
+            <div class="store-contact-box">
+              <h4 class="contact-box-title">Store Contact Info</h4>
+
+              <div class="contact-info-list">
+                <div class="c-info-row">
+                  <span class="material-symbols-outlined c-icon">location_on</span>
+                  <div>
+                    <strong>Full Shop Address</strong>
+                    <p>{{ currentStore.address }}, {{ currentStore.locality }}, {{ currentStore.city }} - {{ currentStore.pincode }}</p>
+                  </div>
+                </div>
+
+                <div class="c-info-row">
+                  <span class="material-symbols-outlined c-icon">phone</span>
+                  <div>
+                    <strong>Phone / Contact Number</strong>
+                    <p>{{ currentStore.phone }}</p>
+                  </div>
+                </div>
+
+                <div class="c-info-row">
+                  <span class="material-symbols-outlined c-icon">verified_user</span>
+                  <div>
+                    <strong>Verified Partner Guarantee</strong>
+                    <p>100% Verified Offline Store Partner on FlashDeals platform</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-action-buttons mt-3">
+                <button class="btn-c-act btn-c-call" (click)="callStore()">
+                  <span class="material-symbols-outlined">call</span> Call Store
+                </button>
+                <button class="btn-c-act btn-c-wa" (click)="whatsappStore()">
+                  <span class="material-symbols-outlined">chat</span> WhatsApp
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- IN-STORE COUPON CLAIM MODAL (POPUP) -->
+  <div class="coupon-modal-backdrop" *ngIf="showCouponModal" (click)="closeCouponModal()">
+    <div class="coupon-modal-card" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeCouponModal()">✕</button>
+
+      <div class="modal-header-icon">🎟️</div>
+      <h3 class="modal-title">In-Store Coupon Claimed!</h3>
+      <p class="modal-subtitle">Show this coupon code at billing counter to get <strong>{{ selectedDeal?.discountPercent }}</strong></p>
+
+      <div class="coupon-code-box">
+        <span class="code-text">{{ selectedDeal?.couponCode }}</span>
+        <button class="btn-copy-code" (click)="copyCouponCode()">
+          {{ codeCopied ? 'Copied ✓' : 'Copy Code' }}
+        </button>
+      </div>
+
+      <div class="modal-store-info" *ngIf="currentStore">
+        <div class="store-mini-badge">🏬 {{ currentStore.name }}</div>
+        <p class="store-mini-addr">📍 {{ currentStore.address }}</p>
+        <p class="store-mini-timing">🕒 Open Today: {{ currentStore.openTimings }}</p>
+      </div>
+
+      <div class="modal-action-buttons">
+        <button class="btn-modal-action btn-dir" (click)="openDirections()">
+          📍 Get Directions
+        </button>
+        <button class="btn-modal-action btn-wa" (click)="whatsappStore()">
+          💬 WhatsApp Store
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
