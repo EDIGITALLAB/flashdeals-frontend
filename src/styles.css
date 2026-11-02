@@ -1,13 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   /* Brand Theme Colors */
-  --primary-color: #ff3f6c;
-  --primary-hover: #e02a55;
+  --primary-color: #ff2e63;
+  --primary-hover: #e02050;
   --primary-light: #fff0f3;
+  --primary-glow: rgba(255, 46, 99, 0.25);
   --secondary-color: #6200ea;
   --secondary-dark: #311b92;
   --accent-color: #ffc107;
   --accent-hover: #ffb300;
+  --teal-color: #00BBA9;
+  --teal-hover: #009e8f;
+  --teal-light: #e6fbf9;
+  --teal-glow: rgba(0, 187, 169, 0.25);
+  --theme-teal: #00BBA9;
   --success-color: #00ca72;
   --success-light: #e6fff4;
   --success-text: #2e7d32;
@@ -88,7 +94,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(255, 63, 108, 0.3);
+  box-shadow: 0 4px 10px var(--primary-glow);
 }
 
 .logo-bolt {
@@ -108,3 +114,134 @@ body {
   color: var(--primary-color);
 }
 
+
+
+/* Teal (#00BBA9) Theme Utilities */
+.text-teal {
+  color: var(--teal-color) !important;
+}
+
+.bg-teal {
+  background-color: var(--teal-color) !important;
+  color: #ffffff !important;
+}
+
+.bg-teal-light {
+  background-color: var(--teal-light) !important;
+  color: var(--teal-color) !important;
+}
+
+.badge-teal {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--teal-light);
+  color: var(--teal-color);
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 187, 169, 0.25);
+}
+
+.btn-teal {
+  background-color: var(--teal-color);
+  color: #ffffff;
+  border: none;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--teal-glow);
+  transition: all 0.2s ease;
+}
+
+.btn-teal:hover {
+  background-color: var(--teal-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 187, 169, 0.35);
+}
+
+/* ========================================================
+   BODY ACCENT THEME CLASSES
+   ======================================================== */
+body.theme-teal {
+  --primary-color: #00BBA9 !important;
+  --primary-hover: #009e8f !important;
+  --primary-light: #e6fbf9 !important;
+  --primary-glow: rgba(0, 187, 169, 0.25) !important;
+}
+
+body.theme-purple {
+  --primary-color: #7c3aed !important;
+  --primary-hover: #6d28d9 !important;
+  --primary-light: #f3e8ff !important;
+  --primary-glow: rgba(124, 58, 237, 0.25) !important;
+}
+
+body.theme-blue {
+  --primary-color: #0284c7 !important;
+  --primary-hover: #0369a1 !important;
+  --primary-light: #f0f9ff !important;
+  --primary-glow: rgba(2, 132, 199, 0.25) !important;
+}
+
+body.theme-orange {
+  --primary-color: #f97316 !important;
+  --primary-hover: #ea580c !important;
+  --primary-light: #fff7ed !important;
+  --primary-glow: rgba(249, 115, 22, 0.25) !important;
+}
+
+body.theme-pink {
+  --primary-color: #ff2e63 !important;
+  --primary-hover: #e02050 !important;
+  --primary-light: #fff0f3 !important;
+  --primary-glow: rgba(255, 46, 99, 0.25) !important;
+}
+
+
+/* ========================================================
+   GLOBAL DARK MODE SUPPORT
+   ======================================================== */
+body.dark-mode {
+  --bg-color: #0b0f19;
+  --card-bg: #151d30;
+  --border-color: #23304a;
+  --border-hover: #334466;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-dark: #f8fafc;
+  background-color: #0b0f19 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .app-layout,
+body.dark-mode .main-content {
+  background-color: #0b0f19 !important;
+}
+
+body.dark-mode .amazon-quad-card,
+body.dark-mode .quad-showcase-container,
+body.dark-mode .vertical-deal-card,
+body.dark-mode .rec-block-card,
+body.dark-mode .rec-mini-card,
+body.dark-mode .amazon-footer-guarantee {
+  background: #151d30 !important;
+  border-color: #23304a !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .section-title,
+body.dark-mode .quad-title,
+body.dark-mode .card-product-title,
+body.dark-mode .mini-product-title,
+body.dark-mode .category-name {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .quad-item-card,
+body.dark-mode .quad-tile-unified,
+body.dark-mode .mini-card-img-box {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}

@@ -91,18 +91,6 @@ export class Home implements OnInit, OnDestroy {
   headerSecondsLeft = 2 * 3600 + 14 * 60 + 22;
   headerTimerString = '02 : 14 : 22';
 
-  // Amazon-Style Category Ribbon
-  amazonSubNav = [
-    { name: 'All Categories', icon: 'menu', link: '/explore', isMenu: true },
-    { name: "Today's Deals", icon: 'bolt', link: '/my-deals' },
-    { name: 'Electronics & Audio', icon: 'headphones', link: '/explore' },
-    { name: 'Fashion & Styles', icon: 'checkroom', link: '/explore' },
-    { name: 'Home & Kitchen', icon: 'home', link: '/explore' },
-    { name: 'Flash Prime', icon: 'verified', link: '/early-access', isPrime: true },
-    { name: 'Best Sellers', icon: 'stars', link: '/explore' },
-    { name: 'Coupons & Offers', icon: 'local_offer', link: '/explore' },
-    { name: 'Bank Discounts', icon: 'credit_card', link: '/explore' }
-  ];
 
   // Amazon-Style Signature Quad Cards (4 Categories / 2x2 Grid)
   quadCards = [

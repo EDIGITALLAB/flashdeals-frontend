@@ -89,7 +89,7 @@ app-main-sidebar {
 }
 
 .fashion-gradient {
-  background: linear-gradient(135deg, #d81b60 0%, #e91e63 30%, #f06292 70%, #ff7043 100%);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-color) 40%, #ff7043 100%);
 }
 
 /* Decorative Mesh & Ambient Glow Orbs */
@@ -391,14 +391,14 @@ app-main-sidebar {
   border-radius: 12px;
   font-size: 10px;
   font-weight: 800;
-  color: #e11d48;
+  color: var(--primary-color);
 }
 
 .chip-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #e11d48;
+  background: var(--primary-color);
 }
 
 .showcase-rating-badge {
@@ -472,7 +472,7 @@ app-main-sidebar {
 .showcase-deal-price {
   font-size: 14px;
   font-weight: 900;
-  color: #e11d48;
+  color: var(--primary-color);
 }
 
 .showcase-orig-price {
@@ -484,7 +484,7 @@ app-main-sidebar {
 .showcase-save-tag {
   font-size: 10px;
   font-weight: 800;
-  background: #fee2e2;
+  background: var(--primary-light);
   color: #ef4444;
   padding: 1px 5px;
   border-radius: 4px;
@@ -563,7 +563,7 @@ app-main-sidebar {
 .badge-suffix {
   font-size: 12px;
   font-weight: 900;
-  color: #e11d48;
+  color: var(--primary-color);
   line-height: 1;
 }
 
@@ -600,7 +600,7 @@ app-main-sidebar {
 
 .carousel-nav-btn:hover {
   background: #ffffff;
-  color: #ff2e63;
+  color: var(--primary-color);
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
 }
@@ -708,7 +708,7 @@ app-main-sidebar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #ff2e63;
+  background-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -727,7 +727,7 @@ app-main-sidebar {
 }
 
 .header-timer-pill {
-  background-color: #ff2e63;
+  background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 20px;
   padding: 4px 14px;
@@ -753,7 +753,7 @@ app-main-sidebar {
 .view-all-deals-link {
   font-size: 13px;
   font-weight: 700;
-  color: #ff2e63;
+  color: var(--primary-color);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -808,8 +808,8 @@ app-main-sidebar {
 
 .vertical-deal-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  border-color: #ffd6e0;
+  box-shadow: 0 10px 24px var(--primary-glow);
+  border-color: var(--primary-color);
 }
 
 /* Card Top Row */
@@ -821,7 +821,7 @@ app-main-sidebar {
 }
 
 .discount-badge-pill {
-  background-color: #ff2e63;
+  background-color: var(--primary-color);
   color: #ffffff;
   font-size: 11px;
   font-weight: 800;
@@ -843,7 +843,7 @@ app-main-sidebar {
 }
 
 .wishlist-btn:hover {
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .wishlist-btn .material-symbols-outlined {
@@ -910,7 +910,7 @@ app-main-sidebar {
 .current-price {
   font-size: 16px;
   font-weight: 900;
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .original-price {
@@ -924,7 +924,7 @@ app-main-sidebar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #ff2e63;
+  background-color: var(--primary-color);
   color: #ffffff;
   border: none;
   display: flex;
@@ -933,12 +933,12 @@ app-main-sidebar {
   cursor: pointer;
   padding: 0;
   transition: transform 0.2s, background-color 0.2s;
-  box-shadow: 0 3px 8px rgba(255, 46, 99, 0.3);
+  box-shadow: 0 3px 8px var(--primary-glow);
 }
 
 .add-cart-btn:hover {
   transform: scale(1.08);
-  background-color: #e02050;
+  background-color: var(--primary-hover);
 }
 
 .add-cart-btn .material-symbols-outlined {
@@ -994,8 +994,8 @@ app-main-sidebar {
 
 .category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  border-color: #ffd6e0;
+  box-shadow: 0 10px 24px var(--primary-glow);
+  border-color: var(--primary-color);
 }
 
 .category-img-container {
@@ -1014,7 +1014,7 @@ app-main-sidebar {
 
 .category-card:hover .category-img-container {
   transform: scale(1.08);
-  box-shadow: 0 8px 20px rgba(255, 46, 99, 0.25);
+  box-shadow: 0 8px 20px var(--primary-glow);
   border-color: #ffffff;
 }
 
@@ -1088,8 +1088,8 @@ app-main-sidebar {
 .category-offer-pill {
   font-size: 10px;
   font-weight: 800;
-  color: #ff2e63;
-  background: #fff0f3;
+  color: var(--primary-color);
+  background: var(--primary-light);
   padding: 2px 7px;
   border-radius: 6px;
   letter-spacing: 0.2px;
@@ -1098,7 +1098,7 @@ app-main-sidebar {
 }
 
 .category-card:hover .category-offer-pill {
-  background: #ff2e63;
+  background: var(--primary-color);
   color: #ffffff;
 }
 
@@ -1224,7 +1224,7 @@ app-main-sidebar {
 }
 
 .text-bright-red {
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .text-indigo {
@@ -1239,37 +1239,45 @@ app-main-sidebar {
   font-weight: 800;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   cursor: pointer;
   align-self: flex-start;
-  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #ffffff;
+  color: #1a1d2e;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
 }
 
 .banner-pill-btn .material-symbols-outlined {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
+  transition: transform 0.2s ease;
+}
+
+.interest-banner-card:hover .banner-pill-btn,
+.banner-pill-btn:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--primary-glow);
+}
+
+.interest-banner-card:hover .banner-pill-btn .material-symbols-outlined,
+.banner-pill-btn:hover .material-symbols-outlined {
+  transform: translateX(3px);
 }
 
 .btn-pink {
-  background-color: #ff2e63;
+  background-color: var(--primary-color);
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(255, 46, 99, 0.2);
-}
-
-.btn-pink:hover {
-  background-color: #e02050;
-  transform: translateY(-1px);
+  box-shadow: 0 2px 6px var(--primary-glow);
 }
 
 .btn-white {
   background-color: #ffffff;
   color: #1a1d2e;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-
-.btn-white:hover {
-  background-color: #f8f9fa;
-  transform: translateY(-1px);
 }
 
 /* Responsive Custom Adjustments */
@@ -1509,11 +1517,11 @@ app-main-sidebar {
 }
 
 .quad-showcase-container {
-  background: linear-gradient(180deg, #fff2f5 0%, #fffbfd 40%, #ffffff 100%);
-  border: 1px solid #ffd6e2;
+  background: linear-gradient(180deg, var(--primary-light) 0%, rgba(255, 255, 255, 0.8) 40%, #ffffff 100%);
+  border: 1px solid var(--primary-light);
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 4px 20px rgba(255, 46, 99, 0.05);
+  box-shadow: 0 4px 20px var(--primary-glow);
 }
 
 .quad-cards-grid {
@@ -1554,8 +1562,8 @@ app-main-sidebar {
 
 .quad-feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(255, 46, 99, 0.12);
-  border-color: rgba(255, 46, 99, 0.3);
+  box-shadow: 0 12px 30px var(--primary-glow);
+  border-color: var(--primary-glow);
 }
 
 .quad-card-head {
@@ -1579,11 +1587,11 @@ app-main-sidebar {
 }
 
 .quad-card-head:hover .quad-card-heading {
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .quad-head-arrow {
-  color: #ff2e63;
+  color: var(--primary-color);
   font-size: 22px;
   font-weight: 700;
   transition: transform 0.2s ease;
@@ -1627,7 +1635,7 @@ app-main-sidebar {
 
 .quad-tile-item:hover .quad-tile-visual {
   background: #ffffff;
-  border-color: rgba(255, 46, 99, 0.2);
+  border-color: var(--primary-glow);
 }
 
 .quad-tile-img {
@@ -1649,9 +1657,9 @@ app-main-sidebar {
   font-weight: 800;
   padding: 2px 7px;
   border-radius: 4px;
-  background: linear-gradient(135deg, #ff2e63 0%, #ff4b72 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(255, 46, 99, 0.35);
+  box-shadow: 0 2px 6px var(--primary-glow);
   letter-spacing: 0.2px;
 }
 
@@ -1679,7 +1687,7 @@ app-main-sidebar {
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
   font-weight: 800;
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .quad-mrp-val {
@@ -1701,7 +1709,7 @@ app-main-sidebar {
 }
 
 .quad-tile-item:hover .quad-tile-text {
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .quad-prefix {
@@ -1721,8 +1729,8 @@ app-main-sidebar {
   display: inline-block;
   font-size: 11px;
   font-weight: 800;
-  color: #ff2e63;
-  background: rgba(255, 46, 99, 0.08);
+  color: var(--primary-color);
+  background: var(--primary-light);
   padding: 1px 6px;
   border-radius: 4px;
 }
@@ -1739,7 +1747,7 @@ app-main-sidebar {
   gap: 6px;
   font-size: 13px;
   font-weight: 700;
-  color: #ff2e63;
+  color: var(--primary-color);
   text-decoration: none;
   transition: gap 0.2s ease, color 0.2s ease;
 }
@@ -1751,7 +1759,7 @@ app-main-sidebar {
 
 .quad-foot-link:hover {
   gap: 9px;
-  color: #d81b4f;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -2121,8 +2129,8 @@ app-main-sidebar {
 
 .rec-mini-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
-  border-color: #e2e8f0;
+  box-shadow: 0 10px 20px var(--primary-glow);
+  border-color: var(--primary-color);
 }
 
 .mini-wishlist-btn {
@@ -2142,7 +2150,7 @@ app-main-sidebar {
 }
 
 .mini-wishlist-btn:hover {
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .mini-wishlist-btn .material-symbols-outlined {
@@ -2194,7 +2202,7 @@ app-main-sidebar {
 .mini-current-price {
   font-size: 15px;
   font-weight: 900;
-  color: #ff2e63;
+  color: var(--primary-color);
 }
 
 .mini-original-price {
@@ -2230,93 +2238,6 @@ app-main-sidebar {
    AMAZON SHOPPING ORGANIZED STYLES (HOME PAGE)
    ========================================================== */
 
-/* 1. Amazon Sub-Nav Category Ribbon */
-.amazon-subnav-ribbon {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  border: 1px solid #edf0f5;
-  border-radius: 14px;
-  padding: 6px 14px;
-  margin-bottom: 18px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  gap: 12px;
-}
-
-.subnav-scroll-container {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.subnav-scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-.subnav-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #4b5563;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.subnav-pill:hover {
-  background: #f1f5f9;
-  color: #0f172a;
-}
-
-.subnav-menu-btn {
-  background: #1e293b;
-  color: #ffffff !important;
-  font-weight: 800;
-}
-
-.subnav-menu-btn:hover {
-  background: #0f172a;
-  color: #ffffff !important;
-}
-
-.subnav-prime {
-  color: #0284c7;
-  background: #f0f9ff;
-  font-weight: 800;
-}
-
-.subnav-icon {
-  font-size: 17px;
-}
-
-.subnav-right-highlight {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 800;
-  color: #e11d48;
-  white-space: nowrap;
-  cursor: pointer;
-  padding: 5px 12px;
-  border-radius: 20px;
-  background: #ffe4e6;
-  border: 1px solid #fecdd3;
-  transition: all 0.2s ease;
-}
-
-.subnav-right-highlight:hover {
-  background: #fecdd3;
-  transform: translateX(2px);
-}
 
 .highlight-chevron {
   font-size: 16px;
@@ -2343,13 +2264,13 @@ app-main-sidebar {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .amazon-quad-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  border-color: #e2e8f0;
+  box-shadow: 0 10px 24px var(--primary-glow);
+  border-color: var(--primary-color);
 }
 
 .quad-header {
@@ -2432,13 +2353,13 @@ app-main-sidebar {
   gap: 3px;
   font-size: 13px;
   font-weight: 800;
-  color: #ff2e63;
+  color: var(--primary-color);
   text-decoration: none;
   transition: gap 0.2s ease, color 0.2s ease;
 }
 
 .quad-footer-link:hover {
-  color: #d81b4f;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -2453,7 +2374,13 @@ app-main-sidebar {
 
 /* Spotlight Deal Card (Card 4) */
 .spotlight-quad-card {
-  border-color: #ffd6e0;
+  border: 1.5px solid var(--primary-glow);
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.spotlight-quad-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 24px var(--primary-glow);
 }
 
 .spotlight-badge-row {
@@ -2466,7 +2393,7 @@ app-main-sidebar {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  background: #ff2e63;
+  background: var(--primary-color);
   color: #ffffff;
   font-size: 11px;
   font-weight: 800;
@@ -2482,8 +2409,8 @@ app-main-sidebar {
 .spotlight-discount-tag {
   font-size: 12px;
   font-weight: 900;
-  color: #e11d48;
-  background: #fee2e2;
+  color: var(--primary-color);
+  background: var(--primary-light);
   padding: 2px 8px;
   border-radius: 6px;
 }
@@ -2707,7 +2634,7 @@ app-main-sidebar {
 }
 
 .wishlist-btn.active {
-  color: #ff2e63 !important;
+  color: var(--primary-color) !important;
 }
 
 /* 7. Best Seller Rank Badges */
@@ -2741,22 +2668,32 @@ app-main-sidebar {
 }
 
 .mini-add-cart-btn {
-  background: #f1f5f9;
-  color: #0f172a;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-light);
+  border-radius: 8px;
   font-size: 11px;
   font-weight: 800;
-  padding: 4px 8px;
+  padding: 5px 10px;
   cursor: pointer;
-  margin-top: 4px;
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 
 .mini-add-cart-btn:hover {
-  background: #0f172a;
+  background: var(--primary-color);
   color: #ffffff;
-  border-color: #0f172a;
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px var(--primary-glow);
+}
+
+.mini-add-cart-btn .mini-btn-icon {
+  font-size: 14px;
 }
 
 /* 9. Amazon Footer Trust & Guarantee */

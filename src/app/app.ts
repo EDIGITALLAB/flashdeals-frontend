@@ -3,11 +3,12 @@ import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MobileNav } from './components/mobile-nav/mobile-nav';
 import { Footer } from './components/footer/footer';
+import { ThemeSwitcher } from './components/theme-switcher/theme-switcher';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MobileNav, Footer],
+  imports: [CommonModule, RouterOutlet, MobileNav, Footer, ThemeSwitcher],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

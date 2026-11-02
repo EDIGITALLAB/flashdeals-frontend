@@ -61,9 +61,9 @@ app-main-sidebar {
 
 .hero-badge {
   display: inline-block;
-  background: rgba(255, 63, 108, 0.2);
-  border: 1px solid rgba(255, 63, 108, 0.4);
-  color: #ff6584;
+  background: var(--primary-glow);
+  border: 1px solid var(--primary-color);
+  color: #ffffff;
   font-size: 12.5px;
   font-weight: 800;
   padding: 6px 14px;
@@ -108,7 +108,7 @@ app-main-sidebar {
 .stat-num {
   font-size: 22px;
   font-weight: 900;
-  color: #ff3f6c;
+  color: var(--primary-color);
 }
 
 .stat-label {
@@ -163,8 +163,8 @@ app-main-sidebar {
 }
 
 .search-input:focus {
-  border-color: #ff3f6c;
-  box-shadow: 0 4px 18px rgba(255, 63, 108, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 18px var(--primary-glow);
 }
 
 .btn-clear {
@@ -229,15 +229,15 @@ app-main-sidebar {
 }
 
 .category-pill-btn:hover {
-  border-color: #ff3f6c;
-  color: #ff3f6c;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .category-pill-btn.active {
-  background-color: #ff3f6c;
-  border-color: #ff3f6c;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(255, 63, 108, 0.3);
+  box-shadow: 0 4px 14px var(--primary-glow);
 }
 
 /* ----------------------------------------------------
@@ -276,8 +276,8 @@ app-main-sidebar {
 
 .store-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
-  border-color: #ff3f6c;
+  box-shadow: 0 16px 36px var(--primary-glow);
+  border-color: var(--primary-color);
 }
 
 .card-top-info {
@@ -372,8 +372,8 @@ app-main-sidebar {
 }
 
 .offer-ribbon-box {
-  background: linear-gradient(135deg, #fff0f3 0%, #ffe6eb 100%);
-  border: 1px solid #ffd0db;
+  background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+  border: 1px solid var(--primary-glow);
   border-radius: 12px;
   padding: 10px 14px;
   display: flex;
@@ -388,7 +388,7 @@ app-main-sidebar {
 .ribbon-text {
   font-size: 13px;
   font-weight: 800;
-  color: #ff3f6c;
+  color: var(--primary-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -411,7 +411,7 @@ app-main-sidebar {
 
 .item-icon {
   font-size: 18px;
-  color: #ff3f6c;
+  color: var(--primary-color);
 }
 
 .item-text {
@@ -482,13 +482,13 @@ app-main-sidebar {
 }
 
 .btn-directions {
-  background-color: #ff3f6c;
+  background-color: var(--primary-color);
   color: #ffffff;
 }
 
 .btn-directions:hover {
-  background-color: #e02a55;
-  box-shadow: 0 4px 12px rgba(255, 63, 108, 0.3);
+  background-color: var(--primary-hover);
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 /* ----------------------------------------------------
@@ -521,7 +521,7 @@ app-main-sidebar {
 }
 
 .btn-reset-filters {
-  background-color: #ff3f6c;
+  background-color: var(--primary-color);
   color: #ffffff;
   border: none;
   padding: 10px 24px;
