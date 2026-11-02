@@ -348,13 +348,6 @@
             <span>🏷️</span> Store Deals, Discount Type & Contact Info
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Primary Offer Type You Want to Post *</label>
-            <select class="form-control" [(ngModel)]="primaryOfferType" name="primaryOfferType">
-              <option *ngFor="let offer of offerTypes" [value]="offer">{{offer}}</option>
-            </select>
-          </div>
-
           <div class="form-row">
             <div class="form-group flex-1">
               <label class="form-label">WhatsApp / Contact No. for Customers *</label>
@@ -382,8 +375,8 @@
 
           <!-- Legal Documents & Verification Uploads Section -->
           <div class="legal-docs-section">
-            <div class="sub-heading">📄 Legal Documents & Store Verification Uploads</div>
-            <p class="section-desc">Upload shop proof documents to obtain the <strong>Verified Store Badge</strong> on your deal listings.</p>
+            <div class="sub-heading">📄 Legal Documents & Store Verification Uploads (Optional)</div>
+            <p class="section-desc">Upload shop proof documents to obtain the <strong>Verified Store Badge</strong> on your deal listings (Optional - You can skip this step).</p>
 
             <div class="doc-upload-grid">
               <!-- GST / Trade License Upload -->

@@ -163,20 +163,6 @@
           <div class="stock-progress-track">
             <div class="stock-progress-fill" [style.width.%]="stockPercentage" [class.fill-urgent]="currentProduct.totalStockLeft <= 5"></div>
           </div>
-
-          <!-- Size Wise Stock Breakdown -->
-          <div class="size-stock-breakdown">
-            <span class="breakdown-label">Size Stock Availability:</span>
-            <div class="size-stock-pills">
-              @for (size of currentProduct.availableSizes; track size) {
-                <div class="size-stock-item" [class.out-of-stock]="currentProduct.sizeStockMap[size] === 0">
-                  <span class="size-num">UK {{ size }}</span>
-                  <span class="size-qty" *ngIf="currentProduct.sizeStockMap[size] > 0">{{ currentProduct.sizeStockMap[size] }} left</span>
-                  <span class="size-qty out" *ngIf="currentProduct.sizeStockMap[size] === 0">Out of Stock</span>
-                </div>
-              }
-            </div>
-          </div>
         </div>
 
         <!-- Size Selection -->

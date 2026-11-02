@@ -65,6 +65,20 @@ export interface HeroSlide {
   quickTags?: string[];
 }
 
+export interface PopularStore {
+  id: number;
+  name: string;
+  category: string;
+  rating: number;
+  reviewsCount: number;
+  distance: string;
+  locality: string;
+  activeDealsCount: number;
+  featuredOffer: string;
+  image: string;
+  verified: boolean;
+}
+
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterLink, MainSidebar, Navbar],

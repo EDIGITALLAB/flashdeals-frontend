@@ -65,7 +65,6 @@ export class SellerRegister implements OnInit {
   detectedCoords: string = '';
 
   // Step 3: Deals & Discount Setup + Verification
-  primaryOfferType: string = 'Percentage Discount';
   gstinOrTradeLicense: string = '';
   storeContactForCustomers: string = '';
   agreePartnerTerms: boolean = false;
@@ -90,14 +89,6 @@ export class SellerRegister implements OnInit {
     'Jewellery & Watches',
     'Home Decor & Furniture',
     'General Retail Store'
-  ];
-
-  offerTypes: string[] = [
-    'Percentage Discount (e.g. Flat 30% OFF)',
-    'Flat Amount Discount (e.g. ₹500 OFF on ₹2000)',
-    'Buy 1 Get 1 Free (BOGO)',
-    'Exclusive In-Store Coupon Code',
-    'Seasonal / Flash Clearance Sale'
   ];
 
   constructor(
@@ -245,7 +236,7 @@ export class SellerRegister implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
       this.authService.login('admin');
-      this.successMessage = `🎉 Success! Store "${this.storeName}" registered with Legal Documents verified! Redirecting to Partner Portal to post your first deal...`;
+      this.successMessage = `🎉 Success! Store "${this.storeName}" registered successfully! Redirecting to Partner Portal to post your first deal...`;
 
       setTimeout(() => {
         this.router.navigate(['/admin/dashboard']);

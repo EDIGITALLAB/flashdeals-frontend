@@ -1,0 +1,882 @@
+/* Layout Configuration */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.app-body {
+  display: flex;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+app-main-sidebar {
+  display: block;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  align-self: flex-start;
+  z-index: 100;
+  transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.main-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-left: 0;
+}
+
+.main-content {
+  padding: 28px 40px 80px 40px;
+  background-color: var(--bg-color);
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ----------------------------------------------------
+   HERO COVER BANNER
+---------------------------------------------------- */
+.store-hero-card {
+  position: relative;
+  background-color: #1e1e2e;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.store-cover-image {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.cover-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(30, 30, 46, 0.3) 0%, rgba(30, 30, 46, 0.95) 100%);
+}
+
+.store-profile-header-content {
+  position: relative;
+  padding: 0 36px 32px 36px;
+  margin-top: -60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.store-logo-large-box {
+  width: 120px;
+  height: 120px;
+  border-radius: 24px;
+  background-color: #ffffff;
+  border: 4px solid #1e1e2e;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.store-logo-large {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.store-header-text {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.title-verified-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.store-name-heading {
+  font-size: 28px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.verified-badge-large {
+  background-color: #dcfce7;
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #bbf7d0;
+}
+
+.store-category-locality {
+  font-size: 14.5px;
+  color: #cbd5e1;
+  margin: 0;
+  font-weight: 500;
+}
+
+.store-rating-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.rating-badge-star {
+  background-color: #16a34a;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.reviews-count-text {
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.dot-separator {
+  color: #64748b;
+}
+
+.active-deals-pill {
+  background-color: #ff3f6c;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 20px;
+}
+
+.store-header-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn-store-cta {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-dir {
+  background-color: #ff3f6c;
+  color: #ffffff;
+}
+
+.btn-dir:hover {
+  background-color: #e02a55;
+  box-shadow: 0 4px 14px rgba(255, 63, 108, 0.35);
+}
+
+.btn-call {
+  background-color: #ffffff;
+  color: #1e1e2e;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-call:hover {
+  background-color: #f8fafc;
+}
+
+.btn-wa {
+  background-color: #25d366;
+  color: #ffffff;
+}
+
+.btn-wa:hover {
+  background-color: #20bd5a;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+
+/* ----------------------------------------------------
+   MAIN 2-COLUMN LAYOUT
+---------------------------------------------------- */
+.store-main-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* ----------------------------------------------------
+   TABS & DEALS PANEL
+---------------------------------------------------- */
+.store-tabs-navigation {
+  display: flex;
+  gap: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #64748b;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  color: #ff3f6c;
+  border-bottom-color: #ff3f6c;
+}
+
+.section-title-row {
+  margin-bottom: 20px;
+}
+
+.panel-section-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1e1e2e;
+  margin: 0 0 4px 0;
+}
+
+.panel-section-sub {
+  font-size: 13.5px;
+  color: #64748b;
+}
+
+.store-deals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.store-deal-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+}
+
+.store-deal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+  border-color: #ff3f6c;
+}
+
+.deal-image-viewport {
+  height: 180px;
+  background-color: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.deal-discount-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #ff3f6c;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.deal-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.deal-card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deal-category-tag {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.deal-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e1e2e;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.deal-pricing-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.deal-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.price-discounted {
+  font-size: 20px;
+  font-weight: 900;
+  color: #1e1e2e;
+}
+
+.price-original {
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: line-through;
+  font-weight: 600;
+}
+
+.stock-left-pill {
+  font-size: 11px;
+  font-weight: 800;
+  color: #ea580c;
+  background-color: #fff7ed;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #ffedd5;
+}
+
+.deal-timer-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #ff3f6c;
+  font-weight: 700;
+  background-color: #fff0f3;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.timer-icon {
+  font-size: 16px;
+}
+
+.deal-actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-claim-deal-coupon {
+  flex-grow: 1;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ff3f6c;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-claim-deal-coupon:hover {
+  background-color: #e02a55;
+}
+
+.btn-view-deal {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #334155;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-view-deal:hover {
+  background-color: #f8fafc;
+}
+
+/* ----------------------------------------------------
+   ABOUT STORE & AMENITIES
+---------------------------------------------------- */
+.about-card-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  padding: 28px;
+}
+
+.store-desc-paragraph {
+  font-size: 14.5px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.sub-heading-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e1e2e;
+  margin: 0 0 12px 0;
+}
+
+.amenities-flex {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.amenity-chip {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chip-check {
+  color: #16a34a;
+  font-weight: 900;
+}
+
+.timing-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #9a3412;
+}
+
+.clock-icon {
+  font-size: 24px;
+  color: #ea580c;
+}
+
+.working-days-text {
+  font-size: 12.5px;
+  color: #c2410c;
+  margin-left: 6px;
+}
+
+/* ----------------------------------------------------
+   CUSTOMER REVIEWS
+---------------------------------------------------- */
+.reviews-summary-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  padding: 28px;
+}
+
+.rating-big-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.rating-number {
+  font-size: 44px;
+  font-weight: 900;
+  color: #1e1e2e;
+  line-height: 1;
+}
+
+.stars-gold {
+  color: #f59e0b;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.stars-gold-small {
+  color: #f59e0b;
+  font-size: 14px;
+  margin: 2px 0 6px 0;
+}
+
+.total-ratings-label {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-item {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 14px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #1e1e2e;
+}
+
+.review-date {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.review-comment {
+  font-size: 13.5px;
+  color: #475569;
+  margin: 4px 0 0 0;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------
+   RIGHT COLUMN: MAP & CONTACT
+---------------------------------------------------- */
+.store-content-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.store-map-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+}
+
+.map-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.map-icon {
+  font-size: 26px;
+  color: #ff3f6c;
+}
+
+.map-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e1e2e;
+  margin: 0;
+}
+
+.map-distance-sub {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.google-map-container {
+  height: 240px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+  margin-bottom: 14px;
+}
+
+.store-google-map {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.btn-full-directions {
+  width: 100%;
+  height: 42px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ff3f6c;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-full-directions:hover {
+  background-color: #e02a55;
+}
+
+/* Store Quick Contact Box */
+.store-contact-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+}
+
+.contact-box-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e1e2e;
+  margin: 0 0 16px 0;
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.c-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.c-icon {
+  font-size: 20px;
+  color: #ff3f6c;
+  margin-top: 2px;
+}
+
+.c-info-row strong {
+  display: block;
+  font-size: 12.5px;
+  color: #1e1e2e;
+  margin-bottom: 2px;
+}
+
+.c-info-row p {
+  font-size: 12.5px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.contact-action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-c-act {
+  flex: 1;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+}
+
+.btn-c-call {
+  background-color: #f1f5f9;
+  color: #1e1e2e;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-c-wa {
+  background-color: #25d366;
+  color: #ffffff;
+}
+
+/* ----------------------------------------------------
+   COUPON CLAIM MODAL POPUP
+---------------------------------------------------- */
+.coupon-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.coupon-modal-card {
+  background: #ffffff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 440px;
+  padding: 32px 28px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: modalPop 0.25s ease-out;
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #f1f5f9;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.modal-header-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e1e2e;
+  margin: 0 0 6px 0;
+}
+
+.modal-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 24px 0;
+}
+
+.coupon-code-box {
+  background: #fff0f3;
+  border: 2px dashed #ff3f6c;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.code-text {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ff3f6c;
+}
+
+.btn-copy-code {
+  background: #ff3f6c;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.modal-store-info {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.store-mini-badge {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #1e1e2e;
+  margin-bottom: 4px;
+}
+
+.store-mini-addr, .store-mini-timing {
+  margin: 2px 0;
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.modal-action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-modal-action {
+  flex: 1;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+/* Responsive Rules */
+@media (max-width: 1100px) {
+  .store-main-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .store-profile-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .store-deals-grid {
+    grid-template-columns: 1fr;
+  }
+  .main-content {
+    padding: 16px;
+  }
+}
