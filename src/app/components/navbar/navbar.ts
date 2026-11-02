@@ -2,6 +2,7 @@ import { Component, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,8 @@ export class Navbar {
   constructor(
     private elementRef: ElementRef,
     private router: Router,
-    public sidebarService: SidebarService
+    public sidebarService: SidebarService,
+    public themeService: ThemeService
   ) {}
 
   toggleSidebar() {
@@ -47,15 +49,9 @@ export class Navbar {
   }
 
   @HostListener('document:click', ['$event'])
-  onClickOutside(event: Event) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
+  onDocumentClick(event: MouseEvent) {
+    if (this.showDropdown && !this.elementRef.nativeElement.querySelector('.location-selector')?.contains(event.target)) {
       this.showDropdown = false;
-      this.showMobileSearch = false;
     }
-  }
-
-  @HostListener('window:scroll')
-  onScroll() {
-    this.showDropdown = false;
   }
 }

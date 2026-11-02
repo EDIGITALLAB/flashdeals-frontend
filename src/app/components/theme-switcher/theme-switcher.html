@@ -1,0 +1,98 @@
+<!-- Floating Theme Switcher Button (Right Side) -->
+<button 
+  class="theme-floating-trigger" 
+  (click)="toggle()" 
+  [class.active]="themeService.isPanelOpen()"
+  title="Customize Theme & Colors"
+  aria-label="Customize Theme & Colors"
+>
+  <span class="material-symbols-outlined trigger-icon">palette</span>
+  <span class="trigger-label">Theme</span>
+  <span class="trigger-glow-dot"></span>
+</button>
+
+<!-- Backdrop Overlay -->
+@if (themeService.isPanelOpen()) {
+  <div class="theme-panel-backdrop" (click)="close()"></div>
+}
+
+<!-- Slide-out Theme Panel (Right Side) -->
+<aside class="theme-panel-drawer" [class.open]="themeService.isPanelOpen()" aria-label="Theme Panel">
+  <!-- Panel Header -->
+  <div class="panel-header">
+    <div class="panel-title-group">
+      <span class="material-symbols-outlined panel-header-icon">palette</span>
+      <div>
+        <h3 class="panel-title">Theme Colors</h3>
+        <p class="panel-subtitle">Personalize your FlashDeals look</p>
+      </div>
+    </div>
+    <button class="panel-close-btn" (click)="close()" title="Close panel">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+    <!-- Section 1: Color Themes -->
+    <div class="panel-section">
+      <div class="section-label-row">
+        <span class="section-label">Accent Theme</span>
+        <span class="current-color-tag" [style.color]="'var(--primary-color)'">Active</span>
+      </div>
+
+      <div class="color-swatches-grid">
+        @for (color of themeService.colors; track color.id) {
+          <button 
+            class="color-swatch-item" 
+            [class.selected]="themeService.activeColorId() === color.id"
+            (click)="selectColor(color)"
+            [title]="color.name"
+          >
+            <span class="swatch-circle" [style.background-color]="color.hex">
+              @if (themeService.activeColorId() === color.id) {
+                <span class="material-symbols-outlined swatch-check">check</span>
+              }
+            </span>
+            <span class="swatch-name">{{ color.name }}</span>
+            @if (color.isNew) {
+              <span class="swatch-new-badge">NEW</span>
+            }
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Section 2: Appearance Mode -->
+    <div class="panel-section">
+      <span class="section-label">Appearance Mode</span>
+      <div class="mode-toggle-group">
+        <button 
+          class="mode-btn" 
+          [class.active]="!themeService.isDarkMode()" 
+          (click)="themeService.setDarkMode(false)"
+        >
+          <span class="material-symbols-outlined mode-icon">light_mode</span>
+          <span>Light Mode</span>
+        </button>
+        <button 
+          class="mode-btn" 
+          [class.active]="themeService.isDarkMode()" 
+          (click)="themeService.setDarkMode(true)"
+        >
+          <span class="material-symbols-outlined mode-icon">dark_mode</span>
+          <span>Dark Mode</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Footer -->
+  <div class="panel-footer">
+    <button class="reset-btn" (click)="reset()">
+      <span class="material-symbols-outlined reset-icon">restart_alt</span>
+      <span>Reset to Default</span>
+    </button>
+  </div>
+</aside>
+

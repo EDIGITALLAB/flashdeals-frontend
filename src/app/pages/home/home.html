@@ -11,23 +11,6 @@
             <!-- Main Content Area -->
             <main class="main-content">
 
-                <!-- 1. Amazon-Style Sub-Navigation Ribbon -->
-                <nav class="amazon-subnav-ribbon">
-                    <div class="subnav-scroll-container">
-                        @for (item of amazonSubNav; track item.name) {
-                        <a [routerLink]="item.link" class="subnav-pill" [class.subnav-menu-btn]="item.isMenu" [class.subnav-prime]="item.isPrime">
-                            <span class="material-symbols-outlined subnav-icon">{{ item.icon }}</span>
-                            <span class="subnav-label">{{ item.name }}</span>
-                        </a>
-                        }
-                    </div>
-                    <div class="subnav-right-highlight" routerLink="/early-access">
-                        <span class="highlight-fire-icon">🔥</span>
-                        <span class="highlight-text">Great Indian Festival Deals Live</span>
-                        <span class="material-symbols-outlined highlight-chevron">chevron_right</span>
-                    </div>
-                </nav>
-
                 <!-- 2. Promo Hero Carousel Banner -->
                 <section class="hero-carousel" (mouseenter)="pauseCarousel()" (mouseleave)="resumeCarousel()">
                     <!-- Carousel Nav Buttons -->
@@ -292,7 +275,7 @@
                                             <span class="current-price">{{ deal.price }}</span>
                                             <span class="original-price"><del>{{ deal.originalPrice }}</del></span>
                                         </div>
-                                        <button class="add-cart-btn" (click)="addToCart(deal.title, $event)" title="Add to cart">
+                                        <button class="add-cart-btn" routerLink="/explore" (click)="$event.stopPropagation()" title="Add to Cart">
                                             <span class="material-symbols-outlined">shopping_cart</span>
                                         </button>
                                     </div>
@@ -332,8 +315,8 @@
                                     <span class="offer-prefix">UP TO</span>
                                     <span class="offer-amount">40% OFF</span>
                                 </div>
-                                <button class="banner-pill-btn btn-pink" routerLink="/explore">
-                                    Shop Now <span class="material-symbols-outlined">chevron_right</span>
+                                <button class="banner-pill-btn" routerLink="/explore">
+                                    Explore Deals <span class="material-symbols-outlined">chevron_right</span>
                                 </button>
                             </div>
                         </div>
@@ -348,8 +331,8 @@
                                     <span class="offer-prefix">Flat</span>
                                     <span class="offer-amount">25% OFF</span>
                                 </div>
-                                <button class="banner-pill-btn btn-white" routerLink="/explore">
-                                    Shop Now <span class="material-symbols-outlined">chevron_right</span>
+                                <button class="banner-pill-btn" routerLink="/explore">
+                                    Explore Deals <span class="material-symbols-outlined">chevron_right</span>
                                 </button>
                             </div>
                         </div>
@@ -364,8 +347,8 @@
                                     <span class="offer-prefix">Min.</span>
                                     <span class="offer-amount">50% OFF</span>
                                 </div>
-                                <button class="banner-pill-btn btn-white" routerLink="/explore">
-                                    Buy Now <span class="material-symbols-outlined">chevron_right</span>
+                                <button class="banner-pill-btn" routerLink="/explore">
+                                    Explore Deals <span class="material-symbols-outlined">chevron_right</span>
                                 </button>
                             </div>
                         </div>
@@ -380,8 +363,8 @@
                                     <span class="offer-prefix">Min.</span>
                                     <span class="offer-amount">35% OFF</span>
                                 </div>
-                                <button class="banner-pill-btn btn-white" routerLink="/explore">
-                                    Shop Now <span class="material-symbols-outlined">chevron_right</span>
+                                <button class="banner-pill-btn" routerLink="/explore">
+                                    Explore Deals <span class="material-symbols-outlined">chevron_right</span>
                                 </button>
                             </div>
                         </div>
@@ -602,8 +585,9 @@
                                             <span class="mini-current-price">{{ item.price }}</span>
                                             <span class="mini-original-price"><del>{{ item.originalPrice }}</del></span>
                                         </div>
-                                        <button class="mini-add-cart-btn" (click)="addToCart(item.title, $event)">
-                                            + Add to Cart
+                                        <button class="mini-add-cart-btn" routerLink="/explore" (click)="$event.stopPropagation()">
+                                            <span class="material-symbols-outlined mini-btn-icon">shopping_cart</span>
+                                            Add to Cart
                                         </button>
                                     </div>
                                 </div>

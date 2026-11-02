@@ -162,7 +162,7 @@ app-main-sidebar {
 }
 
 .active-deals-pill {
-  background-color: #ff3f6c;
+  background-color: var(--primary-color);
   color: #ffffff;
   font-size: 12px;
   font-weight: 800;
@@ -191,13 +191,13 @@ app-main-sidebar {
 }
 
 .btn-dir {
-  background-color: #ff3f6c;
+  background-color: var(--primary-color);
   color: #ffffff;
 }
 
 .btn-dir:hover {
-  background-color: #e02a55;
-  box-shadow: 0 4px 14px rgba(255, 63, 108, 0.35);
+  background-color: var(--primary-hover);
+  box-shadow: 0 4px 14px var(--primary-glow);
 }
 
 .btn-call {
@@ -254,8 +254,8 @@ app-main-sidebar {
 }
 
 .tab-btn.active {
-  color: #ff3f6c;
-  border-bottom-color: #ff3f6c;
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
 }
 
 .section-title-row {
@@ -294,7 +294,7 @@ app-main-sidebar {
 .store-deal-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
-  border-color: #ff3f6c;
+  border-color: var(--primary-color);
 }
 
 .deal-image-viewport {
@@ -312,7 +312,7 @@ app-main-sidebar {
   position: absolute;
   top: 12px;
   left: 12px;
-  background-color: #ff3f6c;
+  background-color: var(--primary-color);
   color: #ffffff;
   font-size: 12px;
   font-weight: 800;
@@ -389,7 +389,7 @@ app-main-sidebar {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #ff3f6c;
+  color: var(--primary-color);
   font-weight: 700;
   background-color: #fff0f3;
   padding: 6px 10px;
@@ -411,7 +411,7 @@ app-main-sidebar {
   height: 40px;
   border-radius: 10px;
   border: none;
-  background-color: #ff3f6c;
+  background-color: var(--primary-color);
   color: #ffffff;
   font-size: 13px;
   font-weight: 800;
@@ -420,7 +420,7 @@ app-main-sidebar {
 }
 
 .btn-claim-deal-coupon:hover {
-  background-color: #e02a55;
+  background-color: var(--primary-hover);
 }
 
 .btn-view-deal {
@@ -607,7 +607,7 @@ app-main-sidebar {
 
 .map-icon {
   font-size: 26px;
-  color: #ff3f6c;
+  color: var(--primary-color);
 }
 
 .map-card-title {
@@ -642,7 +642,7 @@ app-main-sidebar {
   height: 42px;
   border-radius: 10px;
   border: none;
-  background-color: #ff3f6c;
+  background-color: var(--primary-color);
   color: #ffffff;
   font-size: 13.5px;
   font-weight: 800;
@@ -651,7 +651,7 @@ app-main-sidebar {
 }
 
 .btn-full-directions:hover {
-  background-color: #e02a55;
+  background-color: var(--primary-hover);
 }
 
 /* Store Quick Contact Box */
@@ -684,7 +684,7 @@ app-main-sidebar {
 
 .c-icon {
   font-size: 20px;
-  color: #ff3f6c;
+  color: var(--primary-color);
   margin-top: 2px;
 }
 
@@ -797,8 +797,8 @@ app-main-sidebar {
 }
 
 .coupon-code-box {
-  background: #fff0f3;
-  border: 2px dashed #ff3f6c;
+  background: var(--primary-light);
+  border: 2px dashed var(--primary-color);
   border-radius: 14px;
   padding: 16px;
   display: flex;
@@ -811,11 +811,11 @@ app-main-sidebar {
   font-size: 24px;
   font-weight: 900;
   letter-spacing: 2px;
-  color: #ff3f6c;
+  color: var(--primary-color);
 }
 
 .btn-copy-code {
-  background: #ff3f6c;
+  background: var(--primary-color);
   color: #ffffff;
   border: none;
   padding: 8px 16px;
