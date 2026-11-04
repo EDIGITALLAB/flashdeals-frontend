@@ -5,9 +5,6 @@ import { Stores } from './pages/stores/stores';
 import { StoreDetails } from './pages/store-details/store-details';
 import { DealDetails } from './pages/deal-details/deal-details';
 import { Profile } from './pages/profile/profile';
-import { MyDealsFollowups } from './pages/my-deals-followups/my-deals-followups';
-import { MyInterests } from './pages/my-interests/my-interests';
-import { EarlyAccess } from './pages/early-access/early-access';
 import { Notifications } from './pages/notifications/notifications';
 import { AdminAddDeal } from './pages/admin/admin-add-deal/admin-add-deal';
 import { AdminLogin } from './pages/admin/admin-login/admin-login';
@@ -19,7 +16,6 @@ import { AdminCategories } from './pages/admin/admin-categories/admin-categories
 import { AdminManageDeals } from './pages/admin/admin-manage-deals/admin-manage-deals';
 import { AdminScheduledDeals } from './pages/admin/admin-scheduled-deals/admin-scheduled-deals';
 import { AdminDealAnalytics } from './pages/admin/admin-deal-analytics/admin-deal-analytics';
-import { AdminAnnouncements } from './pages/admin/admin-announcements/admin-announcements';
 import { AdminNotifications } from './pages/admin/admin-notifications/admin-notifications';
 import { AdminUsers } from './pages/admin/admin-users/admin-users';
 import { AdminSettings } from './pages/admin/admin-settings/admin-settings';
@@ -33,9 +29,6 @@ export const routes: Routes = [
   { path: 'store-details', component: StoreDetails },
   { path: 'deal-details', component: DealDetails },
   { path: 'profile', component: Profile },
-  { path: 'my-deals', component: MyDealsFollowups },
-  { path: 'my-interests', component: MyInterests },
-  { path: 'early-access', component: EarlyAccess },
   { path: 'notifications', component: Notifications },
 
   // Admin Portal Routes
@@ -56,7 +49,6 @@ export const routes: Routes = [
       { path: 'manage-deals', component: AdminManageDeals },
       { path: 'scheduled-deals', component: AdminScheduledDeals },
       { path: 'deal-analytics', component: AdminDealAnalytics },
-      { path: 'announcements', component: AdminAnnouncements },
       { path: 'notifications', component: AdminNotifications },
       { path: 'users', component: AdminUsers },
       { path: 'settings', component: AdminSettings }

@@ -18,8 +18,8 @@
   <nav class="desktop-top-nav">
     <a href="#" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">grid_view</span> <span>Categories</span></a>
     <a href="#" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">stars</span> <span>Top Brands</span></a>
-    <a routerLink="/my-deals" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">bolt</span> <span>Deals</span></a>
-    <a routerLink="/early-access" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">percent</span> <span>Offers</span></a>
+    <a routerLink="/explore" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">bolt</span> <span>Deals</span></a>
+    <a routerLink="/explore" class="top-nav-link"><span class="material-symbols-outlined nav-link-icon">percent</span> <span>Offers</span></a>
   </nav>
 
   <!-- Mobile search icon button (visible only on mobile) -->
@@ -29,7 +29,7 @@
 
   <div class="header-actions">
     <div class="location-picker-container">
-      <div class="location-picker" (click)="toggleDropdown()">
+      <div class="location-picker" (click)="toggleDropdown($event)">
         <span class="material-symbols-outlined loc-icon">location_on</span>
         <span class="location-name">{{ selectedLocation }}</span>
         <span class="material-symbols-outlined dropdown-icon" [class.rotated]="showDropdown">keyboard_arrow_down</span>
@@ -39,7 +39,7 @@
       @if (showDropdown) {
         <div class="location-dropdown shadow-lg border">
           @for (loc of locations; track loc) {
-            <div class="location-item" [class.active]="loc === selectedLocation" (click)="selectLocation(loc); $event.stopPropagation();">
+            <div class="location-item" [class.active]="loc === selectedLocation" (click)="selectLocation(loc, $event)">
               <span class="material-symbols-outlined check-icon" [style.visibility]="loc === selectedLocation ? 'visible' : 'hidden'">check</span>
               <span class="item-text">{{ loc }}</span>
             </div>
@@ -53,7 +53,7 @@
       <span class="badge">3</span>
     </button>
 
-    <button class="icon-btn wishlist-btn" (click)="goToMyDeals()" title="Wishlist">
+    <button class="icon-btn wishlist-btn" (click)="goToWishlist()" title="Wishlist">
       <span class="material-symbols-outlined">favorite_border</span>
     </button>
 

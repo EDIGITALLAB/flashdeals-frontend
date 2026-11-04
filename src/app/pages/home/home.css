@@ -808,8 +808,8 @@ app-main-sidebar {
 
 .vertical-deal-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px var(--primary-glow);
-  border-color: var(--primary-color);
+  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.09));
+  border-color: var(--primary-border-hover, rgba(0, 187, 169, 0.45));
 }
 
 /* Card Top Row */
@@ -994,8 +994,8 @@ app-main-sidebar {
 
 .category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 24px var(--primary-glow);
-  border-color: var(--primary-color);
+  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.09));
+  border-color: var(--primary-border-hover, rgba(0, 187, 169, 0.45));
 }
 
 .category-img-container {
@@ -1014,7 +1014,7 @@ app-main-sidebar {
 
 .category-card:hover .category-img-container {
   transform: scale(1.08);
-  box-shadow: 0 8px 20px var(--primary-glow);
+  box-shadow: 0 6px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.12));
   border-color: #ffffff;
 }
 
@@ -1521,7 +1521,7 @@ app-main-sidebar {
   border: 1px solid var(--primary-light);
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 4px 20px var(--primary-glow);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 2px 10px var(--primary-subtle-glow, rgba(0, 187, 169, 0.08));
 }
 
 .quad-cards-grid {
@@ -1562,8 +1562,8 @@ app-main-sidebar {
 
 .quad-feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px var(--primary-glow);
-  border-color: var(--primary-glow);
+  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.09));
+  border-color: var(--primary-border-hover, rgba(0, 187, 169, 0.45));
 }
 
 .quad-card-head {
@@ -2129,8 +2129,8 @@ app-main-sidebar {
 
 .rec-mini-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px var(--primary-glow);
-  border-color: var(--primary-color);
+  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.09));
+  border-color: var(--primary-border-hover, rgba(0, 187, 169, 0.45));
 }
 
 .mini-wishlist-btn {
@@ -2269,8 +2269,8 @@ app-main-sidebar {
 
 .amazon-quad-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px var(--primary-glow);
-  border-color: var(--primary-color);
+  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.09));
+  border-color: var(--primary-border-hover, rgba(0, 187, 169, 0.45));
 }
 
 .quad-header {
@@ -2374,13 +2374,13 @@ app-main-sidebar {
 
 /* Spotlight Deal Card (Card 4) */
 .spotlight-quad-card {
-  border: 1.5px solid var(--primary-glow);
-  box-shadow: 0 4px 16px var(--primary-glow);
+  border: 1.5px solid var(--primary-border-hover, rgba(0, 187, 169, 0.25));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03), 0 2px 8px var(--primary-subtle-glow, rgba(0, 187, 169, 0.08));
 }
 
 .spotlight-quad-card:hover {
-  border-color: var(--primary-color);
-  box-shadow: 0 10px 24px var(--primary-glow);
+  border-color: var(--primary-border-hover, rgba(0, 187, 169, 0.45));
+  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.09));
 }
 
 .spotlight-badge-row {

@@ -28,7 +28,7 @@ export class Notifications {
       timeString: '15 mins ago',
       icon: 'diamond',
       colorClass: 'early-access',
-      routeLink: '/my-interests'
+      routeLink: '/explore'
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ export class Notifications {
       timeString: '3 hours ago',
       icon: 'favorite',
       colorClass: 'watchlisted',
-      routeLink: '/my-deals'
+      routeLink: '/explore'
     },
     {
       id: 5,
