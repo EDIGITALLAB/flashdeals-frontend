@@ -7,6 +7,8 @@ export interface ThemeColor {
   hover: string;
   light: string;
   glow: string;
+  subtleGlow: string;
+  borderHover: string;
   isNew?: boolean;
 }
 
@@ -21,7 +23,9 @@ export class ThemeService {
       hex: '#ff2e63',
       hover: '#e02050',
       light: '#fff0f3',
-      glow: 'rgba(255, 46, 99, 0.3)'
+      glow: 'rgba(255, 46, 99, 0.25)',
+      subtleGlow: 'rgba(255, 46, 99, 0.09)',
+      borderHover: 'rgba(255, 46, 99, 0.45)'
     },
     {
       id: 'teal',
@@ -29,7 +33,9 @@ export class ThemeService {
       hex: '#00BBA9',
       hover: '#009e8f',
       light: '#e6fbf9',
-      glow: 'rgba(0, 187, 169, 0.3)',
+      glow: 'rgba(0, 187, 169, 0.25)',
+      subtleGlow: 'rgba(0, 187, 169, 0.09)',
+      borderHover: 'rgba(0, 187, 169, 0.45)',
       isNew: true
     },
     {
@@ -38,7 +44,9 @@ export class ThemeService {
       hex: '#7c3aed',
       hover: '#6d28d9',
       light: '#f3e8ff',
-      glow: 'rgba(124, 58, 237, 0.3)'
+      glow: 'rgba(124, 58, 237, 0.25)',
+      subtleGlow: 'rgba(124, 58, 237, 0.09)',
+      borderHover: 'rgba(124, 58, 237, 0.45)'
     },
     {
       id: 'blue',
@@ -46,7 +54,9 @@ export class ThemeService {
       hex: '#0284c7',
       hover: '#0369a1',
       light: '#f0f9ff',
-      glow: 'rgba(2, 132, 199, 0.3)'
+      glow: 'rgba(0, 132, 199, 0.25)',
+      subtleGlow: 'rgba(2, 132, 199, 0.09)',
+      borderHover: 'rgba(2, 132, 199, 0.45)'
     },
     {
       id: 'orange',
@@ -54,7 +64,9 @@ export class ThemeService {
       hex: '#f97316',
       hover: '#ea580c',
       light: '#fff7ed',
-      glow: 'rgba(249, 115, 22, 0.3)'
+      glow: 'rgba(249, 115, 22, 0.25)',
+      subtleGlow: 'rgba(249, 115, 22, 0.09)',
+      borderHover: 'rgba(249, 115, 22, 0.45)'
     }
   ];
 
@@ -109,6 +121,8 @@ export class ThemeService {
       root.style.setProperty('--primary-hover', selected.hover);
       root.style.setProperty('--primary-light', selected.light);
       root.style.setProperty('--primary-glow', selected.glow);
+      root.style.setProperty('--primary-subtle-glow', selected.subtleGlow);
+      root.style.setProperty('--primary-border-hover', selected.borderHover);
       root.style.setProperty('--theme-teal', '#00BBA9');
 
       if (document.body) {
@@ -116,6 +130,8 @@ export class ThemeService {
         document.body.style.setProperty('--primary-hover', selected.hover);
         document.body.style.setProperty('--primary-light', selected.light);
         document.body.style.setProperty('--primary-glow', selected.glow);
+        document.body.style.setProperty('--primary-subtle-glow', selected.subtleGlow);
+        document.body.style.setProperty('--primary-border-hover', selected.borderHover);
 
         // Apply theme-specific class on body
         this.colors.forEach(c => document.body.classList.remove(`theme-${c.id}`));
@@ -135,6 +151,8 @@ export class ThemeService {
           --primary-hover: ${selected.hover} !important;
           --primary-light: ${selected.light} !important;
           --primary-glow: ${selected.glow} !important;
+          --primary-subtle-glow: ${selected.subtleGlow} !important;
+          --primary-border-hover: ${selected.borderHover} !important;
         }
         .header-icon-circle,
         .header-timer-pill,
@@ -181,8 +199,8 @@ export class ThemeService {
           background-color: ${selected.hover} !important;
         }
         .spotlight-quad-card {
-          border-color: ${selected.glow} !important;
-          box-shadow: 0 4px 16px ${selected.glow} !important;
+          border-color: ${selected.borderHover} !important;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03), 0 2px 8px ${selected.subtleGlow} !important;
         }
         .spotlight-quad-card:hover,
         .amazon-quad-card:hover,
@@ -190,8 +208,8 @@ export class ThemeService {
         .vertical-deal-card:hover,
         .category-card:hover,
         .rec-mini-card:hover {
-          border-color: ${selected.hex} !important;
-          box-shadow: 0 10px 24px ${selected.glow} !important;
+          border-color: ${selected.borderHover} !important;
+          box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px ${selected.subtleGlow} !important;
         }
         .quad-foot-link:hover,
         .quad-footer-link:hover {
@@ -216,8 +234,8 @@ export class ThemeService {
         }
         .store-card:hover,
         .store-deal-card:hover {
-          border-color: ${selected.hex} !important;
-          box-shadow: 0 16px 36px ${selected.glow} !important;
+          border-color: ${selected.borderHover} !important;
+          box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.08), 0 6px 18px ${selected.subtleGlow} !important;
         }
         .offer-ribbon-box {
           background: linear-gradient(135deg, ${selected.light} 0%, #ffffff 100%) !important;

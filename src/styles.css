@@ -5,6 +5,8 @@
   --primary-hover: #e02050;
   --primary-light: #fff0f3;
   --primary-glow: rgba(255, 46, 99, 0.25);
+  --primary-subtle-glow: rgba(255, 46, 99, 0.09);
+  --primary-border-hover: rgba(255, 46, 99, 0.45);
   --secondary-color: #6200ea;
   --secondary-dark: #311b92;
   --accent-color: #ffc107;
@@ -67,7 +69,7 @@ body {
   /* Offset fixed headers/footers globally on mobile screens ONLY */
   .main-content,
   .explore-layout, 
-  .early-access-container, 
+ 
   .interests-container, 
   .profile-layout-container, 
   .watchlist-container {
@@ -169,6 +171,8 @@ body.theme-teal {
   --primary-hover: #009e8f !important;
   --primary-light: #e6fbf9 !important;
   --primary-glow: rgba(0, 187, 169, 0.25) !important;
+  --primary-subtle-glow: rgba(0, 187, 169, 0.09) !important;
+  --primary-border-hover: rgba(0, 187, 169, 0.45) !important;
 }
 
 body.theme-purple {
@@ -176,6 +180,8 @@ body.theme-purple {
   --primary-hover: #6d28d9 !important;
   --primary-light: #f3e8ff !important;
   --primary-glow: rgba(124, 58, 237, 0.25) !important;
+  --primary-subtle-glow: rgba(124, 58, 237, 0.09) !important;
+  --primary-border-hover: rgba(124, 58, 237, 0.45) !important;
 }
 
 body.theme-blue {
@@ -183,6 +189,8 @@ body.theme-blue {
   --primary-hover: #0369a1 !important;
   --primary-light: #f0f9ff !important;
   --primary-glow: rgba(2, 132, 199, 0.25) !important;
+  --primary-subtle-glow: rgba(2, 132, 199, 0.09) !important;
+  --primary-border-hover: rgba(2, 132, 199, 0.45) !important;
 }
 
 body.theme-orange {
@@ -190,6 +198,8 @@ body.theme-orange {
   --primary-hover: #ea580c !important;
   --primary-light: #fff7ed !important;
   --primary-glow: rgba(249, 115, 22, 0.25) !important;
+  --primary-subtle-glow: rgba(249, 115, 22, 0.09) !important;
+  --primary-border-hover: rgba(249, 115, 22, 0.45) !important;
 }
 
 body.theme-pink {
@@ -197,6 +207,8 @@ body.theme-pink {
   --primary-hover: #e02050 !important;
   --primary-light: #fff0f3 !important;
   --primary-glow: rgba(255, 46, 99, 0.25) !important;
+  --primary-subtle-glow: rgba(255, 46, 99, 0.09) !important;
+  --primary-border-hover: rgba(255, 46, 99, 0.45) !important;
 }
 
 

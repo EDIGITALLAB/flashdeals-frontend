@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef } from '@angular/core';
+import { Component, HostListener, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
@@ -10,7 +10,7 @@ import { ThemeService } from '../../services/theme.service';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar {
+export class Navbar implements OnInit {
   selectedLocation = 'Bengaluru';
   showDropdown = false;
   showMobileSearch = false;
@@ -23,6 +23,17 @@ export class Navbar {
     public themeService: ThemeService
   ) {}
 
+  ngOnInit() {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('flashdeals_user_location');
+        if (saved && this.locations.includes(saved)) {
+          this.selectedLocation = saved;
+        }
+      } catch (e) {}
+    }
+  }
+
   toggleSidebar() {
     this.sidebarService.toggle();
   }
@@ -32,16 +43,31 @@ export class Navbar {
   }
 
   goToMyDeals() {
-    this.router.navigate(['/my-deals']);
+    this.router.navigate(['/explore']);
   }
 
-  toggleDropdown() {
+  goToWishlist() {
+    this.router.navigate(['/explore']);
+  }
+
+  toggleDropdown(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
     this.showDropdown = !this.showDropdown;
   }
 
-  selectLocation(loc: string) {
+  selectLocation(loc: string, event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
     this.selectedLocation = loc;
     this.showDropdown = false;
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('flashdeals_user_location', loc);
+      } catch (e) {}
+    }
   }
 
   toggleMobileSearch() {
@@ -50,7 +76,8 @@ export class Navbar {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    if (this.showDropdown && !this.elementRef.nativeElement.querySelector('.location-selector')?.contains(event.target)) {
+    const container = this.elementRef.nativeElement.querySelector('.location-picker-container');
+    if (this.showDropdown && container && !container.contains(event.target as Node)) {
       this.showDropdown = false;
     }
   }
