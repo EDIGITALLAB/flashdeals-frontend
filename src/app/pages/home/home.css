@@ -35,8 +35,39 @@ app-main-sidebar {
 
 /* Main Content container */
 .main-content {
-  padding: 32px 40px;
+  padding: 20px 40px 32px;
   background-color: var(--bg-color);
+}
+
+/* Top Hero Promo Banner */
+.top-hero-banner-section {
+  margin-bottom: 24px;
+}
+
+.top-hero-banner-card {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: #ffffff;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.top-hero-banner-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12), 0 4px 14px var(--primary-glow);
+}
+
+.top-hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
 }
 
 /* Hero Carousel Banner */
@@ -81,7 +112,7 @@ app-main-sidebar {
 
 /* Gradients with richer multi-stop palette */
 .purple-gradient {
-  background: linear-gradient(135deg, #3730a3 0%, #4f46e5 35%, #7c3aed 70%, #ec4899 100%);
+  background: linear-gradient(135deg, #3730a3 0%, #4f46e5 35%, #783FE4 70%, #ec4899 100%);
 }
 
 .blue-gradient {
@@ -948,7 +979,7 @@ app-main-sidebar {
 /* Categories Section */
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 14px;
 }
 
@@ -2249,28 +2280,97 @@ app-main-sidebar {
   z-index: 3;
 }
 
+.quad-scroll-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.quad-scroll-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid #edf0f5;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  padding: 0;
+  color: #374151;
+}
+
+.quad-scroll-left {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.quad-scroll-left:hover {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 6px 20px var(--primary-glow);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.quad-scroll-right {
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.quad-scroll-right:hover {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 6px 20px var(--primary-glow);
+  transform: translate(50%, -50%) scale(1.1);
+}
+
 .amazon-quad-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: row;
   gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 12px 6px 14px 6px;
+  margin: -12px -6px -14px -6px;
+  width: calc(100% + 12px);
+}
+
+.amazon-quad-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .amazon-quad-card {
   background: #ffffff;
   border: 1px solid #edf0f5;
   border-radius: 16px;
-  padding: 18px;
+  padding: 18px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  flex: 0 0 calc(25% - 12px);
+  flex-shrink: 0;
+  min-width: 200px;
+  scroll-snap-align: start;
 }
 
 .amazon-quad-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-subtle-glow, rgba(0, 187, 169, 0.09));
-  border-color: var(--primary-border-hover, rgba(0, 187, 169, 0.45));
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px -3px rgba(0, 0, 0, 0.06), 0 4px 14px var(--primary-glow);
+  border-color: var(--primary-color);
 }
 
 .quad-header {
@@ -2630,7 +2730,7 @@ app-main-sidebar {
 
 .prime-bolt {
   font-size: 13px;
-  color: #f59e0b;
+  color: #0284c7;
 }
 
 .wishlist-btn.active {
@@ -2778,8 +2878,8 @@ app-main-sidebar {
 
 /* Responsive Rules for Amazon Layout */
 @media (max-width: 1200px) {
-  .amazon-quad-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .amazon-quad-card {
+    flex: 0 0 calc(50% - 8px);
   }
 
   .guarantee-grid {
@@ -2789,8 +2889,8 @@ app-main-sidebar {
 }
 
 @media (max-width: 768px) {
-  .amazon-quad-grid {
-    grid-template-columns: 1fr;
+  .amazon-quad-card {
+    flex: 0 0 calc(100% - 16px);
   }
 
   .guarantee-grid {

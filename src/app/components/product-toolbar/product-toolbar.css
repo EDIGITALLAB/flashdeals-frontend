@@ -29,14 +29,15 @@
 }
 
 .pill-btn:hover {
-  border-color: var(--border-hover);
-  background-color: #f9f9fb;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--primary-light);
 }
 
 .pill-btn.active {
   background-color: var(--primary-light);
   color: var(--primary-color);
-  border-color: rgba(255, 63, 108, 0.3);
+  border-color: var(--primary-color);
 }
 
 .scale-down {

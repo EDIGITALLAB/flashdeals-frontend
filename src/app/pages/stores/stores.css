@@ -445,8 +445,8 @@ app-main-sidebar {
 .active-deals-count-badge {
   font-size: 11px;
   font-weight: 800;
-  color: #7c3aed;
-  background-color: #f3e8ff;
+  color: var(--primary-color);
+  background-color: var(--primary-light);
   padding: 3px 10px;
   border-radius: 12px;
   width: fit-content;

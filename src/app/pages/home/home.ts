@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MainSidebar } from '../../components/main-sidebar/main-sidebar';
@@ -88,6 +88,16 @@ export interface PopularStore {
 export class Home implements OnInit, OnDestroy {
   constructor(private cdr: ChangeDetectorRef) {}
 
+  @ViewChild('quadGrid') quadGrid!: ElementRef<HTMLDivElement>;
+
+  scrollQuadLeft() {
+    this.quadGrid.nativeElement.scrollBy({ left: -320, behavior: 'smooth' });
+  }
+
+  scrollQuadRight() {
+    this.quadGrid.nativeElement.scrollBy({ left: 320, behavior: 'smooth' });
+  }
+
   headerSecondsLeft = 2 * 3600 + 14 * 60 + 22;
   headerTimerString = '02 : 14 : 22';
 
@@ -128,6 +138,30 @@ export class Home implements OnInit, OnDestroy {
         { label: 'Home & Decor', image: '/cat_home.jpg', link: '/explore' },
         { label: 'Beauty & Skincare', image: '/cat_beauty.jpg', link: '/explore' },
         { label: 'Health & Wellness', image: '/cat_health.jpg', link: '/explore' }
+      ]
+    },
+    {
+      title: 'Sports, Fitness & Outdoors',
+      subtitle: 'Top gear for an active lifestyle',
+      linkText: 'Explore fitness deals',
+      link: '/explore',
+      items: [
+        { label: 'Yoga & Fitness', image: '/fitness_gear.png', link: '/explore' },
+        { label: 'Racquets & Sports', image: '/smartwatch_deal.jpg', link: '/explore' },
+        { label: 'Cycles & Scooters', image: '/cat_appliances.jpg', link: '/explore' },
+        { label: 'Smart Fitness', image: '/smartwatch_deal.jpg', link: '/explore' }
+      ]
+    },
+    {
+      title: 'Books, Toys & Kids Zone',
+      subtitle: 'Fun learning & play for every age',
+      linkText: 'Explore kids & toys',
+      link: '/explore',
+      items: [
+        { label: 'Story Books', image: '/cat_beauty.jpg', link: '/explore' },
+        { label: 'Building Blocks', image: '/cat_home.jpg', link: '/explore' },
+        { label: 'Board Games', image: '/gaming_setup.png', link: '/explore' },
+        { label: 'Soft Toys', image: '/cat_fashion.jpg', link: '/explore' }
       ]
     }
   ];
@@ -443,7 +477,6 @@ export class Home implements OnInit, OnDestroy {
   showExpandedCategories = false;
 
   categoriesList = [
-    { title: 'Fashion', image: '/cat_fashion.jpg', isContain: false, offer: 'Up to 70% OFF', bgClass: 'bg-fashion' },
     { title: 'Electronics', image: '/boat_headphones.png', isContain: true, offer: 'Min. 40% OFF', bgClass: 'bg-tech' },
     { title: 'Home & Living', image: '/cat_home.jpg', isContain: false, offer: 'Up to 60% OFF', bgClass: 'bg-home' },
     { title: 'Beauty', image: '/cat_beauty.jpg', isContain: false, offer: 'From ₹199', bgClass: 'bg-beauty' },

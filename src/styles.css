@@ -176,12 +176,12 @@ body.theme-teal {
 }
 
 body.theme-purple {
-  --primary-color: #7c3aed !important;
-  --primary-hover: #6d28d9 !important;
-  --primary-light: #f3e8ff !important;
-  --primary-glow: rgba(124, 58, 237, 0.25) !important;
-  --primary-subtle-glow: rgba(124, 58, 237, 0.09) !important;
-  --primary-border-hover: rgba(124, 58, 237, 0.45) !important;
+  --primary-color: #783FE4 !important;
+  --primary-hover: #662fd1 !important;
+  --primary-light: #f4effe !important;
+  --primary-glow: rgba(120, 63, 228, 0.25) !important;
+  --primary-subtle-glow: rgba(120, 63, 228, 0.09) !important;
+  --primary-border-hover: rgba(120, 63, 228, 0.45) !important;
 }
 
 body.theme-blue {

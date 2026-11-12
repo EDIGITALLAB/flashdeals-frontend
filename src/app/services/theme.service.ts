@@ -41,12 +41,12 @@ export class ThemeService {
     {
       id: 'purple',
       name: 'Royal Purple',
-      hex: '#7c3aed',
-      hover: '#6d28d9',
-      light: '#f3e8ff',
-      glow: 'rgba(124, 58, 237, 0.25)',
-      subtleGlow: 'rgba(124, 58, 237, 0.09)',
-      borderHover: 'rgba(124, 58, 237, 0.45)'
+      hex: '#783FE4',
+      hover: '#662fd1',
+      light: '#f4effe',
+      glow: 'rgba(120, 63, 228, 0.25)',
+      subtleGlow: 'rgba(120, 63, 228, 0.09)',
+      borderHover: 'rgba(120, 63, 228, 0.45)'
     },
     {
       id: 'blue',
@@ -257,6 +257,23 @@ export class ThemeService {
         .btn-dir:hover,
         .btn-claim-deal-coupon:hover {
           background-color: ${selected.hover} !important;
+        }
+        .pill-btn.active {
+          background-color: ${selected.light} !important;
+          color: ${selected.hex} !important;
+          border-color: ${selected.hex} !important;
+        }
+        .pill-btn:hover {
+          border-color: ${selected.hex} !important;
+          color: ${selected.hex} !important;
+        }
+        .price-item.active,
+        .toggle-btn.active {
+          color: ${selected.hex} !important;
+          background-color: ${selected.light} !important;
+        }
+        .price-check-icon {
+          color: ${selected.hex} !important;
         }
         .hero-badge {
           background-color: ${selected.glow} !important;

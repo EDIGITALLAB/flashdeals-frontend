@@ -531,7 +531,7 @@
     font-size: 10px !important;
     padding: 2px 4px !important;
     align-self: auto !important;
-    background-color: rgba(255, 63, 108, 0.07) !important; /* Lighter background */
+    background-color: var(--primary-light) !important; /* Theme background */
     display: flex !important;
     align-items: center !important;
     gap: 2px !important;
