@@ -11,212 +11,16 @@
             <!-- Main Content Area -->
             <main class="main-content">
 
-                <!-- 2. Promo Hero Carousel Banner -->
-                <section class="hero-carousel" (mouseenter)="pauseCarousel()" (mouseleave)="resumeCarousel()">
-                    <!-- Carousel Nav Buttons -->
-                    <button class="carousel-nav-btn prev-btn" (click)="prevSlide()" aria-label="Previous Slide">
-                        <span class="material-symbols-outlined">chevron_left</span>
-                    </button>
-                    <button class="carousel-nav-btn next-btn" (click)="nextSlide()" aria-label="Next Slide">
-                        <span class="material-symbols-outlined">chevron_right</span>
-                    </button>
-
-                    <div class="carousel-inner" [style.transform]="'translateX(' + (-currentSlide * 33.3333) + '%)'">
-                        @for (slide of slides; track $index) {
-                        <div class="hero-slide" [className]="'hero-slide ' + slide.gradientClass">
-                            <!-- Decorative Background Mesh & Glow Orbs -->
-                            <div class="hero-mesh-overlay"></div>
-                            <div class="hero-glow-orb hero-glow-1"></div>
-                            <div class="hero-glow-orb hero-glow-2"></div>
-
-                            <!-- Centered Hero Slide Wrapper to eliminate dead space on all screens -->
-                            <div class="hero-slide-wrapper">
-                                <!-- Left Content Area -->
-                                <div class="slide-content">
-                                    <div class="hero-event-tag">
-                                        <span class="tag-pulse"></span>
-                                        <span class="material-symbols-outlined tag-icon">{{ slide.tagIcon }}</span>
-                                        <span>{{ slide.tag }}</span>
-                                    </div>
-
-                                    <h1 class="hero-title-large">
-                                        {{ slide.title }} <span class="highlight-text">{{ slide.highlightText }}</span>
-                                    </h1>
-
-                                    <p class="hero-subtitle">{{ slide.subtitle }}</p>
-
-                                    <!-- Quick Interactive Category Chips -->
-                                    @if (slide.quickTags && slide.quickTags.length) {
-                                    <div class="hero-quick-tags-row">
-                                        @for (qtag of slide.quickTags; track qtag) {
-                                        <a routerLink="/explore" class="hero-quick-tag">{{ qtag }}</a>
-                                        }
-                                    </div>
-                                    }
-
-                                    <div class="hero-perks-row">
-                                        @for (perk of slide.perks; track perk) {
-                                        <div class="hero-perk-item">
-                                            <span class="material-symbols-outlined perk-icon">check_circle</span>
-                                            <span>{{ perk }}</span>
-                                        </div>
-                                        }
-                                    </div>
-
-                                    <div class="hero-action-row">
-                                        <button class="btn btn-explore" routerLink="/explore">
-                                            <span>{{ slide.btnText }}</span>
-                                            <span class="material-symbols-outlined btn-arrow">arrow_forward</span>
-                                        </button>
-
-                                        <div class="hero-coupon-pill" (click)="copyCoupon(slide.coupon, $event)" [title]="'Click to copy code ' + slide.coupon">
-                                            <span class="coupon-prefix">CODE:</span>
-                                            <span class="coupon-code">{{ slide.coupon }}</span>
-                                            <span class="material-symbols-outlined coupon-copy-icon">
-                                                {{ copiedCoupon === slide.coupon ? 'done' : 'content_copy' }}
-                                            </span>
-                                            @if (copiedCoupon === slide.coupon) {
-                                            <span class="copied-badge">Copied!</span>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Right Showcase Spotlight Stage Area -->
-                                <div class="slide-showcase-container">
-                                    <!-- Showcase Product Card -->
-                                    <div class="showcase-card" routerLink="/explore">
-                                        <div class="showcase-card-top">
-                                            <div class="showcase-chip">
-                                                <span class="chip-dot"></span>
-                                                <span>{{ slide.floatingTag }}</span>
-                                            </div>
-                                            @if (slide.rating) {
-                                            <div class="showcase-rating-badge">
-                                                <span class="star-sym">★</span>
-                                                <span>{{ slide.rating }}</span>
-                                            </div>
-                                            }
-                                        </div>
-
-                                        <div class="showcase-image-wrapper">
-                                            <img [src]="slide.productImage" [alt]="slide.productName" class="showcase-product-img" />
-                                        </div>
-
-                                        <div class="showcase-info">
-                                            <div class="showcase-category">{{ slide.productCategory }}</div>
-                                            <div class="showcase-product-name">{{ slide.productName }}</div>
-                                            <div class="showcase-pricing">
-                                                <span class="showcase-deal-price">{{ slide.dealPrice }}</span>
-                                                <span class="showcase-orig-price">{{ slide.origPrice }}</span>
-                                                <span class="showcase-save-tag">SAVE {{ slide.badgePercent }}</span>
-                                            </div>
-                                        </div>
-
-                                        @if (slide.urgencyText) {
-                                        <div class="showcase-urgency-strip">
-                                            <span class="urgency-dot"></span>
-                                            <span>{{ slide.urgencyText }}</span>
-                                        </div>
-                                        }
-                                    </div>
-
-                                    <!-- 3D Discount Badge -->
-                                    <div class="discount-badge-3d">
-                                        <div class="badge-ring"></div>
-                                        <span class="badge-prefix">{{ slide.badgePrefix }}</span>
-                                        <span class="badge-percentage">{{ slide.badgePercent }}</span>
-                                        <span class="badge-suffix">{{ slide.badgeSuffix }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        }
-                    </div>
-
-                    <div class="carousel-dots">
-                        @for (slide of slides; track $index) {
-                        <button class="dot" [class.active]="$index === currentSlide" (click)="setSlide($index)" [attr.aria-label]="'Go to slide ' + ($index + 1)"></button>
-                        }
-                    </div>
-                </section>
-
-                <!-- 3. Amazon Signature 4-Column Multi-Card Grid (Quad 2x2 & Spotlight) -->
-                <section class="amazon-quad-section mt-4">
-                    <div class="amazon-quad-grid">
-                        <!-- Cards 1, 2, 3: Quad 2x2 Category Cards -->
-                        @for (card of quadCards; track card.title) {
-                        <div class="amazon-quad-card">
-                            <div class="quad-header">
-                                <h3 class="quad-title">{{ card.title }}</h3>
-                                <p class="quad-subtitle">{{ card.subtitle }}</p>
-                            </div>
-                            <div class="quad-items-grid">
-                                @for (tile of card.items; track tile.label) {
-                                <div class="quad-tile" [routerLink]="tile.link">
-                                    <div class="quad-tile-img-box">
-                                        <img [src]="tile.image" [alt]="tile.label" class="quad-tile-img" />
-                                    </div>
-                                    <span class="quad-tile-label">{{ tile.label }}</span>
-                                </div>
-                                }
-                            </div>
-                            <a [routerLink]="card.link" class="quad-footer-link">
-                                <span>{{ card.linkText }}</span>
-                                <span class="material-symbols-outlined link-arrow">chevron_right</span>
-                            </a>
-                        </div>
-                        }
-
-                        <!-- Card 4: Amazon Spotlight "Deal of the Day" Card -->
-                        <div class="amazon-quad-card spotlight-quad-card">
-                            <div class="quad-header">
-                                <div class="spotlight-badge-row">
-                                    <span class="spotlight-tag-pill">
-                                        <span class="material-symbols-outlined bolt-mini">bolt</span> {{ spotlightDeal.badge }}
-                                    </span>
-                                    <span class="spotlight-discount-tag">{{ spotlightDeal.discount }}</span>
-                                </div>
-                                <h3 class="quad-title mt-2">{{ spotlightDeal.title }}</h3>
-                            </div>
-                            <div class="spotlight-body" [routerLink]="spotlightDeal.link">
-                                <div class="spotlight-img-box">
-                                    <img [src]="spotlightDeal.image" [alt]="spotlightDeal.title" class="spotlight-img" />
-                                    <span class="prime-pill">
-                                        <span class="material-symbols-outlined prime-icon">bolt</span> Flash Prime
-                                    </span>
-                                </div>
-                                <div class="spotlight-meta">
-                                    <div class="spotlight-ratings">
-                                        <span class="stars-gold">★★★★★</span>
-                                        <span class="rating-num">{{ spotlightDeal.rating }}</span>
-                                        <span class="rating-count">({{ spotlightDeal.reviews }})</span>
-                                    </div>
-                                    <div class="spotlight-price-row">
-                                        <span class="spotlight-deal-price">{{ spotlightDeal.price }}</span>
-                                        <span class="spotlight-mrp">M.R.P.: <del>{{ spotlightDeal.originalPrice }}</del></span>
-                                    </div>
-                                    <div class="spotlight-delivery">
-                                        <span class="material-symbols-outlined delivery-icon">local_shipping</span>
-                                        <span>{{ spotlightDeal.delivery }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="spotlight-card-footer">
-                                <button class="btn-spotlight-cart" [routerLink]="spotlightDeal.link">
-                                    <span class="material-symbols-outlined">storefront</span> {{ spotlightDeal.btnText }}
-                                </button>
-                                <a [routerLink]="spotlightDeal.link" class="quad-footer-link">
-                                    <span>{{ spotlightDeal.linkText }}</span>
-                                    <span class="material-symbols-outlined link-arrow">chevron_right</span>
-                                </a>
-                            </div>
-                        </div>
+                <!-- 1. Top Hero Promo Banner -->
+                <section class="top-hero-banner-section">
+                    <div class="top-hero-banner-card" routerLink="/explore">
+                        <img src="/new 2.0.png" alt="FlashDeals - Discover the Best Deals Online"
+                            class="top-hero-banner-img" />
                     </div>
                 </section>
 
                 <!-- 5. Today's Deals (Amazon Lightning Deals Shelf with Timer & Filter Tabs) -->
-                <section class="deals-section mt-4">
+                <section class="deals-section">
                     <div class="section-header d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                         <div class="d-flex align-items-center gap-3 flex-wrap">
                             <div class="header-icon-circle">
@@ -237,7 +41,8 @@
                         <!-- Category Filter Pills -->
                         <div class="deal-category-filters">
                             @for (filter of dealFilters; track filter.id) {
-                            <button class="deal-filter-btn" [class.active]="selectedDealFilter === filter.id" (click)="setDealFilter(filter.id)">
+                            <button class="deal-filter-btn" [class.active]="selectedDealFilter === filter.id"
+                                (click)="setDealFilter(filter.id)">
                                 {{ filter.label }}
                             </button>
                             }
@@ -251,8 +56,11 @@
                             <div class="vertical-deal-card amazon-deal-card">
                                 <div class="card-top-row">
                                     <span class="discount-badge-pill">{{ deal.discount }}</span>
-                                    <button class="wishlist-btn" [class.active]="wishlistMap[deal.id]" (click)="toggleWishlist(deal.id, $event)" [title]="wishlistMap[deal.id] ? 'Remove from Wishlist' : 'Add to Wishlist'">
-                                        <span class="material-symbols-outlined">{{ wishlistMap[deal.id] ? 'favorite' : 'favorite_border' }}</span>
+                                    <button class="wishlist-btn" [class.active]="wishlistMap[deal.id]"
+                                        (click)="toggleWishlist(deal.id, $event)"
+                                        [title]="wishlistMap[deal.id] ? 'Remove from Wishlist' : 'Add to Wishlist'">
+                                        <span class="material-symbols-outlined">{{ wishlistMap[deal.id] ? 'favorite' :
+                                            'favorite_border' }}</span>
                                     </button>
                                 </div>
                                 <div class="card-image-box" routerLink="/explore">
@@ -261,7 +69,7 @@
                                 <div class="card-info-box">
                                     <div class="card-brand-badge">{{ deal.brand }}</div>
                                     <p class="card-product-title" [title]="deal.title">{{ deal.title }}</p>
-                                    
+
                                     @if (deal.rating) {
                                     <div class="card-rating-row">
                                         <span class="rating-stars">★★★★☆</span>
@@ -275,15 +83,16 @@
                                             <span class="current-price">{{ deal.price }}</span>
                                             <span class="original-price"><del>{{ deal.originalPrice }}</del></span>
                                         </div>
-                                        <button class="add-cart-btn" routerLink="/explore" (click)="$event.stopPropagation()" title="Add to Cart">
+                                        <button class="add-cart-btn" routerLink="/explore"
+                                            (click)="$event.stopPropagation()" title="Add to Cart">
                                             <span class="material-symbols-outlined">shopping_cart</span>
                                         </button>
                                     </div>
 
                                     @if (deal.isPrime) {
                                     <div class="card-prime-tag">
-                                        <span class="material-symbols-outlined prime-bolt">bolt</span>
-                                        <span>Flash Delivery</span>
+                                        <span class="material-symbols-outlined prime-bolt">verified</span>
+                                        <span>Verified Deal</span>
                                     </div>
                                     }
                                 </div>
@@ -292,6 +101,65 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- 7. Shop by Category (with High Quality PNG Images) -->
+                <section class="categories-section mt-4 pt-2">
+                    <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="header-icon-circle blue-circle">
+                                <span class="material-symbols-outlined text-white">grid_view</span>
+                            </div>
+                            <div>
+                                <h2 class="section-title mb-0">Shop by Category</h2>
+                                <p class="section-subtext mb-0">Explore millions of curated products</p>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" class="view-all-deals-link" (click)="toggleMoreCategories()">
+                            {{ showExpandedCategories ? 'Show Less' : 'Explore All Categories' }}
+                            <span class="material-symbols-outlined align-middle fs-6">{{ showExpandedCategories ?
+                                'keyboard_arrow_up' : 'chevron_right' }}</span>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- 3. Amazon Signature 4-Column Multi-Card Grid (Quad 2x2 & Spotlight) -->
+                <section class="amazon-quad-section mt-4">
+                    <div class="quad-scroll-wrapper">
+                        <button class="quad-scroll-btn quad-scroll-left" (click)="scrollQuadLeft()"
+                            aria-label="Scroll Left">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <div class="amazon-quad-grid" #quadGrid>
+                            @for (card of quadCards; track card.title) {
+                            <div class="amazon-quad-card">
+                                <div class="quad-header">
+                                    <h3 class="quad-title">{{ card.title }}</h3>
+                                    <p class="quad-subtitle">{{ card.subtitle }}</p>
+                                </div>
+                                <div class="quad-items-grid">
+                                    @for (tile of card.items; track tile.label) {
+                                    <div class="quad-tile" [routerLink]="tile.link">
+                                        <div class="quad-tile-img-box">
+                                            <img [src]="tile.image" [alt]="tile.label" class="quad-tile-img" />
+                                        </div>
+                                        <span class="quad-tile-label">{{ tile.label }}</span>
+                                    </div>
+                                    }
+                                </div>
+                                <a [routerLink]="card.link" class="quad-footer-link">
+                                    <span>{{ card.linkText }}</span>
+                                    <span class="material-symbols-outlined link-arrow">chevron_right</span>
+                                </a>
+                            </div>
+                            }
+                        </div>
+                        <button class="quad-scroll-btn quad-scroll-right" (click)="scrollQuadRight()"
+                            aria-label="Scroll Right">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </div>
+                </section>
+
 
                 <!-- 6. Based on Your Interests -->
                 <section class="interests-section mt-5 mb-5">
@@ -371,148 +239,6 @@
                     </div>
                 </section>
 
-                <!-- 7. Shop by Category (with High Quality PNG Images) -->
-                <section class="categories-section mt-5">
-                    <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="header-icon-circle blue-circle">
-                                <span class="material-symbols-outlined text-white">grid_view</span>
-                            </div>
-                            <div>
-                                <h2 class="section-title mb-0">Shop by Category</h2>
-                                <p class="section-subtext mb-0">Explore millions of curated products</p>
-                            </div>
-                        </div>
-                        <a href="javascript:void(0)" class="view-all-deals-link" (click)="toggleMoreCategories()">
-                            {{ showExpandedCategories ? 'Show Less' : 'Explore All Categories' }}
-                            <span class="material-symbols-outlined align-middle fs-6">{{ showExpandedCategories ? 'keyboard_arrow_up' : 'chevron_right' }}</span>
-                        </a>
-                    </div>
-
-                    <div class="categories-grid">
-                        @for (cat of categoriesList; track cat.title) {
-                        <div class="category-card" routerLink="/explore">
-                            <div [className]="'category-img-container ' + cat.bgClass">
-                                <img [src]="cat.image" [alt]="cat.title" class="category-png-img" [class.contain-fit]="cat.isContain" />
-                            </div>
-                            <div class="category-card-info">
-                                <span class="category-title">{{ cat.title }}</span>
-                                <span class="category-offer-pill">{{ cat.offer }}</span>
-                            </div>
-                        </div>
-                        }
-
-                        @if (!showExpandedCategories) {
-                        <div class="category-card toggle-card" (click)="toggleMoreCategories()">
-                            <div class="category-img-container toggle-circle">
-                                <span class="material-symbols-outlined toggle-icon">grid_view</span>
-                            </div>
-                            <div class="category-card-info">
-                                <span class="category-title">Explore All</span>
-                                <span class="category-offer-pill toggle-pill">+7 More</span>
-                            </div>
-                        </div>
-                        }
-
-                        @if (showExpandedCategories) {
-                        @for (cat of expandedCategoriesList; track cat.title) {
-                        <div class="category-card" routerLink="/explore">
-                            <div [className]="'category-img-container ' + cat.bgClass">
-                                <img [src]="cat.image" [alt]="cat.title" class="category-png-img" [class.contain-fit]="cat.isContain" />
-                            </div>
-                            <div class="category-card-info">
-                                <span class="category-title">{{ cat.title }}</span>
-                                <span class="category-offer-pill">{{ cat.offer }}</span>
-                            </div>
-                        </div>
-                        }
-
-                        <div class="category-card toggle-card less-card" (click)="toggleMoreCategories()">
-                            <div class="category-img-container toggle-circle less-circle">
-                                <span class="material-symbols-outlined toggle-icon">unfold_less</span>
-                            </div>
-                            <div class="category-card-info">
-                                <span class="category-title">Show Less</span>
-                                <span class="category-offer-pill toggle-pill">Collapse</span>
-                            </div>
-                        </div>
-                        }
-                    </div>
-                </section>
-
-                <!-- 8. Amazon-Style 4-Quadrant Collections Shelf (FlashDeals Theme Look) -->
-                <section class="quad-showcase-section mt-5 mb-5">
-                    <div class="quad-showcase-container">
-                        <div class="quad-cards-grid">
-                            @for (card of quadFeaturedDeals; track card.id) {
-                            <div class="quad-feature-card">
-                                <a routerLink="/explore" class="quad-card-head">
-                                    <h3 class="quad-card-heading">{{ card.title }}</h3>
-                                    <span class="material-symbols-outlined quad-head-arrow">chevron_right</span>
-                                </a>
-
-                                <div class="quad-card-grid">
-                                    @for (item of card.items; track item.id) {
-                                    <div class="quad-tile-item" routerLink="/explore">
-                                        <div class="quad-tile-visual">
-                                            <img [src]="item.image" [alt]="item.label" class="quad-tile-img" />
-                                            @if (item.badge) {
-                                            <span class="quad-tag-pill" [class.badge-gold]="item.isGoldBadge">{{ item.badge }}</span>
-                                            }
-                                        </div>
-
-                                        <div class="quad-tile-details">
-                                            @if (item.price) {
-                                            <div class="quad-price-line">
-                                                <span class="quad-price-val">{{ item.price }}</span>
-                                                @if (item.originalPrice) {
-                                                <span class="quad-mrp-val"><del>{{ item.originalPrice }}</del></span>
-                                                }
-                                            </div>
-                                            }
-
-                                            <div class="quad-tile-text" [title]="item.label">
-                                                @if (item.prefix) {
-                                                <span class="quad-prefix">{{ item.prefix }}</span> | <span class="quad-suffix">{{ item.suffix }}</span>
-                                                } @else {
-                                                {{ item.label }}
-                                                }
-                                            </div>
-
-                                            @if (item.discount) {
-                                            <div class="quad-discount-badge-line">
-                                                <span class="quad-discount-text">{{ item.discount }}</span>
-                                            </div>
-                                            }
-                                        </div>
-                                    </div>
-                                    }
-                                </div>
-
-                                <div class="quad-card-foot">
-                                    <a routerLink="/explore" class="quad-foot-link">
-                                        <span>{{ card.footerLinkText }}</span>
-                                        <span class="material-symbols-outlined foot-arrow">arrow_forward</span>
-                                    </a>
-                                </div>
-                            </div>
-                            }
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 9. Dual Promo Banners (Under ₹999 & Eco Friendly) -->
-                <section class="dual-promo-banners-section mt-5 mb-5">
-                    <div class="dual-promo-grid">
-                        <div class="full-img-promo-card" routerLink="/explore">
-                            <img src="/deals_under_999_banner.png" alt="Deals Under ₹999" class="promo-full-banner-img" />
-                        </div>
-                        <div class="full-img-promo-card" routerLink="/explore">
-                            <img src="/eco_friendly_banner.png" alt="Eco Friendly Picks" class="promo-full-banner-img" />
-                        </div>
-                    </div>
-                </section>
-
                 <!-- 10. Recently Viewed & Recommended Dual Section -->
                 <section class="dual-recommendations-section mt-5 mb-5">
                     <div class="dual-rec-grid">
@@ -528,7 +254,8 @@
                                         <p class="rec-block-subtitle">Continue where you left off</p>
                                     </div>
                                 </div>
-                                <a routerLink="/explore" class="rec-view-all-link link-blue">View All <span class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
+                                <a routerLink="/explore" class="rec-view-all-link link-blue">View All <span
+                                        class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
                             </div>
 
                             <div class="rec-cards-row">
@@ -566,7 +293,8 @@
                                         <p class="rec-block-subtitle">Personalized picks based on your trends</p>
                                     </div>
                                 </div>
-                                <a routerLink="/explore" class="rec-view-all-link link-orange">View All <span class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
+                                <a routerLink="/explore" class="rec-view-all-link link-orange">View All <span
+                                        class="material-symbols-outlined align-middle fs-6">arrow_forward</span></a>
                             </div>
 
                             <div class="rec-cards-row">
@@ -585,7 +313,8 @@
                                             <span class="mini-current-price">{{ item.price }}</span>
                                             <span class="mini-original-price"><del>{{ item.originalPrice }}</del></span>
                                         </div>
-                                        <button class="mini-add-cart-btn" routerLink="/explore" (click)="$event.stopPropagation()">
+                                        <button class="mini-add-cart-btn" routerLink="/explore"
+                                            (click)="$event.stopPropagation()">
                                             <span class="material-symbols-outlined mini-btn-icon">shopping_cart</span>
                                             Add to Cart
                                         </button>
