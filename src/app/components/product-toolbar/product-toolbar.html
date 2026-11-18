@@ -15,7 +15,7 @@
 
       <!-- Price Dropdown Menu -->
       @if (showPriceDropdown) {
-        <div class="price-dropdown shadow-lg border">
+        <div class="price-dropdown">
           @for (opt of priceOptions; track opt.label) {
             <div class="price-item" [class.active]="opt.label === selectedPriceFilterLabel" (click)="selectPriceFilter(opt); $event.stopPropagation();">
               <span class="material-symbols-outlined price-check-icon" [style.visibility]="opt.label === selectedPriceFilterLabel ? 'visible' : 'hidden'">check</span>
@@ -35,7 +35,7 @@
 
       <!-- Sort By Dropdown Menu -->
       @if (showSortDropdown) {
-        <div class="price-dropdown shadow-lg border">
+        <div class="price-dropdown">
           @for (opt of sortOptions; track opt.value) {
             <div class="price-item" [class.active]="opt.label === selectedSortLabel" (click)="selectSortOption(opt); $event.stopPropagation();">
               <span class="material-symbols-outlined price-check-icon" [style.visibility]="opt.label === selectedSortLabel ? 'visible' : 'hidden'">check</span>

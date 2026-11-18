@@ -1,18 +1,24 @@
 :host {
   display: block;
   position: sticky;
-  top: 104px;
+  top: 94px;
   z-index: 98;
 }
 
 /* Filters Sidebar Component Styles */
 .filters-sidebar {
   width: 280px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
   border-radius: 16px;
   padding: 24px;
   flex-shrink: 0;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 8px 24px -4px rgba(15, 23, 42, 0.07),
+    inset 0 1.5px 1px 0 #ffffff;
 }
 
 .filter-group-header {
@@ -126,12 +132,20 @@
 
 /* Brand search box */
 .brand-search-box {
-  background-color: #f5f6f9;
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   padding: 0 10px;
   display: flex;
   align-items: center;
+  transition: all 0.2s ease;
+}
+
+.brand-search-box:focus-within {
+  background: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-glow);
 }
 
 .brand-search-input {

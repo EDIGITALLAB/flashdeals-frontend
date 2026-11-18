@@ -257,3 +257,269 @@ body.dark-mode .mini-card-img-box {
   background: #1e293b !important;
   border-color: #334155 !important;
 }
+
+/* ========================================================
+   GLASS MORPHISM — DARK MODE OVERRIDE
+   ======================================================== */
+body.dark-mode app-navbar .top-header {
+  background: rgba(15, 20, 35, 0.80) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark-mode app-main-sidebar .sidebar {
+  background: linear-gradient(
+    160deg,
+    rgba(20, 15, 40, 0.92) 0%,
+    rgba(15, 20, 35, 0.85) 60%,
+    rgba(25, 15, 45, 0.90) 100%
+  ) !important;
+  border-right: 1.5px solid rgba(120, 63, 228, 0.22) !important;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark-mode .app-layout {
+  background-color: #0b0f19 !important;
+}
+
+body.dark-mode .vertical-deal-card,
+body.dark-mode .category-card,
+body.dark-mode .rec-mini-card,
+body.dark-mode .amazon-quad-card,
+body.dark-mode .amazon-footer-guarantee {
+  background: rgba(21, 29, 48, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.dark-mode .product-card-img {
+  mix-blend-mode: normal !important;
+}
+
+body.dark-mode .card-image-box {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .wishlist-btn {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .card-product-title {
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .location-picker {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .location-dropdown {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .location-item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .location-item.active {
+  background: rgba(120, 63, 228, 0.25) !important;
+}
+
+body.dark-mode .search-container,
+body.dark-mode .mobile-search-bar-container {
+  background: rgba(30, 41, 59, 0.70) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .search-container:focus-within,
+body.dark-mode .mobile-search-bar-container:focus-within {
+  background: rgba(30, 41, 59, 0.90) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* Explore Page Dark Mode Glass */
+body.dark-mode .explore-layout {
+  background: #0b0f19 !important;
+}
+
+body.dark-mode app-search-header {
+  background: rgba(11, 15, 25, 0.88) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .explore-header,
+body.dark-mode .filters-sidebar,
+body.dark-mode .product-item-card,
+body.dark-mode .product-grid-card,
+body.dark-mode .price-dropdown {
+  background: rgba(21, 29, 48, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .pill-btn,
+body.dark-mode .view-toggle-buttons,
+body.dark-mode .back-btn-explore,
+body.dark-mode .header-action-btn-exp {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .price-item {
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .price-item:hover {
+  background: rgba(36, 50, 72, 0.8) !important;
+  color: var(--primary-color) !important;
+}
+
+body.dark-mode .price-item.active {
+  background: rgba(45, 60, 90, 0.9) !important;
+  color: var(--primary-color) !important;
+}
+
+body.dark-mode .product-image-section,
+body.dark-mode .grid-image-container {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Stores Page Dark Mode Glass */
+body.dark-mode .stores-filter-bar .search-input,
+body.dark-mode .sort-dropdown,
+body.dark-mode .category-pill-btn {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .category-pill-btn.active {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .store-card,
+body.dark-mode .no-stores-found {
+  background: rgba(21, 29, 48, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .store-card:hover {
+  background: rgba(26, 36, 60, 0.88) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+body.dark-mode .store-name-text,
+body.dark-mode .section-title,
+body.dark-mode .no-stores-found h3 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .store-logo-box {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .store-logo-img {
+  mix-blend-mode: normal !important;
+}
+
+body.dark-mode .btn-call {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Alerts Modal Dark Mode Glass */
+body.dark-mode .alerts-modal-backdrop {
+  background-color: rgba(5, 8, 15, 0.65) !important;
+}
+
+body.dark-mode .alerts-modal-card {
+  background: rgba(21, 29, 48, 0.82) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-mode .modal-alerts-title {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .feed-item,
+body.dark-mode .notif-item {
+  background: rgba(30, 41, 59, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.dark-mode .feed-item:hover,
+body.dark-mode .notif-item:hover {
+  background: rgba(36, 50, 72, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+body.dark-mode .feed-item-title,
+body.dark-mode .notif-title-text,
+body.dark-mode .notif-page-title {
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .modal-close-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .view-all-btn,
+body.dark-mode .see-more-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Brands Modal Dark Mode Glass */
+body.dark-mode .brands-modal-backdrop {
+  background-color: rgba(5, 8, 15, 0.65) !important;
+}
+
+body.dark-mode .brands-modal-card {
+  background: rgba(21, 29, 48, 0.82) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-mode .modal-brands-title {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .brand-card {
+  background: rgba(30, 41, 59, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.dark-mode .brand-card:hover {
+  background: rgba(36, 50, 72, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+body.dark-mode .brand-card-name {
+  color: #f1f5f9 !important;
+}
