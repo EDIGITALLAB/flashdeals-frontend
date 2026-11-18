@@ -1,7 +1,13 @@
 /* Layout container */
 .explore-layout {
   padding: 0 40px 40px 40px;
-  background-color: var(--bg-color);
+  background-color: #f1f4f9;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(220, 230, 245, 0.6) 0px, transparent 50%),
+    radial-gradient(at 100% 10%, rgba(228, 236, 250, 0.6) 0px, transparent 50%),
+    radial-gradient(at 20% 50%, rgba(235, 242, 255, 0.5) 0px, transparent 45%),
+    radial-gradient(at 90% 85%, rgba(225, 235, 248, 0.6) 0px, transparent 50%);
+  background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,33 +45,45 @@
 }
 
 .product-item-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
   border-radius: 16px;
   display: flex;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 8px 24px -4px rgba(15, 23, 42, 0.07),
+    0 2px 6px -1px rgba(15, 23, 42, 0.03),
+    inset 0 1.5px 1px 0 #ffffff;
 }
 
 .product-item-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.80);
+  border-color: #ffffff;
+  box-shadow: 
+    0 0 0 1.5px rgba(0, 0, 0, 0.09),
+    0 14px 32px -4px rgba(15, 23, 42, 0.10),
+    inset 0 2px 2px 0 #ffffff;
 }
 
 /* Product Image column */
 .product-image-section {
   width: 180px;
   height: 140px;
-  background-color: #fcfcfd;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
   position: relative;
   flex-shrink: 0;
-  border-right: 1px solid var(--border-color);
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .prod-img {
@@ -217,38 +235,54 @@
 }
 
 .product-grid-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.25s ease;
   height: 100%;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.07),
+    0 8px 24px -4px rgba(15, 23, 42, 0.08),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04),
+    inset 0 1.5px 1px 0 #ffffff,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
 }
 
 .product-grid-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
-  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.78);
+  border-color: #ffffff;
+  box-shadow: 
+    0 0 0 1.5px rgba(0, 0, 0, 0.10),
+    0 16px 36px -4px rgba(15, 23, 42, 0.12),
+    0 4px 12px -2px rgba(15, 23, 42, 0.05),
+    inset 0 2px 2px 0 #ffffff;
 }
 
 .grid-image-container {
   position: relative;
   height: 200px;
-  background-color: #f8f9fb;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .grid-img {
   max-width: 85%;
   max-height: 85%;
   object-fit: contain;
-  transition: transform 0.5s ease;
+  mix-blend-mode: multiply;
+  transition: transform 0.4s ease;
 }
 
 .product-grid-card:hover .grid-img {
@@ -259,7 +293,9 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 11px;
@@ -268,15 +304,18 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .grid-wishlist-btn {
   position: absolute;
   top: 12px;
   right: 12px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.70);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -285,14 +324,15 @@
   justify-content: center;
   color: var(--text-secondary);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 1px #ffffff;
   transition: all 0.2s;
 }
 
 .grid-wishlist-btn:hover {
   color: var(--primary-color);
-  background-color: var(--primary-light);
-  border-color: var(--primary-light);
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .grid-wishlist-btn .material-symbols-outlined {
@@ -323,9 +363,11 @@
   font-size: 11px;
   font-weight: 700;
   color: var(--success-text);
-  background-color: var(--success-light);
-  padding: 2px 6px;
-  border-radius: 4px;
+  background: rgba(230, 255, 244, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 202, 114, 0.25);
+  padding: 2px 7px;
+  border-radius: 6px;
 }
 
 .grid-title {
@@ -374,10 +416,13 @@
   gap: 4px;
   font-size: 12px;
   color: var(--primary-color);
-  font-weight: 600;
-  background-color: var(--primary-light);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.70);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .icon-timer {

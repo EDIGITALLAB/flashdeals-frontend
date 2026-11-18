@@ -3,7 +3,13 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--bg-color);
+  background-color: #f1f4f9;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(220, 230, 245, 0.6) 0px, transparent 50%),
+    radial-gradient(at 100% 10%, rgba(228, 236, 250, 0.6) 0px, transparent 50%),
+    radial-gradient(at 20% 50%, rgba(235, 242, 255, 0.5) 0px, transparent 45%),
+    radial-gradient(at 90% 85%, rgba(225, 235, 248, 0.6) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 .app-body {
@@ -33,7 +39,7 @@ app-main-sidebar {
 
 .main-content {
   padding: 32px 40px 80px 40px;
-  background-color: var(--bg-color);
+  background-color: transparent;
   font-family: 'Outfit', sans-serif;
 }
 
@@ -95,14 +101,16 @@ app-main-sidebar {
 
 .stat-pill {
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 16px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 120px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
 }
 
 .stat-num {
@@ -151,20 +159,23 @@ app-main-sidebar {
   width: 100%;
   height: 48px;
   border-radius: 14px;
-  border: 1.5px solid #e2e8f0;
-  background-color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   padding: 0 44px 0 48px;
   font-size: 14.5px;
   font-weight: 500;
   color: #1e1e2e;
   outline: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), inset 0 1px 1px #ffffff, 0 4px 14px rgba(0, 0, 0, 0.02);
 }
 
 .search-input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 4px 18px var(--primary-glow);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 4px 18px var(--primary-glow);
 }
 
 .btn-clear {
@@ -193,13 +204,22 @@ app-main-sidebar {
   height: 44px;
   padding: 0 16px;
   border-radius: 12px;
-  border: 1.5px solid #e2e8f0;
-  background-color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   font-size: 13.5px;
   font-weight: 700;
   color: #1e1e2e;
   outline: none;
   cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), inset 0 1px 1px #ffffff, 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.sort-dropdown:focus {
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 /* ----------------------------------------------------
@@ -218,19 +238,23 @@ app-main-sidebar {
   height: 40px;
   padding: 0 18px;
   border-radius: 20px;
-  border: 1.5px solid #e2e8f0;
-  background-color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #475569;
   font-size: 13.5px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), inset 0 1px 1px #ffffff, 0 2px 6px rgba(15, 23, 42, 0.02);
 }
 
 .category-pill-btn:hover {
   border-color: var(--primary-color);
   color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .category-pill-btn.active {
@@ -261,9 +285,11 @@ app-main-sidebar {
 }
 
 .store-card {
-  background-color: #ffffff;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-radius: 20px;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
   padding: 22px;
   display: flex;
   flex-direction: column;
@@ -271,13 +297,23 @@ app-main-sidebar {
   gap: 16px;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.07),
+    0 8px 24px -4px rgba(15, 23, 42, 0.08), 
+    0 2px 6px -1px rgba(15, 23, 42, 0.04), 
+    inset 0 1.5px 1px 0 #ffffff,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
 }
 
 .store-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 36px var(--primary-glow);
-  border-color: var(--primary-color);
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 16px 36px -4px rgba(15, 23, 42, 0.12), 
+    0 4px 12px -2px rgba(15, 23, 42, 0.06), 
+    inset 0 2px 1.5px 0 #ffffff;
 }
 
 .card-top-info {
@@ -290,20 +326,22 @@ app-main-sidebar {
   width: 64px;
   height: 64px;
   border-radius: 16px;
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
   padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .store-logo-img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .store-main-meta {
@@ -372,8 +410,10 @@ app-main-sidebar {
 }
 
 .offer-ribbon-box {
-  background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
-  border: 1px solid var(--primary-glow);
+  background: rgba(255, 46, 99, 0.06);
+  border: 1px solid rgba(255, 46, 99, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 12px;
   padding: 10px 14px;
   display: flex;
@@ -399,8 +439,8 @@ app-main-sidebar {
   flex-direction: column;
   gap: 8px;
   padding: 12px 0;
-  border-top: 1px solid #f1f5f9;
-  border-bottom: 1px solid #f1f5f9;
+  border-top: 1px solid rgba(226, 232, 240, 0.65);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.65);
 }
 
 .meta-item {
@@ -446,7 +486,8 @@ app-main-sidebar {
   font-size: 11px;
   font-weight: 800;
   color: var(--primary-color);
-  background-color: var(--primary-light);
+  background-color: rgba(255, 46, 99, 0.08);
+  border: 1px solid rgba(255, 46, 99, 0.15);
   padding: 3px 10px;
   border-radius: 12px;
   width: fit-content;
@@ -472,13 +513,17 @@ app-main-sidebar {
 }
 
 .btn-call {
-  background-color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.7);
   color: #1e293b;
-  border: 1px solid #cbd5e1;
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), inset 0 1px 1px #ffffff;
 }
 
 .btn-call:hover {
-  background-color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #94a3b8;
 }
 
 .btn-directions {
@@ -497,9 +542,12 @@ app-main-sidebar {
 .no-stores-found {
   text-align: center;
   padding: 60px 20px;
-  background-color: #ffffff;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-radius: 20px;
-  border: 1px dashed #cbd5e1;
+  border: 1.5px dashed rgba(203, 213, 225, 0.8);
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08), inset 0 1.5px 1px #ffffff;
 }
 
 .empty-icon {
